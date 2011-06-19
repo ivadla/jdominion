@@ -1,0 +1,38 @@
+Ideas/TODO:
+- remove CardPile class and put code into Supply class
+- factory for turn; 
+- activePlayer.getHand().remove(choosenCard); move to Player class
+	private void choose(Class<? extends CardEffect> class1) {
+			// TODO Auto-generated method stub
+- change supply so that it is initialized with the card class and the number
+  of cards in the supply so that it can create the objects itself. That way it
+  can also create a reference object which can be used even if the piles are
+  empty
+- find out good naming convention for interfaces. currently we use IName for
+  the interface and Name for the implementation. We could use Name for the
+  Interface and NameImpl for the implementation.
+
+- make it possible to provide more than one IExtraStatistics to a simulation
+- make statistickeeping clearer
+
+- maybe create a CardList-class which would be used instead of the Hand and
+  Deck and in other places. The List-class could provide methods like:
+  	- countVictoryPoints
+	- countCoins
+	- countCardsOfClass
+	- getCardByClass
+	- contains
+	- remove
+	- getCheapestCard
+	- ...
+
+- the user should be able to choose which treasure cards to play
+- a system to save user configs in a system-transparent way
+- rename humanstrategy to humanplayer
+- move MAXIMUM_PLAYERS from GameConfigurationController to somewhere more
+  global. Or at least make sure that the config returns the correct number of
+  values for playerNames and playerStrategies
+- for ChooseFromRevealedCards the answers are not set by setanswer, but
+  setanswer has to be called. Look for a better way
+- use a typesafe way to check which button was pressed in the actionPerformed
+  methods
