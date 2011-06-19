@@ -2,3 +2,5 @@ jdominion is an unofficial java implementation of the cardgame Dominion.
 The official game is at http://www.riograndegames.com/games.html?id=278
 
 The main feature of this jdominion is the ability to add custom AIs and cards.
+
+jdominion is licensed under the GPL
