@@ -7,7 +7,9 @@ jdominion is licensed under the GPL
 
 Compile and Run:
 ----------------
-Basically you just have to compile all the java files in the src directory. You can do that by running
+Basically you just have to compile all the java files in the src directory 
+and put them in the build directory(do not create a jar file, otherwise the autodetection of cards and AIs won't work).
+You can use ant to do that:
 ant compile
 Alternatively you can import this project into eclipse and compile it there.
 
