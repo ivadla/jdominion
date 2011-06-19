@@ -4,3 +4,16 @@ The official game is at http://www.riograndegames.com/games.html?id=278
 The main feature of jdominion is the ability to add custom AIs and cards.
 
 jdominion is licensed under the GPL
+
+Compile and Run:
+----------------
+Basically you just have to compile all the java files in the src directory. You can do that by running
+ant compile
+Alternatively you can import this project into eclipse and compile it there.
+
+To run jdominion first make sure that you have jpg files with the images of the cards in images/cards/ 
+You can get them at https://github.com/ivadla/dominion-images/tree/master/Openclipart-cards/jpg/
+Then you can execute run.sh or run
+	ant run
+or
+	java -cp "build:libs/*" org.jdominion.GUIMain

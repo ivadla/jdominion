@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jdominion" default="compile" basedir=".">
+	<property name="src.dir" value="src" />
+	<property name="lib.dir" value="libs" />
+	<property name="build.dir" value="build" />
+	<property name="main-class" value="org.jdominion.GUIMain" />
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="*.jar" />
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+	<target name="compile">
+		<mkdir dir="${build.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath" includeantruntime="false" />
+	</target>
+
+    <target name="run" depends="compile">
+        <java fork="true" classname="${main-class}" >
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${build.dir}"/>
+            </classpath>
+        </java>
+    </target>
+</project>
