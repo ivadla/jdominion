@@ -15,7 +15,10 @@ Alternatively you can import this project into eclipse and compile it there.
 
 To run jdominion first make sure that you have jpg files with the images of the cards in images/cards/ 
 You can get them at https://github.com/downloads/ivadla/dominion-images/cards.zip or https://github.com/ivadla/dominion-images/tree/master/Openclipart-cards/jpg/
+The filenames should all be lowercase.
 Then you can execute run.sh or run
 	ant run
 or
 	java -cp "build:libs/*" org.jdominion.GUIMain
+or
+	run the GUIMain class in eclipse
