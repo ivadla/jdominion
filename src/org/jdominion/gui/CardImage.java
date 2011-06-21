@@ -1,9 +1,11 @@
 package org.jdominion.gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
@@ -112,16 +114,37 @@ public class CardImage extends JPanel {
 	private BufferedImage getImage(Card card) {
 		if (!getCardImages().containsKey(card.getClass())) {
 			BufferedImage cardImage = null;
+			String filename = "images/cards/" + card.getName().toLowerCase() + ".jpg";
 			try {
-				cardImage = ImageIO.read(new File("images/cards/" + card.getName().toLowerCase() + ".jpg"));
+				if(new File(filename).exists()) {
+					cardImage = ImageIO.read(new File(filename));
+				} else {
+					//TODO better error reporting
+					System.err.println("Error: Could not find image file: " + filename);
+					cardImage = createDummyImage(card);
+				}
 			} catch (IOException e) {
-				// TODO Show a dummy image if the real one is not available
-				// or show a better error message to the user
+				//TODO better error reporting
+				System.err.println("Error reading " + filename + ": " + e.getMessage());
 				throw new RuntimeException(e);
 			}
 			getCardImages().put(card.getClass(), cardImage);
 		}
 		return getCardImages().get(card.getClass());
+	}
+
+	private BufferedImage createDummyImage(Card card) {
+		BufferedImage cardImage = new BufferedImage(211, 330, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D graphics = cardImage.createGraphics();
+		graphics.setColor(Color.BLACK);
+		graphics.fillRect(0, 0, 211, 330);
+		graphics.setColor(Color.YELLOW);
+		graphics.setStroke(new BasicStroke(8));
+		graphics.drawRect(0, 0, 211, 330);
+		graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 36));
+		graphics.setColor(Color.RED);
+		graphics.drawString(card.getName(), 10, 100);
+		return cardImage;
 	}
 
 	private BufferedImage getGreyImage() {
