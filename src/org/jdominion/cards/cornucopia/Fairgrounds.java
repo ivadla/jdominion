@@ -1,7 +1,7 @@
 package org.jdominion.cards.cornucopia;
 
 import org.jdominion.Card;
-import org.jdominion.effects.FairgroundsEffect;
+import org.jdominion.effects.cornucopia.FairgroundsEffect;
 
 public class Fairgrounds extends Card {
 

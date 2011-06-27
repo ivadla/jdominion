@@ -1,7 +1,7 @@
 package org.jdominion.cards.base;
 
 import org.jdominion.Card;
-import org.jdominion.effects.GardenEffect;
+import org.jdominion.effects.base.GardenEffect;
 
 public class Gardens extends Card {
 

@@ -2,7 +2,7 @@ package org.jdominion.cards.prosperity;
 
 import org.jdominion.Card;
 import org.jdominion.effects.CardEffectTreasure;
-import org.jdominion.effects.LoanEffect;
+import org.jdominion.effects.prosperity.LoanEffect;
 
 public class Loan extends Card {
 

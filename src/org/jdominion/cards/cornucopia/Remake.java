@@ -1,7 +1,7 @@
 package org.jdominion.cards.cornucopia;
 
 import org.jdominion.Card;
-import org.jdominion.effects.RemakeEffect;
+import org.jdominion.effects.cornucopia.RemakeEffect;
 
 public class Remake extends Card {
 

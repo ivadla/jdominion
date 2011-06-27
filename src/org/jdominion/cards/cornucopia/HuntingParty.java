@@ -3,7 +3,7 @@ package org.jdominion.cards.cornucopia;
 import org.jdominion.Card;
 import org.jdominion.effects.AddActions;
 import org.jdominion.effects.DrawCards;
-import org.jdominion.effects.HuntingPartyEffect;
+import org.jdominion.effects.cornucopia.HuntingPartyEffect;
 
 public class HuntingParty extends Card {
 

@@ -2,7 +2,7 @@ package org.jdominion.cards.seaside;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddBuys;
-import org.jdominion.effects.TrashForCoin;
+import org.jdominion.effects.seaside.TrashForCoin;
 
 public class Salvager extends Card {
 

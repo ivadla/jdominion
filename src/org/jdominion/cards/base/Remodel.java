@@ -4,6 +4,6 @@ import org.jdominion.Card;
 
 public class Remodel extends Card {
 	public Remodel() {
-		super("Remodel", new org.jdominion.effects.RemodelEffect(2), 4);
+		super("Remodel", new org.jdominion.effects.base.RemodelEffect(2), 4);
 	}
 }

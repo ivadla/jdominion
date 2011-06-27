@@ -2,7 +2,7 @@ package org.jdominion.cards.base;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddExtraMoney;
-import org.jdominion.effects.DiscardDeckEffect;
+import org.jdominion.effects.base.DiscardDeckEffect;
 
 public class Chancellor extends Card {
 

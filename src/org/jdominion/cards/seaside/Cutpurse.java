@@ -2,7 +2,7 @@ package org.jdominion.cards.seaside;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddExtraMoney;
-import org.jdominion.effects.DiscardCopper;
+import org.jdominion.effects.seaside.DiscardCopper;
 
 public class Cutpurse extends Card {
 

@@ -2,8 +2,8 @@ package org.jdominion.cards.base;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddActions;
-import org.jdominion.effects.DiscardTopCard;
 import org.jdominion.effects.DrawCards;
+import org.jdominion.effects.base.DiscardTopCard;
 
 public class Spy extends Card {
 

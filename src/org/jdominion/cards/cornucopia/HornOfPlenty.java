@@ -1,7 +1,7 @@
 package org.jdominion.cards.cornucopia;
 
 import org.jdominion.Card;
-import org.jdominion.effects.HornOfPlentyEffect;
+import org.jdominion.effects.cornucopia.HornOfPlentyEffect;
 
 public class HornOfPlenty extends Card {
 

@@ -2,7 +2,7 @@ package org.jdominion.cards.base;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddActions;
-import org.jdominion.effects.CellarEffect;
+import org.jdominion.effects.base.CellarEffect;
 
 public class Cellar extends Card {
 	public Cellar() {

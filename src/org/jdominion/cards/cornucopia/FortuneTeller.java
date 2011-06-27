@@ -2,7 +2,7 @@ package org.jdominion.cards.cornucopia;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddExtraMoney;
-import org.jdominion.effects.FortuneTellerEffect;
+import org.jdominion.effects.cornucopia.FortuneTellerEffect;
 
 public class FortuneTeller extends Card {
 

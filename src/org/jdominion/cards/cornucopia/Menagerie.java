@@ -2,7 +2,7 @@ package org.jdominion.cards.cornucopia;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddActions;
-import org.jdominion.effects.MenagerieEffect;
+import org.jdominion.effects.cornucopia.MenagerieEffect;
 
 public class Menagerie extends Card {
 

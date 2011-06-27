@@ -18,7 +18,7 @@ import org.jdominion.decisions.ChooseCardToBuy;
 import org.jdominion.decisions.ChooseCardToGain;
 import org.jdominion.decisions.ChooseCardsFromHandToTrash;
 import org.jdominion.effects.CardEffect;
-import org.jdominion.effects.RemodelEffect;
+import org.jdominion.effects.base.RemodelEffect;
 
 public class RemodelStrategy extends GenericAI {
 

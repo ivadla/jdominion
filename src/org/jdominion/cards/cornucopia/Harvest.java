@@ -1,7 +1,7 @@
 package org.jdominion.cards.cornucopia;
 
 import org.jdominion.Card;
-import org.jdominion.effects.HarvestEffect;
+import org.jdominion.effects.cornucopia.HarvestEffect;
 
 public class Harvest extends Card {
 

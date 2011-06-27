@@ -1,7 +1,7 @@
 package org.jdominion.cards.cornucopia;
 
 import org.jdominion.effects.CardEffectTreasure;
-import org.jdominion.effects.DiademEffect;
+import org.jdominion.effects.cornucopia.DiademEffect;
 
 public class Diadem extends Prize {
 

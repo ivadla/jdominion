@@ -2,7 +2,7 @@ package org.jdominion.cards.base;
 
 import org.jdominion.Card;
 import org.jdominion.effects.AddExtraMoney;
-import org.jdominion.effects.TrashCopper;
+import org.jdominion.effects.base.TrashCopper;
 
 public class Moneylender extends Card {
 	public Moneylender() {

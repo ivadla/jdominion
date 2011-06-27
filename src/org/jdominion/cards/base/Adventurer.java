@@ -1,7 +1,7 @@
 package org.jdominion.cards.base;
 
 import org.jdominion.Card;
-import org.jdominion.effects.AdventurerEffect;
+import org.jdominion.effects.base.AdventurerEffect;
 
 public class Adventurer extends Card {
 
