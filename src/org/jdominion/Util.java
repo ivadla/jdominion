@@ -22,4 +22,17 @@ public class Util {
 		}
 		return counter;
 	}
+
+	public static String convertCardListToString(List<Card> cards) {
+		String message = "";
+		if (cards.size() == 0) {
+			message += "no cards";
+		} else {
+			for (int i = 0; i < cards.size() - 1; i++) {
+				message += cards.get(i).getName() + ", ";
+			}
+			message += cards.get(cards.size() - 1).getName();
+		}
+		return message;
+	}
 }

@@ -18,7 +18,7 @@ public class TextOutput implements EventObserver, Serializable {
 
 	@Override
 	public void discardsCards(Player player, List<Card> discardedCards) {
-		printMessage(player.getName() + " discards " + convertCardListToString(discardedCards) + ".");
+		printMessage(player.getName() + " discards " + Util.convertCardListToString(discardedCards) + ".");
 	}
 
 	@Override
@@ -38,18 +38,18 @@ public class TextOutput implements EventObserver, Serializable {
 
 	@Override
 	public void trashesCards(Player player, List<Card> trashedCards) {
-		printMessage(player.getName() + " trashes " + convertCardListToString(trashedCards) + ".");
+		printMessage(player.getName() + " trashes " + Util.convertCardListToString(trashedCards) + ".");
 	}
 
 	@Override
 	public void revealsCards(Player player, List<Card> revealedCards) {
-		String message = player.getName() + " reveals " + convertCardListToString(revealedCards) + ".";
+		String message = player.getName() + " reveals " + Util.convertCardListToString(revealedCards) + ".";
 		printMessage(message);
 	}
 
 	@Override
 	public void setCardsAside(Player player, List<Card> cardsToSetAside) {
-		printMessage(player.getName() + " sets " + convertCardListToString(cardsToSetAside) + " aside.");
+		printMessage(player.getName() + " sets " + Util.convertCardListToString(cardsToSetAside) + " aside.");
 	}
 
 	@Override
@@ -73,19 +73,6 @@ public class TextOutput implements EventObserver, Serializable {
 		message.delete(message.length() - 1, message.length());
 		printMessage(message.toString());
 		gameEndMessageDisplayed = true;
-	}
-	
-	private String convertCardListToString(List<Card> cards) {
-		String message = "";
-		if (cards.size() == 0) {
-			message += "no cards";
-		} else {
-			for (int i = 0; i < cards.size() - 1; i++) {
-				message += cards.get(i).getName() + ", ";
-			}
-			message += cards.get(cards.size() - 1).getName();
-		}
-		return message;
 	}
 
 }
