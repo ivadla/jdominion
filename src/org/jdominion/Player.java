@@ -62,6 +62,7 @@ public class Player implements Serializable, IPlayer {
 		return id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -70,14 +71,17 @@ public class Player implements Serializable, IPlayer {
 		return hand;
 	}
 
+	@Override
 	public int getHandSize() {
 		return hand.size();
 	}
 
+	@Override
 	public int getDeckSize() {
 		return deck.size();
 	}
 
+	@Override
 	public int getDiscardPileSize() {
 		return discardPile.size();
 	}

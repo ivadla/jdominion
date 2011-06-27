@@ -67,6 +67,7 @@ public abstract class ChooseCardsFromHand extends Decision<List<Card>> {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void chooseDefaultAnswer(Hand hand, Turn currentTurn, Supply supply) {
 		List<Card> choosenCards = new ArrayList<Card>();

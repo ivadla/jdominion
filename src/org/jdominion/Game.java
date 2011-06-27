@@ -58,6 +58,7 @@ public class Game implements Serializable, ICurrentTurn {
 		return turnCounter;
 	}
 
+	@Override
 	public Turn getCurrentTurn() {
 		return currentTurn;
 	}
@@ -126,7 +127,7 @@ public class Game implements Serializable, ICurrentTurn {
 	}
 
 	private List<Player> findWinners() {
-		List<Player> winners = null;
+		List<Player> winners = new ArrayList<Player>();	// just assign something to get rid of a warning
 		int highestPoints = Integer.MIN_VALUE;
 
 		for (Player player : getPlayers()) {

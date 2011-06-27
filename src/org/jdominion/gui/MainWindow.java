@@ -25,7 +25,6 @@ import net.miginfocom.swing.MigLayout;
 import org.jdominion.Card;
 import org.jdominion.Supply;
 import org.jdominion.decisions.ChooseFromRevealedCards;
-import org.jdominion.decisions.MultipleChoice;
 import org.jdominion.decisions.multipleChoice.Choice;
 
 public class MainWindow extends JFrame {

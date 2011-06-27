@@ -2,7 +2,6 @@ package org.jdominion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class Hand implements Serializable {
@@ -25,7 +24,7 @@ public class Hand implements Serializable {
 
 	public List<Card> getCardList() {
 		// return a new list to hopefully prevent ConcurrentModificationException
-		// additionaly it prevents messing with the hand contents 
+		// additionally it prevents messing with the hand contents 
 		return new ArrayList<Card>(cardsInHand);
 	}
 

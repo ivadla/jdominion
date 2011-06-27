@@ -44,6 +44,7 @@ public class RemoteStrategy extends UnicastRemoteObject implements IStrategy, IR
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public synchronized void decide(Decision<?> decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
 

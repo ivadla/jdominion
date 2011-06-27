@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdominion.effects.AddActions;
 import org.jdominion.effects.CardEffect;
 
 public abstract class Card implements Serializable {
