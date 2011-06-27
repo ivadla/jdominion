@@ -28,10 +28,4 @@ public class UpgradeEffect extends TrashGainEffect {
 		}
 		return new Supply(newPiles);
 	}
-
-	@Override
-	protected boolean putCardInHand() {
-		return false;
-	}
-
 }

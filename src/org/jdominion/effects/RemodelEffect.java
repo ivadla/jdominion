@@ -25,9 +25,4 @@ public class RemodelEffect extends TrashGainEffect {
 				+ addedValue);
 	}
 
-	@Override
-	protected boolean putCardInHand() {
-		return false;
-	}
-
 }

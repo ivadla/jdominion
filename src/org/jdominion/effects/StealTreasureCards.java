@@ -56,7 +56,7 @@ public class StealTreasureCards extends CardEffectAttack {
 				revealedCard.getOwner().trashCard(revealedCard.getRevealedCard(), currentTurn.getGame());
 				if(revealedCard.getChoosenOption() == Gain.getInstance()) {
 					currentTurn.getGame().removeCardFromTrash(revealedCard.getRevealedCard());
-					activePlayer.gainCard(revealedCard.getRevealedCard(), false);
+					activePlayer.gainCard(revealedCard.getRevealedCard());
 				}	
 			}
 			

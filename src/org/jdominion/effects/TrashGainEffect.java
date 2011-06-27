@@ -7,6 +7,8 @@ import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.decisions.ChooseCardToGain;
 import org.jdominion.decisions.ChooseCardsFromHandToTrash;
+import org.jdominion.location.DiscardPile;
+import org.jdominion.location.Location;
 
 public abstract class TrashGainEffect extends CardEffectAction {
 
@@ -14,7 +16,9 @@ public abstract class TrashGainEffect extends CardEffectAction {
 
 	protected abstract Supply createSupply(Supply supply, Card cardToTrash);
 
-	protected abstract boolean putCardInHand();
+	protected Location whereToPutCard() {
+		return new DiscardPile();
+	}
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
@@ -43,7 +47,7 @@ public abstract class TrashGainEffect extends CardEffectAction {
 		assert availableCards.isCardAvailable(choosenCard);
 		assert supply.isCardAvailable(choosenCard);
 
-		activePlayer.gainCard(choosenCard, supply, putCardInHand());
+		activePlayer.gainCard(choosenCard, supply, whereToPutCard());
 
 		return true;
 	}

@@ -16,6 +16,8 @@ import org.jdominion.effects.CardEffect;
 import org.jdominion.event.CardPlayFinished;
 import org.jdominion.event.CardPlayed;
 import org.jdominion.event.EventManager;
+import org.jdominion.location.DiscardPile;
+import org.jdominion.location.Location;
 
 public class Player implements Serializable, IPlayer {
 
@@ -271,31 +273,28 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void gainCard(Class<? extends Card> card, Supply supply) {
-		gainCard(card, supply, false);
+		gainCard(card, supply, new DiscardPile());
 	}
 
-	public void gainCard(Class<? extends Card> card, Supply supply, boolean putCardInHand) {
+	public void gainCard(Class<? extends Card> card, Supply supply, Location whereToPlaceCard) {
 		if (supply.isCardAvailable(card)) {
-			gainCard(supply.takeCard(card), putCardInHand);
+			gainCard(supply.takeCard(card), whereToPlaceCard);
 		}
 	}
+	
+	public void gainCard(Card gainedCard) {
+		this.gainCard(gainedCard, new DiscardPile());
+	}
 
-	public void gainCard(Card gainedCard, boolean putCardInHand) {
-		if (putCardInHand) {
-			addCardToHand(gainedCard);
-		} else {
-			discardPile.add(gainedCard);
-		}
+	public void gainCard(Card gainedCard, Location whereToPlaceCard) {
 		EventHandler.getInstance().gainsCard(this, gainedCard);
+		whereToPlaceCard.putCard(this, gainedCard);
 	}
 
 	public void setCardAside(Card card) {
 		EventHandler.getInstance().setCardsAside(this, Util.createCardList(card));
 		this.cardsSetAside.add(card);
 		removeCardsFromOtherPlaces(Util.createCardList(card));
-		// TODO: check if card is in hand; add method to move this card
-		// somewhere else(hand, discard pile, or maybe deck) - maybe do it
-		// automatically if the card is added there
 	}
 
 	private List<Card> getListOfAllCards(Turn currentTurn) {

@@ -10,6 +10,7 @@ import org.jdominion.Supply;
 import org.jdominion.Card.Type;
 import org.jdominion.decisions.ChooseCardsFromHandToTrash;
 import org.jdominion.decisions.ChooseTreasureCardFromHandToTrash;
+import org.jdominion.location.Location;
 
 public class MineEffect extends TrashGainEffect {
 
@@ -38,8 +39,8 @@ public class MineEffect extends TrashGainEffect {
 	}
 
 	@Override
-	protected boolean putCardInHand() {
-		return true;
+	protected Location whereToPutCard() {
+		return new org.jdominion.location.Hand();
 	}
 
 }
