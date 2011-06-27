@@ -100,7 +100,7 @@ public class ClassFinder {
 			throw new RuntimeException(e);
 		}
 		for (Class classInCardsPackage : classesInCardsPackage) {
-			if (classInCardsPackage.getSuperclass() == Card.class) {
+			if (classInCardsPackage.getSuperclass() == Card.class && !Modifier.isAbstract(classInCardsPackage.getModifiers())) {
 				try {
 					Card card = (Card) classInCardsPackage.newInstance();
 					if (card.isKingdomCard()) {

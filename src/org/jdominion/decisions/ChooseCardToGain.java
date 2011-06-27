@@ -7,9 +7,13 @@ import org.jdominion.Turn;
 public class ChooseCardToGain extends ChooseCardFromSupply {
 
 	public ChooseCardToGain(Supply availableCards) {
-		super("Please choose a card to gain.", availableCards, false);
+		this(availableCards, false);
 	}
-	
+
+	public ChooseCardToGain(Supply availableCards, boolean cancelable) {
+		super("Please choose a card to gain.", availableCards, cancelable);
+	}
+
 	@Override
 	public void chooseDefaultAnswer(Hand hand, Turn currentTurn, Supply supply) {
 		setAnswer(getAvailableCards().findMostExpensiveCard());

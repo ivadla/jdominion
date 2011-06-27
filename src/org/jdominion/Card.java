@@ -15,7 +15,7 @@ public abstract class Card implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public enum Type {
-		ACTION, ATTACK, CURSE, DURATION, REACTION, TREASURE, VICTORY
+		ACTION, ATTACK, CURSE, DURATION, PRIZE, REACTION, TREASURE, VICTORY
 	}
 
 	private final int cost;
@@ -59,6 +59,11 @@ public abstract class Card implements Serializable {
 		this(name, cost);
 		this.isKingdomCard = isKingdomCard;
 		addCardEffect(effect);
+	}
+
+	public Card(String name, int cost, boolean isKingdomCard) {
+		this(name, cost);
+		this.isKingdomCard = isKingdomCard;
 	}
 
 	public Card(String name, List<CardEffect> effects, int cost) {

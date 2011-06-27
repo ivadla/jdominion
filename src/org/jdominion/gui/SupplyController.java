@@ -36,7 +36,16 @@ public class SupplyController implements MouseListener, ActionListener {
 
 	public void update(Supply availableCards) {
 		List<CardImage> cardImages = new ArrayList<CardImage>();
-		for (CardPile pile : guiInformationSource.getSupply().getCardPiles()) {
+		
+		Supply completeSupply;
+
+		if (availableCards.isSubsetOf(guiInformationSource.getSupply())) {
+			completeSupply = guiInformationSource.getSupply();
+		} else {
+			completeSupply = availableCards;
+		}
+		
+		for (CardPile pile : completeSupply.getCardPiles()) {
 			if (pile.getNumberOfCardsInPile() > 0) {
 				try {
 					CardImage cardImage = new CardImage(pile.getCardClass().newInstance());

@@ -24,16 +24,28 @@ public class Supply implements Serializable {
 			cardPiles.add(newCardPile);
 		}
 	}
-
-	public boolean isCardAvailable(Class<? extends Card> card) {
+	
+	public CardPile getPile(Class<? extends Card> card) {
 		for (CardPile pile : cardPiles) {
 			if (pile.getCardClass() == card) {
-				if (pile.getNumberOfCardsInPile() > 0) {
-					return true;
-				}
+				return pile;
 			}
 		}
-		return false;
+		return null;
+	}
+
+	public boolean isCardAvailable(Class<? extends Card> card) {
+		return getNumberOfAvailableCards(card) > 0;
+	}
+	
+	public int getNumberOfAvailableCards(Class<? extends Card> card) {
+		CardPile pile = getPile(card);
+		if(pile == null) {
+			return 0;
+		} else {
+			return pile.getNumberOfCardsInPile(); 
+		}
+		
 	}
 
 	public int getCardCost(Class<? extends Card> card) {
@@ -87,6 +99,15 @@ public class Supply implements Serializable {
 			}
 		}
 		return mostExpensiveCard;
+	}
+
+	public boolean isSubsetOf(Supply supply) {
+		for (CardPile pile : getCardPiles()) {
+			if (!supply.isCardAvailable(pile.getCardClass())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
