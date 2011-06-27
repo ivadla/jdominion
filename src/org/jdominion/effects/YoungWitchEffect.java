@@ -10,7 +10,7 @@ import org.jdominion.Game;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.cards.Curse;
+import org.jdominion.cards.common.Curse;
 import org.jdominion.decisions.RevealBaneCard;
 
 public class YoungWitchEffect extends CardEffectSimpleAttack {

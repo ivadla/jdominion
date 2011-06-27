@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jdominion.aiStrategies.IStrategy;
-import org.jdominion.cards.Province;
+import org.jdominion.cards.common.Province;
 import org.jdominion.effects.CardEffect;
 import org.jdominion.extraGameData.ExtraGameData;
 

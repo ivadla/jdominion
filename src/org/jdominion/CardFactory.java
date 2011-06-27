@@ -8,7 +8,7 @@ import java.util.Deque;
 import java.util.List;
 
 import org.jdominion.Card.Type;
-import org.jdominion.cards.*;
+import org.jdominion.cards.common.*;
 
 public class CardFactory {
 

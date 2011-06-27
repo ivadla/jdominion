@@ -4,7 +4,7 @@ import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.cards.Copper;
+import org.jdominion.cards.common.Copper;
 
 public class TrashRevealedCard extends YesNoDecision {
 

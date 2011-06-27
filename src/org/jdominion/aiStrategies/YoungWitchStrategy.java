@@ -1,6 +1,6 @@
 package org.jdominion.aiStrategies;
 
-import org.jdominion.cards.YoungWitch;
+import org.jdominion.cards.cornucopia.YoungWitch;
 
 public class YoungWitchStrategy extends BuyOneTypeOfActionCard {
 

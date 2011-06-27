@@ -5,7 +5,7 @@ import java.util.List;
 import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Card.Type;
-import org.jdominion.cards.Copper;
+import org.jdominion.cards.common.Copper;
 
 public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 

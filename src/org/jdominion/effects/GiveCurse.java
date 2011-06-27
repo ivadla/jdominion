@@ -3,7 +3,7 @@ package org.jdominion.effects;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.cards.Curse;
+import org.jdominion.cards.common.Curse;
 
 public class GiveCurse extends CardEffectSimpleAttack {
 

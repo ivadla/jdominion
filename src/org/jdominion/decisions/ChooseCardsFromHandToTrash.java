@@ -2,9 +2,9 @@ package org.jdominion.decisions;
 
 import org.jdominion.Card;
 import org.jdominion.Hand;
-import org.jdominion.cards.Copper;
-import org.jdominion.cards.Curse;
-import org.jdominion.cards.Estate;
+import org.jdominion.cards.common.Copper;
+import org.jdominion.cards.common.Curse;
+import org.jdominion.cards.common.Estate;
 
 public class ChooseCardsFromHandToTrash extends ChooseCardsFromHand {
 

@@ -1,6 +1,6 @@
 package org.jdominion.aiStrategies;
 
-import org.jdominion.cards.Witch;
+import org.jdominion.cards.base.Witch;
 
 public class WitchStrategy extends BuyOneTypeOfActionCard {
 

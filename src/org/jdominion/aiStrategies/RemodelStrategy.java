@@ -5,6 +5,14 @@ import java.util.List;
 
 import org.jdominion.*;
 import org.jdominion.cards.*;
+import org.jdominion.cards.base.Remodel;
+import org.jdominion.cards.common.Copper;
+import org.jdominion.cards.common.Curse;
+import org.jdominion.cards.common.Duchy;
+import org.jdominion.cards.common.Estate;
+import org.jdominion.cards.common.Gold;
+import org.jdominion.cards.common.Province;
+import org.jdominion.cards.common.Silver;
 import org.jdominion.decisions.ChooseActionCardToPlay;
 import org.jdominion.decisions.ChooseCardToBuy;
 import org.jdominion.decisions.ChooseCardToGain;

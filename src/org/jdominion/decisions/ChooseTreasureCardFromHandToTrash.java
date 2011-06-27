@@ -3,8 +3,8 @@ package org.jdominion.decisions;
 import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Card.Type;
-import org.jdominion.cards.Copper;
-import org.jdominion.cards.Silver;
+import org.jdominion.cards.common.Copper;
+import org.jdominion.cards.common.Silver;
 
 public class ChooseTreasureCardFromHandToTrash extends ChooseCardsFromHandToTrash {
 

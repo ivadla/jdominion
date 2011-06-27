@@ -4,7 +4,7 @@ import org.jdominion.Hand;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.Util;
-import org.jdominion.cards.Moat;
+import org.jdominion.cards.base.Moat;
 import org.jdominion.decisions.ChooseReactionCardToUse;
 import org.jdominion.effects.CardEffect;
 import org.jdominion.event.Event;

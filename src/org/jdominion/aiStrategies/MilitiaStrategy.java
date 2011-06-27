@@ -1,6 +1,6 @@
 package org.jdominion.aiStrategies;
 
-import org.jdominion.cards.Militia;
+import org.jdominion.cards.base.Militia;
 
 public class MilitiaStrategy extends BuyOneTypeOfActionCard {
 

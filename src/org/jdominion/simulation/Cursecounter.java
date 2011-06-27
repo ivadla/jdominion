@@ -1,7 +1,7 @@
 package org.jdominion.simulation;
 
 import org.jdominion.Player;
-import org.jdominion.cards.Curse;
+import org.jdominion.cards.common.Curse;
 
 public class Cursecounter implements IExtraStatistics {
 

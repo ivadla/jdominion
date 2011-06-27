@@ -1,6 +1,6 @@
 package org.jdominion.aiStrategies;
 
-import org.jdominion.cards.Loan;
+import org.jdominion.cards.prosperity.Loan;
 
 public class LoanStrategy extends BuyOneTypeOfActionCard {
 

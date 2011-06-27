@@ -1,6 +1,6 @@
 package org.jdominion.aiStrategies;
 
-import org.jdominion.cards.Cutpurse;
+import org.jdominion.cards.seaside.Cutpurse;
 
 public class OnlyCutpurse extends BuyOneTypeOfActionCard {
 

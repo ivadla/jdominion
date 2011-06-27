@@ -7,11 +7,11 @@ import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.cards.Duchy;
-import org.jdominion.cards.Estate;
-import org.jdominion.cards.Gold;
-import org.jdominion.cards.Province;
-import org.jdominion.cards.Silver;
+import org.jdominion.cards.common.Duchy;
+import org.jdominion.cards.common.Estate;
+import org.jdominion.cards.common.Gold;
+import org.jdominion.cards.common.Province;
+import org.jdominion.cards.common.Silver;
 import org.jdominion.decisions.ChooseCardToBuy;
 import org.jdominion.effects.CardEffect;
 

@@ -7,7 +7,7 @@ import org.jdominion.Card;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.cards.Copper;
+import org.jdominion.cards.common.Copper;
 
 public class DiscardCopper extends CardEffectSimpleAttack {
 

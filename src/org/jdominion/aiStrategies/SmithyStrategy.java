@@ -1,6 +1,6 @@
 package org.jdominion.aiStrategies;
 
-import org.jdominion.cards.Smithy;
+import org.jdominion.cards.base.Smithy;
 
 public class SmithyStrategy extends BuyOneTypeOfActionCard {
 
