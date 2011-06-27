@@ -43,19 +43,20 @@ public class YoungWitchEffect extends CardEffectSimpleAttack {
 
 	@Override
 	public void gameStarted(Game game) {
-		createBaneCard(game);
+		baneCard = chooseBaneCard(game);
+		game.getSupply().addCardPile(CardFactory.createCardPile(baneCard, game.getPlayers().size()));
 	}
 
-	private void createBaneCard(Game game) {
+	private Class<? extends Card> chooseBaneCard(Game game) {
 		List<Class<? extends Card>> kingdomCards = ClassFinder.findAllKingdomCards();
 		Collections.shuffle(kingdomCards);
 		for (Class<? extends Card> cardClass : kingdomCards) {
 			if (!game.getSupply().isCardAvailable(cardClass) && cardCosts2or3(cardClass)) {
-				baneCard = cardClass;
-				game.getSupply().addCardPile(CardFactory.createCardPile(cardClass, game.getPlayers().size()));
-				return;
+				return cardClass;
 			}
 		}
+		assert false : "no bane card found";
+		return null;
 	}
 
 	private boolean cardCosts2or3(Class<? extends Card> cardClass) {
