@@ -2,12 +2,16 @@ package org.jdominion;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jdominion.aiStrategies.IStrategy;
 import org.jdominion.cards.Province;
 import org.jdominion.effects.CardEffect;
+import org.jdominion.extraGameData.ExtraGameData;
 
 public class Game implements Serializable, ICurrentTurn {
 
@@ -24,6 +28,7 @@ public class Game implements Serializable, ICurrentTurn {
 	private int turnCounter = 0;
 	private Turn currentTurn = null;
 	private List<Card> trash;
+	private Map<Class<? extends ExtraGameData<?>>, ExtraGameData<?>> extraGameData;
 
 	private void setPlayers(List<Player> players) {
 		this.players = players;
@@ -69,27 +74,47 @@ public class Game implements Serializable, ICurrentTurn {
 		return trash;
 	}
 
+	@SuppressWarnings("unchecked")
+	public void addExtraGameData(ExtraGameData<?> data) {
+		extraGameData.put((Class<? extends ExtraGameData<?>>) data.getClass(), data);
+	}
+
+	public ExtraGameData<?> getExtraGameData(Class<? extends ExtraGameData<?>> dataType) {
+		return extraGameData.get(dataType);
+	}
+
+	public Collection<ExtraGameData<?>> getAllExtraGameData() {
+		return extraGameData.values();
+	}
+
 	public Game(List<Player> players, Supply supply) {
 		this.setPlayers(players);
 		this.supply = supply;
 		this.trash = new ArrayList<Card>();
+		this.extraGameData = new HashMap<Class<? extends ExtraGameData<?>>, ExtraGameData<?>>();
 	}
-	
-	public Game(List<String> playerNames, List<Class<? extends IStrategy>> playerStrategies, List<Class<? extends Card>> kingdomCardsToAddToSupply) {
+
+	public Game(List<String> playerNames, List<Class<? extends IStrategy>> playerStrategies,
+			List<Class<? extends Card>> kingdomCardsToAddToSupply) {
+		this(createPlayersFromStrategies(playerNames, playerStrategies), CardFactory.createSupply(playerStrategies
+				.size(), kingdomCardsToAddToSupply));
+	}
+
+	private static List<Player> createPlayersFromStrategies(List<String> playerNames,
+			List<Class<? extends IStrategy>> playerStrategies) {
 		assert playerNames.size() > 0 : "The game needs players";
-		assert playerNames.size() == playerStrategies.size(): "There should be one strategy for each player";
-		this.players = new ArrayList<Player>();
-		for(int i=0; i<playerNames.size();i++) {
+		assert playerNames.size() == playerStrategies.size() : "There should be one strategy for each player";
+		List<Player> players = new ArrayList<Player>();
+		for (int i = 0; i < playerNames.size(); i++) {
 			try {
-				this.players.add(new Player(playerNames.get(i),CardFactory.createInitialDeck() , playerStrategies.get(i).newInstance() ));
+				players.add(new Player(playerNames.get(i), CardFactory.createInitialDeck(), playerStrategies.get(i)
+						.newInstance()));
 			} catch (Exception e) {
 				throw new RuntimeException("Error while creating player " + playerNames.get(i), e);
 			}
 		}
-		Collections.shuffle(this.players);
-		
-		this.supply = CardFactory.createSupply(players.size(),kingdomCardsToAddToSupply);
-		this.trash = new ArrayList<Card>();
+		Collections.shuffle(players);
+		return players;
 	}
 
 	private boolean gameIsRunning() {
