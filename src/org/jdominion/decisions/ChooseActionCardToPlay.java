@@ -3,10 +3,8 @@ package org.jdominion.decisions;
 import java.util.List;
 
 import org.jdominion.Card;
-import org.jdominion.Hand;
 import org.jdominion.Card.Type;
-import org.jdominion.effects.AddActions;
-import org.jdominion.effects.CardEffect;
+import org.jdominion.Hand;
 
 public class ChooseActionCardToPlay extends ChooseCardsFromHand {
 
@@ -31,10 +29,8 @@ public class ChooseActionCardToPlay extends ChooseCardsFromHand {
 	@Override
 	protected Card chooseCardForDefaultAnswer(Hand hand) {
 		for (Card card : hand.getCardList()) {
-			for (CardEffect effect : card.getEffects()) {
-				if (effect instanceof AddActions) {
-					return card;
-				}
+			if (!card.isTerminalAction()) {
+				return card;
 			}
 		}
 		for (Card card : hand.getCardList()) {
