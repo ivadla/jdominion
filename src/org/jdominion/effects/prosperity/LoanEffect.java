@@ -8,7 +8,7 @@ import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.Card.Type;
-import org.jdominion.decisions.TrashRevealedCard;
+import org.jdominion.decisions.prosperity.TrashRevealedCard;
 import org.jdominion.effects.CardEffectTreasure;
 
 public class LoanEffect extends CardEffectTreasure {

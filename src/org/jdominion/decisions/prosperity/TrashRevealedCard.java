@@ -1,10 +1,11 @@
-package org.jdominion.decisions;
+package org.jdominion.decisions.prosperity;
 
 import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.cards.common.Copper;
+import org.jdominion.decisions.YesNoDecision;
 
 public class TrashRevealedCard extends YesNoDecision {
 

@@ -1,6 +1,7 @@
-package org.jdominion.decisions;
+package org.jdominion.decisions.cornucopia;
 
 import org.jdominion.Hand;
+import org.jdominion.decisions.ChooseCardFromHandToDiscard;
 
 public class ChooseCardFromHandToDiscardForExtraAction extends ChooseCardFromHandToDiscard {
 

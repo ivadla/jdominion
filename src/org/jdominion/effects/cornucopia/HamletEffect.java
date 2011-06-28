@@ -3,8 +3,8 @@ package org.jdominion.effects.cornucopia;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.decisions.ChooseCardFromHandToDiscardForExtraAction;
-import org.jdominion.decisions.ChooseCardFromHandToDiscardForExtraBuy;
+import org.jdominion.decisions.cornucopia.ChooseCardFromHandToDiscardForExtraAction;
+import org.jdominion.decisions.cornucopia.ChooseCardFromHandToDiscardForExtraBuy;
 import org.jdominion.effects.CardEffectAction;
 
 public class HamletEffect extends CardEffectAction {

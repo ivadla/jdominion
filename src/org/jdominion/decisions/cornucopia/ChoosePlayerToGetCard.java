@@ -1,4 +1,4 @@
-package org.jdominion.decisions;
+package org.jdominion.decisions.cornucopia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.jdominion.Hand;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
+import org.jdominion.decisions.MultipleChoice;
 import org.jdominion.decisions.multipleChoice.PlayerChoice;
 
 public class ChoosePlayerToGetCard extends MultipleChoice<PlayerChoice> {

@@ -1,8 +1,9 @@
-package org.jdominion.decisions;
+package org.jdominion.decisions.base;
 
 import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Card.Type;
+import org.jdominion.decisions.ChooseCardsFromHand;
 
 public class ChooseVictoryCardFromHandToPutOnDeck extends ChooseCardsFromHand {
 

@@ -17,7 +17,7 @@ import org.jdominion.cards.cornucopia.BagOfGold;
 import org.jdominion.cards.cornucopia.Diadem;
 import org.jdominion.cards.cornucopia.Followers;
 import org.jdominion.decisions.ChooseCardToGain;
-import org.jdominion.decisions.RevealProvince;
+import org.jdominion.decisions.cornucopia.RevealProvince;
 import org.jdominion.effects.CardEffectAction;
 import org.jdominion.extraGameData.Prizes;
 import org.jdominion.location.TopOfDeck;

@@ -11,7 +11,7 @@ import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.cards.common.Curse;
-import org.jdominion.decisions.RevealBaneCard;
+import org.jdominion.decisions.cornucopia.RevealBaneCard;
 import org.jdominion.effects.CardEffectSimpleAttack;
 
 public class YoungWitchEffect extends CardEffectSimpleAttack {

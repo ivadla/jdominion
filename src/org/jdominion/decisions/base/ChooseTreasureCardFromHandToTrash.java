@@ -1,10 +1,11 @@
-package org.jdominion.decisions;
+package org.jdominion.decisions.base;
 
 import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Card.Type;
 import org.jdominion.cards.common.Copper;
 import org.jdominion.cards.common.Silver;
+import org.jdominion.decisions.ChooseCardsFromHandToTrash;
 
 public class ChooseTreasureCardFromHandToTrash extends ChooseCardsFromHandToTrash {
 

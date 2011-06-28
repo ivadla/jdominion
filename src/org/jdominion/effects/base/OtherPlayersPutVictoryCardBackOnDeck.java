@@ -4,7 +4,7 @@ import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.Card.Type;
-import org.jdominion.decisions.ChooseVictoryCardFromHandToPutOnDeck;
+import org.jdominion.decisions.base.ChooseVictoryCardFromHandToPutOnDeck;
 import org.jdominion.effects.CardEffectSimpleAttack;
 
 public class OtherPlayersPutVictoryCardBackOnDeck extends CardEffectSimpleAttack {

@@ -6,7 +6,7 @@ import org.jdominion.Card;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.decisions.DiscardDeckDecision;
+import org.jdominion.decisions.base.DiscardDeckDecision;
 import org.jdominion.effects.CardEffectAction;
 
 public class DiscardDeckEffect extends CardEffectAction {

@@ -9,7 +9,7 @@ import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.Util;
 import org.jdominion.Card.Type;
-import org.jdominion.decisions.StealFromRevealedCards;
+import org.jdominion.decisions.base.StealFromRevealedCards;
 import org.jdominion.decisions.revealedCards.Discard;
 import org.jdominion.decisions.revealedCards.Gain;
 import org.jdominion.decisions.revealedCards.Option;

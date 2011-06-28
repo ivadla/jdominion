@@ -9,7 +9,7 @@ import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.Card.Type;
 import org.jdominion.cards.common.Curse;
-import org.jdominion.decisions.ChoosePlayerToGetCard;
+import org.jdominion.decisions.cornucopia.ChoosePlayerToGetCard;
 import org.jdominion.effects.CardEffectSimpleAttack;
 
 public class JesterEffect extends CardEffectSimpleAttack {

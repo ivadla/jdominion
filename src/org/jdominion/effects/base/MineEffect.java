@@ -9,7 +9,7 @@ import org.jdominion.Hand;
 import org.jdominion.Supply;
 import org.jdominion.Card.Type;
 import org.jdominion.decisions.ChooseCardsFromHandToTrash;
-import org.jdominion.decisions.ChooseTreasureCardFromHandToTrash;
+import org.jdominion.decisions.base.ChooseTreasureCardFromHandToTrash;
 import org.jdominion.effects.TrashGainEffect;
 import org.jdominion.location.Location;
 
