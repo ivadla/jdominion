@@ -1,5 +1,6 @@
 package org.jdominion.decisions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.decisions.multipleChoice.Choice;
@@ -11,7 +12,7 @@ public abstract class MultipleChoice<E extends Choice> extends Decision<List<E>>
 	private List<E> choices;
 
 	public List<E> getChoices() {
-		return choices;
+		return new ArrayList<E>(choices);
 	}
 
 	public int getMinAnswers() {

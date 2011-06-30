@@ -33,7 +33,7 @@ public class MultipleChoiceView extends JDialog {
 
 	private void init(String userMessage, List<String> choices, boolean canChooseMoreThanOne) {
 		if (canChooseMoreThanOne) {
-			throw new NotImplementedException("choosing multiple answers is not yet implemented");
+			throw new NotImplementedException("choosing multiple answers simultaneously is not yet implemented");
 		}
 
 		this.setLocationRelativeTo(getParent());
