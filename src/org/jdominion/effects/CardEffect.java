@@ -39,6 +39,13 @@ public abstract class CardEffect implements Serializable {
 
 	public abstract int getCoins();
 
+	/**
+	 * @return the text for the Effect like it would appear on the card
+	 */
+	public String getText() {
+		return "";
+	}
+
 	public int getAddedActions() {
 		return 0;
 	}

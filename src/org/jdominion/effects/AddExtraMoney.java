@@ -19,4 +19,9 @@ public class AddExtraMoney extends CardEffectAction {
 		return true;
 	}
 
+	@Override
+	public String getText() {
+		return "+ " + coinsToAdd + " Coin" + (coinsToAdd > 1 ? "s": "");
+	}
+
 }

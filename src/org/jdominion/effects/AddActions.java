@@ -14,6 +14,11 @@ public class AddActions extends CardEffectAction {
 	}
 
 	@Override
+	public String getText() {
+		return "+ " + numberOfActionsToAdd + " Action" + (numberOfActionsToAdd > 1 ? "s": "");
+	}
+
+	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		currentTurn.addActions(numberOfActionsToAdd);
 		return true;
