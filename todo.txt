@@ -21,13 +21,12 @@ Ideas/TODO:
 	- countCoins
 	- countCardsOfClass
 	- getCardByClass
-	- contains
+	- containsX, where can be card-type,card-class or some things useful for the AI, like containsTerminalAction
 	- remove
 	- getCheapestCard
 	- ...
 
 - the user should be able to choose which treasure cards to play
-- a system to save user configs in a system-transparent way
 - rename humanstrategy to humanplayer
 - move MAXIMUM_PLAYERS from GameConfigurationController to somewhere more
   global. Or at least make sure that the config returns the correct number of
@@ -35,4 +34,4 @@ Ideas/TODO:
 - for ChooseFromRevealedCards the answers are not set by setanswer, but
   setanswer has to be called. Look for a better way
 - use a typesafe way to check which button was pressed in the actionPerformed
-  methods
+  methods(we could use one anonymous inner class per button)
