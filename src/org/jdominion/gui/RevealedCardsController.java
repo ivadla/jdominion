@@ -36,7 +36,7 @@ public class RevealedCardsController implements MouseListener, ActionListener, W
 		String cardOwner = revealedCards.get(0).getOwner().getName();
 		this.cardImages = new ArrayList<CardImage>();
 		for (RevealedCard revealedCard : revealedCards) {
-			if (revealedCard.getOwner().getName() != cardOwner) {
+			if (!revealedCard.getOwner().getName().equals(cardOwner)) {
 				view.addCardImages(cardOwner, cardImagesForOnePlayer);
 				cardImagesForOnePlayer = new ArrayList<CardImage>();
 				cardOwner = revealedCard.getOwner().getName();
@@ -66,7 +66,7 @@ public class RevealedCardsController implements MouseListener, ActionListener, W
 
 	private void updateCardImages() {
 		for (int i = 0; i < cardImages.size(); i++) {
-			if (cardImages.get(i).getLongOverlayText() != revealedCards.get(i).getChoosenOption().getName()) {
+			if (!cardImages.get(i).getLongOverlayText().equals(revealedCards.get(i).getChoosenOption().getName())) {
 				cardImages.get(i).setLongOverlayText(revealedCards.get(i).getChoosenOption().getName());
 			}
 		}

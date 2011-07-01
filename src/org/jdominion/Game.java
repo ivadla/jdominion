@@ -127,17 +127,17 @@ public class Game implements Serializable, ICurrentTurn {
 	}
 
 	private List<Player> findWinners() {
-		List<Player> winners = new ArrayList<Player>();	// just assign something to get rid of a warning
+		List<Player> winners = new ArrayList<Player>();
 		int highestPoints = Integer.MIN_VALUE;
 
 		for (Player player : getPlayers()) {
 			if (player.countVictoryPoints(null) > highestPoints) {
-				winners = new ArrayList<Player>();
+				winners.clear();
 				winners.add(player);
 				highestPoints = player.countVictoryPoints(null);
 			} else if (player.countVictoryPoints(null) == highestPoints) {
 				if (player.getTurnCounter() < winners.get(0).getTurnCounter()) {
-					winners = new ArrayList<Player>();
+					winners.clear();
 					winners.add(player);
 				} else if (player.getTurnCounter() == winners.get(0).getTurnCounter()) {
 					winners.add(player);

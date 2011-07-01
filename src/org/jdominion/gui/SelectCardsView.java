@@ -81,7 +81,7 @@ public class SelectCardsView extends JDialog implements ItemListener {
 				return;
 			}
 		}
-		new RuntimeException("Unknown Item changed: " + e.getSource());
+		throw new RuntimeException("Unknown Item changed: " + e.getSource());
 	}
 
 	public void enOrDisableUncheckedCheckboxes(boolean enable) {
