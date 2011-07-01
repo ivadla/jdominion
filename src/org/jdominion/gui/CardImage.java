@@ -1,11 +1,13 @@
 package org.jdominion.gui;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
@@ -17,6 +19,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JToolTip;
+import com.mortennobel.imagescaling.ResampleOp;
 
 import org.jdominion.Card;
 
@@ -164,15 +167,33 @@ public class CardImage extends JPanel {
 	}
 
 	private void drawText(Graphics g) {
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+		
 		if (this.getOverlayText() != null) {
-			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-			g.setColor(Color.BLUE);
-			g.drawString(getOverlayText(), getWidth() - 25, getHeight() - 4);
+			g2d.setColor(Color.WHITE);
+			g2d.drawString(getOverlayText(), getWidth() - 26, getHeight() - 5);
+			g2d.drawString(getOverlayText(), getWidth() - 26, getHeight() - 3);
+			g2d.drawString(getOverlayText(), getWidth() - 24, getHeight() - 3);
+			g2d.drawString(getOverlayText(), getWidth() - 24, getHeight() - 5);
+			
+			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+			g2d.setColor(Color.BLUE);
+			g2d.drawString(getOverlayText(), getWidth() - 25, getHeight() - 4);
 		}
 		if (this.getLongOverlayText() != null) {
-			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-			g.setColor(Color.GREEN);
-			g.drawString(getLongOverlayText(), 10, 15);
+			g2d.setColor(Color.WHITE);
+			g2d.drawString(getLongOverlayText(), 11, 16);
+			g2d.drawString(getLongOverlayText(), 11, 14);
+			g2d.drawString(getLongOverlayText(), 9, 14);
+			g2d.drawString(getLongOverlayText(), 9, 16);
+			
+			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+			g2d.setColor(Color.GREEN);
+			g2d.drawString(getLongOverlayText(), 10, 15);
 		}
 	}
 
@@ -183,7 +204,9 @@ public class CardImage extends JPanel {
 		} else {
 			imageToDraw = image;
 		}
-		g.drawImage(imageToDraw, 0, 0, this.getWidth(), this.getHeight(), null);
+		ResampleOp resampleOp = new ResampleOp(this.getWidth(), this.getHeight());
+		BufferedImage image = resampleOp.filter(imageToDraw, null); 
+		g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
 	@Override
