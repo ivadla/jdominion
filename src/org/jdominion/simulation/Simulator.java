@@ -24,11 +24,11 @@ public class Simulator {
 		this.numberOfGamesToSimulate = numberOfGamesToSimulate;
 	}
 
-	public void AddPlayer(Class<? extends IStrategy> strategy) {
-		AddPlayer(strategy, new ArrayList<SimulationParameter>());
+	public void addPlayer(Class<? extends IStrategy> strategy) {
+		addPlayer(strategy, new ArrayList<SimulationParameter>());
 	}
 
-	public void AddPlayer(Class<? extends IStrategy> strategy, List<SimulationParameter> parameters) {
+	public void addPlayer(Class<? extends IStrategy> strategy, List<SimulationParameter> parameters) {
 		PlayerInformationContainer player = new PlayerInformationContainer(players.size(), strategy, parameters);
 		players.add(player);
 	}

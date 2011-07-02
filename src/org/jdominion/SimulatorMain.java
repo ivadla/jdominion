@@ -14,18 +14,18 @@ public class SimulatorMain {
 		
 		Simulator simulator = new Simulator(100000);
 
-		simulator.AddPlayer(WitchStrategy.class);
+		simulator.addPlayer(WitchStrategy.class);
 		
 		
 		List<SimulationParameter> parameters = new ArrayList<SimulationParameter>();
 		parameters.add(new SimulationParameter(1, 2));
-		simulator.AddPlayer(SmithyStrategy.class, parameters);
+		simulator.addPlayer(SmithyStrategy.class, parameters);
 		
 		parameters = new ArrayList<SimulationParameter>();
 		parameters.add(new SimulationParameter(18,20));
 		parameters.add(new SimulationParameter(20,22));
 		parameters.add(new SimulationParameter(20,22));
-		simulator.AddPlayer(MoneyOnly.class,parameters);
+		simulator.addPlayer(MoneyOnly.class,parameters);
 		
 		simulator.run(new Cursecounter());
 	}
