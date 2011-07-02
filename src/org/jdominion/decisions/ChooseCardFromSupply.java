@@ -17,11 +17,7 @@ public abstract class ChooseCardFromSupply extends Decision<Class<? extends Card
 
 	@Override
 	public boolean isValidAnswer(Class<? extends Card> answer) {
-		if (availableCards.isCardAvailable(answer)) {
-			return true;
-		} else {
-			return false;
-		}
+		return availableCards.isCardAvailable(answer);
 	}
 
 }

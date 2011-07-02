@@ -27,7 +27,6 @@ public class ChooseCardsFromHandToTrash extends ChooseCardsFromHand {
 			return hand.getCardByClass(Copper.class);
 		}
 
-		Card cheapestCard = hand.getCheapestCard();
-		return cheapestCard;
+		return hand.getCheapestCard();
 	}
 }

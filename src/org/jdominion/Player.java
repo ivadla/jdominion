@@ -103,8 +103,7 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public List<Card> getCardsFromDeck(int numberOfCardsToGet) {
-		List<Card> cardsToGet = drawCards(numberOfCardsToGet);
-		return cardsToGet;
+		return drawCards(numberOfCardsToGet);
 	}
 
 	public Card revealCard() {
@@ -363,8 +362,6 @@ public class Player implements Serializable, IPlayer {
 		if (!decision.isAnswered()) {
 			decision.chooseDefaultAnswer(hand, currentTurn, supply);
 		}
-
-		return;
 	}
 
 	public static void callCorrectDecisionMethod(Decision<?> decision, CardEffect effect, Hand hand, Turn currentTurn,
