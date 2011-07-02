@@ -90,7 +90,7 @@ public class HumanStrategy implements IStrategy {
 						.getMinimumNumberOfCards()
 						|| decision.isCancelable());
 				if (choosenCard == null) {
-					if (choosenCards.size() == 0) {
+					if (choosenCards.isEmpty()) {
 						decision.setCanceled(true);
 						return;
 					} else {

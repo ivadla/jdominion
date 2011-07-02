@@ -25,7 +25,7 @@ public class Util {
 
 	public static String convertCardListToString(List<Card> cards) {
 		String message = "";
-		if (cards.size() == 0) {
+		if (cards.isEmpty()) {
 			message += "no cards";
 		} else {
 			for (int i = 0; i < cards.size() - 1; i++) {

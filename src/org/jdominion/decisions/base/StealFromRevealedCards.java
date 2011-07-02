@@ -69,7 +69,7 @@ public class StealFromRevealedCards extends ChooseFromRevealedCards {
 	@Override
 	public boolean isValidAnswer(List<RevealedCard> answer) {
 		if (super.isValidAnswer(answer)) {
-			if (answer.size() == 0) {
+			if (answer.isEmpty()) {
 				return true;
 			}
 			Map<Player, Boolean> playerHasTrashedOrStolenCard = new HashMap<Player, Boolean>();

@@ -25,7 +25,7 @@ public class DrawUpToXCards extends CardEffectAction {
 		List<Card> setAsideCards = new ArrayList<Card>();
 		while (activePlayer.getHandSize() < this.maxCardsInHand) {
 			List<Card> revealedCards = activePlayer.revealCards(1);
-			if (revealedCards.size() == 0) { // no cards left to draw
+			if (revealedCards.isEmpty()) { // no cards left to draw
 				break;
 			}
 

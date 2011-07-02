@@ -41,7 +41,7 @@ public class StealTreasureCards extends CardEffectAttack {
 				}
 			}
 		}
-		if (revealedCards.size() == 0) {
+		if (revealedCards.isEmpty()) {
 
 			return false;
 		}

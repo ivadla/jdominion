@@ -26,26 +26,26 @@ public class CardPile implements Serializable {
 	}
 
 	public Class<? extends Card> getCardClass() {
-		if (cards.size() == 0) {
+		if (cards.isEmpty()) {
 			return null;
 		}
 		return cards.get(0).getClass();
 	}
 
 	public String getCardName() {
-		if (cards.size() == 0) {
+		if (cards.isEmpty()) {
 			return null;
 		}
 		return cards.get(0).getName();
 	}
 
 	public int getCardCost() {
-		assert cards.size() > 0;
+		assert !cards.isEmpty();
 		return cards.get(0).getCost();
 	}
-	
+
 	public List<CardEffect> getCardEffects() {
-		if (cards.size() == 0) {
+		if (cards.isEmpty()) {
 			return new ArrayList<CardEffect>();
 		}
 		return cards.get(0).getEffects();
@@ -54,14 +54,14 @@ public class CardPile implements Serializable {
 	public int getNumberOfCardsInPile() {
 		return cards.size();
 	}
-	
+
 	public boolean isOfType(Card.Type type) {
-		assert cards.size() > 0;
+		assert !cards.isEmpty();
 		return cards.get(0).isOfType(type);
 	}
 
 	public Card takeCard() {
-		assert cards.size() > 0;
+		assert !cards.isEmpty();
 		return cards.remove(0);
 	}
 }

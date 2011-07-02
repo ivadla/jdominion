@@ -28,7 +28,7 @@ public class RevealedCardsController implements MouseListener, ActionListener, W
 		this.decision = decision;
 		this.revealedCards = decision.getRevealedCards();
 
-		assert revealedCards.size() > 0;
+		assert !revealedCards.isEmpty();
 
 		view = new RevealedCardsView(parent, message, this);
 

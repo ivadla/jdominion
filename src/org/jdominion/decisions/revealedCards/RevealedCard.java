@@ -14,7 +14,7 @@ public class RevealedCard {
 
 	public RevealedCard(Card revealedCard, Player owner, List<Option> options) {
 		super();
-		assert options.size() > 0;
+		assert !options.isEmpty();
 		this.revealedCard = revealedCard;
 		this.owner = owner;
 		this.options = options;

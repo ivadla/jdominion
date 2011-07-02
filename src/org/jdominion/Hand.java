@@ -35,7 +35,7 @@ public class Hand implements Serializable {
 	 * @param newHandCards
 	 */
 	public void set(List<Card> newHandCards) {
-		assert cardsInHand.size() == 0 : "Hand has to be empty to prevent the loss of cards";
+		assert cardsInHand.isEmpty() : "Hand has to be empty to prevent the loss of cards";
 		cardsInHand = newHandCards;
 	}
 

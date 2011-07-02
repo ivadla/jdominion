@@ -32,7 +32,7 @@ public class ExtraGameDataCardList extends ExtraGameData<List<Card>> {
 
 	@Override
 	public void set(List<Card> data) {
-		assert cards.size() == 0 : "Possible losing track of cards " + getContentsAsString();
+		assert cards.isEmpty() : "Possible losing track of cards " + getContentsAsString();
 		this.cards = data;
 	}
 

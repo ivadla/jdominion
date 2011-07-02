@@ -14,7 +14,7 @@ public class TributeEffect extends CardEffectAction {
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		Player nextPlayer = currentTurn.getNextPlayer();
 		List<Card> revealedCards = nextPlayer.revealCards(2);
-		if (revealedCards.size() == 0) {
+		if (revealedCards.isEmpty()) {
 			return false;
 		}
 		List<Card.Type> typesOfRevealedCards = new ArrayList<Card.Type>(revealedCards.get(0).getTypes());
