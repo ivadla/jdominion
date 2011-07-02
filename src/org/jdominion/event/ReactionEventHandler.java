@@ -21,7 +21,7 @@ public class ReactionEventHandler implements IEventHandler {
 
 	private static ReactionEventHandler instance = null;
 
-	Map<Player, List<Card>> playerCardMap = null;
+	private Map<Player, List<Card>> playerCardMap = null;
 
 	private ReactionEventHandler() {
 		playerCardMap = new HashMap<Player, List<Card>>();

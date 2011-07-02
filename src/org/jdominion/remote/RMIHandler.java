@@ -6,7 +6,7 @@ import java.rmi.registry.LocateRegistry;
 
 public class RMIHandler {
 	
-	public static boolean alreadyInitialized = false;
+	private static boolean alreadyInitialized = false;
 
 	public static void initializeRMI() {
 		

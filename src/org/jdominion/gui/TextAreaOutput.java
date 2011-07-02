@@ -4,7 +4,7 @@ import org.jdominion.TextOutput;
 
 public class TextAreaOutput extends TextOutput {
 
-	MainWindow mainWindow;
+	private MainWindow mainWindow;
 
 	public TextAreaOutput(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;

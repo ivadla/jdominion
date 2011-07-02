@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TextOutput implements EventObserver, Serializable {
 
-	boolean gameEndMessageDisplayed = false;
+	private boolean gameEndMessageDisplayed = false;
 
 	protected void printMessage(String message) {
 		System.out.println(message);

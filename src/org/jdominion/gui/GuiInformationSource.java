@@ -10,10 +10,10 @@ import org.jdominion.Turn;
 
 public class GuiInformationSource implements IGuiInformationSource {
 
-	public Game game;
-	public Hand hand;
-	public List<IPlayer> players;
-	public Supply supply;
+	private Game game;
+	private Hand hand;
+	private List<IPlayer> players;
+	private Supply supply;
 
 	public GuiInformationSource(Game game, Hand hand, List<IPlayer> players, Supply supply) {
 		this.game = game;
