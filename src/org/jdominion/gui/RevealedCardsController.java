@@ -124,7 +124,7 @@ public class RevealedCardsController implements MouseListener, ActionListener, W
 
 	@Override
 	public synchronized void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand() == "OK") {
+		if ("OK".equals(e.getActionCommand())) {
 			this.decisionFinished = true;
 			this.notifyAll();
 		}
