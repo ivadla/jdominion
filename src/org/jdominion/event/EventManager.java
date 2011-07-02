@@ -19,7 +19,7 @@ public class EventManager {
 		ONCE, END_OF_TURN, FOREVER
 	}
 
-	private class EventHandlerContainer {
+	private static class EventHandlerContainer {
 		public IEventHandler eventHandler;
 		public EventManager.Duration duration;
 		public Player player = null;
