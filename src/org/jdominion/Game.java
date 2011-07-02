@@ -103,7 +103,7 @@ public class Game implements Serializable, ICurrentTurn {
 
 	private static List<Player> createPlayersFromStrategies(List<String> playerNames,
 			List<Class<? extends IStrategy>> playerStrategies) {
-		assert playerNames.size() > 0 : "The game needs players";
+		assert !playerNames.isEmpty() : "The game needs players";
 		assert playerNames.size() == playerStrategies.size() : "There should be one strategy for each player";
 		List<Player> players = new ArrayList<Player>();
 		for (int i = 0; i < playerNames.size(); i++) {
