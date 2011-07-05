@@ -34,11 +34,13 @@ public class MainWindow extends JFrame {
 	private JTextArea messageTextArea = null;
 	private JScrollPane messageScrollPane = null;
 	private JPanel leftPanel = null;
+	private JPanel centralPanel = null;
 	private JTable playerTable = null;
 	private JLabel messageToUser = null;
 	private JButton cancelButton = null;
 	private PlayerTableModel playerTableModel = null;
-	private HandController handController = null;
+	private CardListController handController = null;
+	private CardListController playAreaController = null;
 	private SupplyController supplyController = null;
 	private TurnController turnController = null;
 
@@ -64,6 +66,7 @@ public class MainWindow extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.playerTable = this.initializePlayerTable(guiInformationSource);
 		this.handController = new HandController(guiInformationSource);
+		this.playAreaController = new PlayAreaController(guiInformationSource);
 		this.supplyController = new SupplyController(guiInformationSource);
 		this.turnController = new TurnController(guiInformationSource);
 		this.setContentPane(getJContentPane());
@@ -77,11 +80,11 @@ public class MainWindow extends JFrame {
 			jContentPane.setLayout(layout);
 			jContentPane.add(supplyController.getView(), new CC().wrap().spanX());
 			jContentPane.add(getLeftPanel());
-			jContentPane.add(getMessageToUser());
+			jContentPane.add(getCentralPanel(), new CC().grow());
 			jContentPane.add(getMessageScrollPane(), new CC().grow().wrap());
-			jContentPane.add(handController.getHandView(), new CC().grow().spanX());
+			jContentPane.add(handController.view(), new CC().grow().spanX());
 			layout.setRowConstraints("[16%][50%][34%]");
-			layout.setColumnConstraints("[20%!][40%!][30%!]");
+			layout.setColumnConstraints("[20%!][45%!][30%!]");
 		}
 		return jContentPane;
 	}
@@ -114,6 +117,17 @@ public class MainWindow extends JFrame {
 			leftPanel.add(getCancelButton());
 		}
 		return leftPanel;
+	}
+	
+	private JPanel getCentralPanel() {
+		if(centralPanel == null) {
+			MigLayout layout = new MigLayout(new LC().fill());
+			centralPanel = new JPanel(layout);
+			centralPanel.add(getMessageToUser(), new CC().wrap().growX());
+			centralPanel.add(playAreaController.view(), new CC().grow());
+			layout.setRowConstraints("[][:200:200]");
+		}
+		return centralPanel;
 	}
 
 	private JTable getplayerTable() {
@@ -223,6 +237,7 @@ public class MainWindow extends JFrame {
 			public void run() {
 				playerTableModel.fireTableDataChanged();
 				handController.update();
+				playAreaController.update();
 				supplyController.update();
 				turnController.update();
 			}

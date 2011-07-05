@@ -2,6 +2,7 @@ package org.jdominion.gui;
 
 import java.util.List;
 
+import org.jdominion.Card;
 import org.jdominion.Game;
 import org.jdominion.Hand;
 import org.jdominion.IPlayer;
@@ -40,6 +41,11 @@ public class GuiInformationSource implements IGuiInformationSource {
 	@Override
 	public Supply getSupply() {
 		return supply;
+	}
+
+	@Override
+	public List<Card> getPlayArea() {
+		return getCurrentTurn().getPlayedCards();
 	}
 
 }

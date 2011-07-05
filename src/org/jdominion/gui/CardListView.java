@@ -2,16 +2,17 @@ package org.jdominion.gui;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class HandView extends JScrollPane implements ComponentListener {
+public class CardListView extends JScrollPane implements ComponentListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel = null;
-	private List<CardImage> cardImages = null;
+	private List<CardImage> cardImages = new ArrayList<CardImage>();
 
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -20,7 +21,7 @@ public class HandView extends JScrollPane implements ComponentListener {
 		return panel;
 	}
 
-	public HandView() {
+	public CardListView() {
 		super();
 		this.setViewportView(getPanel());
 		this.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_NEVER);
@@ -28,7 +29,7 @@ public class HandView extends JScrollPane implements ComponentListener {
 		this.addComponentListener(this);
 	}
 
-	public void displayHand(List<CardImage> cards) {
+	public void displayCards(List<CardImage> cards) {
 		cardImages = cards;
 
 		getPanel().removeAll();

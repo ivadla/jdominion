@@ -2,6 +2,7 @@ package org.jdominion.gui;
 
 import java.util.List;
 
+import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.Turn;
 import org.jdominion.IPlayer;
@@ -16,4 +17,6 @@ public interface IGuiInformationSource {
 	public Supply getSupply();
 
 	public Turn getCurrentTurn();
+	
+	public List<Card> getPlayArea();
 }

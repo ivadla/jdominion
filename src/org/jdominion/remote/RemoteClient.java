@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import org.jdominion.Card;
 import org.jdominion.Hand;
 import org.jdominion.IPlayer;
 import org.jdominion.Player;
@@ -96,6 +97,11 @@ public class RemoteClient implements IGuiInformationSource {
 		} catch (RemoteException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public List<Card> getPlayArea() {
+		return getCurrentTurn().getCardsInPlay();
 	}
 
 }
