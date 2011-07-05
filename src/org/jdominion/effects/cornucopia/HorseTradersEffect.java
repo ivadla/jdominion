@@ -1,8 +1,6 @@
 package org.jdominion.effects.cornucopia;
 
 import org.jdominion.Player;
-import org.jdominion.Supply;
-import org.jdominion.Turn;
 import org.jdominion.effects.CardEffectReaction;
 import org.jdominion.event.Event;
 import org.jdominion.event.EventManager;
@@ -19,9 +17,9 @@ public class HorseTradersEffect extends CardEffectReaction implements IEventHand
 	}
 
 	@Override
-	public void handleEvent(Event event, Player activePlayer, Turn currentTurn, Supply supply) {
-		activePlayer.drawCardsIntoHand(1);
-		activePlayer.addCardToHand(getCard());
+	public void handleEvent(Event event) {
+		event.getAffectedPlayer().drawCardsIntoHand(1);
+		event.getAffectedPlayer().addCardToHand(getCard());
 	}
 
 }

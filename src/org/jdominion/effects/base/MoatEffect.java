@@ -1,8 +1,6 @@
 package org.jdominion.effects.base;
 
 import org.jdominion.Player;
-import org.jdominion.Supply;
-import org.jdominion.Turn;
 import org.jdominion.Card.Type;
 import org.jdominion.effects.CardEffectReaction;
 import org.jdominion.event.Attack;
@@ -27,7 +25,7 @@ public class MoatEffect extends CardEffectReaction implements IEventHandler {
 	}
 
 	@Override
-	public void handleEvent(Event event, Player activePlayer, Turn currentTurn, Supply supply) {
+	public void handleEvent(Event event) {
 		if (event instanceof Attack) {
 			Attack attackEvent = (Attack) event;
 			if(attackEvent.getAttackedPlayer() == this.getOwner()) {

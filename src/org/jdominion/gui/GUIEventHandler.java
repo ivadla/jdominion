@@ -1,6 +1,4 @@
-package org.jdominion.remote;
-
-import java.rmi.RemoteException;
+package org.jdominion.gui;
 
 import org.jdominion.event.CardBought;
 import org.jdominion.event.CardGained;
@@ -16,21 +14,12 @@ import org.jdominion.event.GameEnded;
 import org.jdominion.event.IEventHandler;
 import org.jdominion.event.EventManager.Duration;
 
-public class RemoteOutput implements IEventHandler {
+public class GUIEventHandler implements IEventHandler {
 
-	private TextMessageServer textMessageServer;
-	
-	public RemoteOutput() {
-		
-		try {
-			this.textMessageServer = new TextMessageServer();
-			//Thread.sleep(10000);
-		} catch (RemoteException e) {
-			throw new RuntimeException(e);
-		}
-			//		} catch (InterruptedException e) {
-//			new RuntimeException(e);
-//		}
+	private MainWindow mainWindow;
+
+	public GUIEventHandler(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
 	}
 
 	public void registerForEvents(EventManager eventManager) {
@@ -47,7 +36,11 @@ public class RemoteOutput implements IEventHandler {
 
 	@Override
 	public void handleEvent(Event event) {
-		textMessageServer.setMessage(event.getDescription());
+		printMessage(event.getDescription());
 	}
 
+	protected void printMessage(String message) {
+		mainWindow.addMessageText(message);
+		mainWindow.update();
+	}
 }

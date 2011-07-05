@@ -91,12 +91,12 @@ public class Turn implements Serializable {
 	}
 
 	public void doTurn() {
-		EventManager.getInstance().handleEvent(new StartOfTurn(this), activePlayer, this, game.getSupply());
+		EventManager.getInstance().handleEvent(new StartOfTurn(this));
 		playActionCards(activePlayer, game.getSupply());
 		playTreasureCards(activePlayer, game.getSupply());
 		buyCards(activePlayer, game.getSupply());
 		cleanUp(activePlayer);
-		EventManager.getInstance().handleEvent(new EndOfTurn(this), activePlayer, this, game.getSupply());
+		EventManager.getInstance().handleEvent(new EndOfTurn(this));
 	}
 
 	public List<Player> getOtherPlayers() {
@@ -122,7 +122,7 @@ public class Turn implements Serializable {
 	private void playActionCards(Player activePlayer, Supply supply) {
 		while (activePlayer.hasActionCardInHand() && (this.availableActions > 0)) {
 			ChooseActionCardToPlay playDecision = new ChooseActionCardToPlay(activePlayer.getHand());
-			activePlayer.decide(playDecision, new NullEffect(), activePlayer.getHand(), this, supply);
+			activePlayer.decide(playDecision, new NullEffect());
 			if (playDecision.isCanceled()) {
 				return;
 			}
@@ -157,7 +157,7 @@ public class Turn implements Serializable {
 	private void playOtherTreasureCards(Player activePlayer, Supply supply) {
 		while (activePlayer.getHand().contains(Type.TREASURE)) {
 			ChooseTreasureCardToPlay playDecision = new ChooseTreasureCardToPlay(activePlayer.getHand());
-			activePlayer.decide(playDecision, new NullEffect(), activePlayer.getHand(), this, supply);
+			activePlayer.decide(playDecision, new NullEffect());
 			if (playDecision.isCanceled()) {
 				return;
 			}
@@ -174,7 +174,7 @@ public class Turn implements Serializable {
 
 			ChooseCardToBuy buyDecision = new ChooseCardToBuy(supply.createSupplyWithMaximumCost(availableCoins),
 					availableBuys, availableCoins);
-			activePlayer.decide(buyDecision, new NullEffect(), activePlayer.getHand(), this, supply);
+			activePlayer.decide(buyDecision, new NullEffect());
 
 			if (buyDecision.isCanceled()) {
 				return;

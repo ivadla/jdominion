@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
-import org.jdominion.EventHandler;
-import org.jdominion.EventObserver;
 import org.jdominion.Game;
 import org.jdominion.Hand;
 import org.jdominion.IPlayer;
@@ -21,6 +19,7 @@ import org.jdominion.decisions.MultipleChoice;
 import org.jdominion.decisions.YesNoDecision;
 import org.jdominion.decisions.multipleChoice.Choice;
 import org.jdominion.effects.CardEffect;
+import org.jdominion.event.EventManager;
 
 public class HumanStrategy implements IStrategy {
 
@@ -52,8 +51,8 @@ public class HumanStrategy implements IStrategy {
 		mainWindow = new MainWindow(new GuiInformationSource(game, player.getHand(), players, game.getSupply()));
 		mainWindow.setVisible(true);
 		
-		EventObserver observer = new TextAreaOutput(mainWindow);
-		EventHandler.getInstance().addObserver(observer);
+		GUIEventHandler observer = new GUIEventHandler(mainWindow);
+		observer.registerForEvents(EventManager.getInstance());
 	}
 
 	@Override

@@ -4,21 +4,15 @@ import org.jdominion.Card;
 import org.jdominion.Player;
 
 public class CardPlayed extends Event {
-	
-	private Player owner;
-	private Card playedCard;
 
-	public Player getOwner() {
-		return owner;
-	}
+	private Card playedCard;
 
 	public Card getPlayedCard() {
 		return playedCard;
 	}
 
 	public CardPlayed(Player owner, Card playedCard) {
-		super(owner.getName() + " plays " + playedCard.getName());
-		this.owner = owner;
+		super(owner.getName() + " plays " + playedCard.getName(), owner);
 		this.playedCard = playedCard;
 	}
 }

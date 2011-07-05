@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jdominion.Player;
-import org.jdominion.Supply;
-import org.jdominion.Turn;
 
 public class EventManager {
 
@@ -79,14 +77,16 @@ public class EventManager {
 		}
 	}
 
-	public void handleEvent(Event event, Player activePlayer, Turn currentTurn, Supply supply) {
+	public void handleEvent(Event event) {
 		if (eventHandlers.containsKey(event.getClass())) {
 			// use a copy of of the EventHandlerContainer-list to be able to
 			// remove elements from the original list
-			for (EventHandlerContainer eventHandlerContainer : new ArrayList<EventHandlerContainer>(eventHandlers
-					.get(event.getClass()))) {
-				if (eventHandlerContainer.player == activePlayer || eventHandlerContainer.player == null) {
-					eventHandlerContainer.eventHandler.handleEvent(event, activePlayer, currentTurn, supply);
+			for (EventHandlerContainer eventHandlerContainer : new ArrayList<EventHandlerContainer>(
+					eventHandlers.get(event.getClass()))) {
+				// TODO: add affected player to every event or as a parameter to
+				// this method
+				if (eventHandlerContainer.player == event.getAffectedPlayer() || eventHandlerContainer.player == null) {
+					eventHandlerContainer.eventHandler.handleEvent(event);
 					if (eventHandlerContainer.duration == Duration.ONCE) {
 						removeEventHandler(eventHandlerContainer.eventHandler, event.getClass());
 					}

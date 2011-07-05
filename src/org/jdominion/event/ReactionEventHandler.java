@@ -8,8 +8,6 @@ import java.util.Map.Entry;
 
 import org.jdominion.Card;
 import org.jdominion.Player;
-import org.jdominion.Supply;
-import org.jdominion.Turn;
 import org.jdominion.Card.Type;
 import org.jdominion.decisions.ChooseReactionCardToUse;
 import org.jdominion.effects.CardEffect;
@@ -36,22 +34,23 @@ public class ReactionEventHandler implements IEventHandler {
 	}
 
 	@Override
-	public void handleEvent(Event event, Player activePlayer, Turn currentTurn, Supply supply) {
+	public void handleEvent(Event event) {
 		if ((event instanceof CardPlayed) && ((CardPlayed) event).getPlayedCard().isOfType(Type.ATTACK)) {
 
 			for (Entry<Player, List<Card>> playerCardMapEntry : playerCardMap.entrySet()) {
-				if ((playerCardMapEntry.getKey() != activePlayer) && (playerCardMapEntry.getValue().size() > 0)) {
-					chooseReactionCardAndHandleReaction(playerCardMapEntry.getKey(), event, currentTurn, supply);
+				// affectedPlayer is the player who plays the attack card
+				if ((playerCardMapEntry.getKey() != event.getAffectedPlayer()) && (playerCardMapEntry.getValue().size() > 0)) {
+					chooseReactionCardAndHandleReaction(playerCardMapEntry.getKey(), event);
 				}
 			}
 		}
 	}
 
-	private void chooseReactionCardAndHandleReaction(Player attackedPlayer, Event event, Turn currentTurn, Supply supply) {
+	private void chooseReactionCardAndHandleReaction(Player attackedPlayer, Event event) {
 		ChooseReactionCardToUse decision;
 		do {
 			decision = new ChooseReactionCardToUse(attackedPlayer.getHand(), event);
-			attackedPlayer.decide(decision, new NullEffect(), attackedPlayer.getHand(), currentTurn, supply);
+			attackedPlayer.decide(decision, new NullEffect());
 			if (!decision.isCanceled()) {
 				Card reactionCard = decision.getAnswer().get(0);
 				attackedPlayer.revealCardFromHand(reactionCard);

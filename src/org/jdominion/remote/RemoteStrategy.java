@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
-import org.jdominion.EventHandler;
-import org.jdominion.EventObserver;
 import org.jdominion.Game;
 import org.jdominion.Hand;
 import org.jdominion.IPlayer;
@@ -20,6 +18,7 @@ import org.jdominion.decisions.ChooseCardFromSupply;
 import org.jdominion.decisions.ChooseCardsFromHand;
 import org.jdominion.decisions.Decision;
 import org.jdominion.effects.CardEffect;
+import org.jdominion.event.EventManager;
 
 public class RemoteStrategy extends UnicastRemoteObject implements IStrategy, IRemoteDecision {
 
@@ -124,9 +123,8 @@ public class RemoteStrategy extends UnicastRemoteObject implements IStrategy, IR
 			System.err.println("RMI server exception:");
 			e.printStackTrace();
 		}
-
-		EventObserver observer = new RemoteOutput();
-		EventHandler.getInstance().addObserver(observer);
+		RemoteOutput eventHandler = new RemoteOutput();
+		eventHandler.registerForEvents(EventManager.getInstance());
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class Attack extends CancelableEvent {
 	}
 
 	public Attack(Player attackedPlayer, Player attacker, CardEffect effect) {
-		super(attacker.getName() + " attacks " + attackedPlayer.getName() + " with " + effect.getCard().getName());
+		super(attacker.getName() + " attacks " + attackedPlayer.getName() + " with " + effect.getCard().getName(), attackedPlayer);
 		this.attackedPlayer = attackedPlayer;
 		this.attacker = attacker;
 		this.effect = effect;
@@ -30,7 +30,7 @@ public class Attack extends CancelableEvent {
 	public static boolean isBlocked(Player attackedPlayer, Player attacker, CardEffect effect, Turn currentTurn,
 			Supply supply) {
 		CancelableEvent event = new Attack(attackedPlayer, attacker, effect);
-		EventManager.getInstance().handleEvent(event, attacker, currentTurn, supply);
+		EventManager.getInstance().handleEvent(event);
 		return event.isCanceled();
 	}
 

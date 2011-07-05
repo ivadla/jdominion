@@ -13,9 +13,17 @@ import java.util.List;
 import org.jdominion.aiStrategies.IStrategy;
 import org.jdominion.decisions.Decision;
 import org.jdominion.effects.CardEffect;
+import org.jdominion.event.CardBought;
+import org.jdominion.event.CardGained;
 import org.jdominion.event.CardPlayFinished;
 import org.jdominion.event.CardPlayed;
+import org.jdominion.event.CardsDiscarded;
+import org.jdominion.event.CardsDrawn;
+import org.jdominion.event.CardsRevealed;
+import org.jdominion.event.CardsSetAside;
+import org.jdominion.event.CardsTrashed;
 import org.jdominion.event.EventManager;
+import org.jdominion.event.GameEnded;
 import org.jdominion.location.DiscardPile;
 import org.jdominion.location.Location;
 
@@ -29,6 +37,7 @@ public class Player implements Serializable, IPlayer {
 					// several simulated games
 	private String name;
 	private Hand hand;
+	private Game game;
 	private Deque<Card> deck;
 	private List<Card> discardPile;
 	private List<Card> cardsSetAside;
@@ -116,7 +125,7 @@ public class Player implements Serializable, IPlayer {
 
 	public List<Card> revealCards(int numberOfCardsToReveal) {
 		List<Card> cardsToReveal = drawCards(numberOfCardsToReveal);
-		EventHandler.getInstance().revealsCards(this, cardsToReveal);
+		EventManager.getInstance().handleEvent(new CardsRevealed(this, cardsToReveal));
 		return cardsToReveal;
 	}
 
@@ -130,17 +139,17 @@ public class Player implements Serializable, IPlayer {
 		for (Card card : cardsToReveal) {
 			assert hand.contains(card);
 		}
-		EventHandler.getInstance().revealsCards(this, cardsToReveal);
+		EventManager.getInstance().handleEvent(new CardsRevealed(this, cardsToReveal));
 	}
 
 	public void revealHand() {
-		EventHandler.getInstance().revealsCards(this, hand.getCardList());
+		EventManager.getInstance().handleEvent(new CardsRevealed(this, hand.getCardList()));
 	}
 
 	public void drawCardsIntoHand(int numberOfCardsToDraw) {
 		List<Card> drawnCards = drawCards(numberOfCardsToDraw);
 		addCardsToHand(drawnCards);
-		EventHandler.getInstance().drawsCards(this, drawnCards.size());
+		EventManager.getInstance().handleEvent(new CardsDrawn(this, drawnCards.size()));
 	}
 
 	private List<Card> drawCards(int numberOfCardsToDraw) {
@@ -200,7 +209,7 @@ public class Player implements Serializable, IPlayer {
 			removeCardFromHand(card);
 			placeOnDiscardPile(card);
 		}
-		EventHandler.getInstance().discardsCards(this, cardsToDiscard);
+		EventManager.getInstance().handleEvent(new CardsDiscarded(this, cardsToDiscard));
 	}
 
 	public void placeOnDiscardPile(Card card) {
@@ -256,23 +265,22 @@ public class Player implements Serializable, IPlayer {
 			}
 		}
 		game.addCardsToTrash(cardsToTrash);
-		EventHandler.getInstance().trashesCards(this, cardsToTrash);
+		EventManager.getInstance().handleEvent(new CardsTrashed(this, cardsToTrash));
 	}
 
 	public void playCard(Card card, Turn currentTurn, Supply supply) {
 		if (hand.contains(card)) {
 			removeCardFromHand(card);
 		}
-		EventHandler.getInstance().playsCard(this, card);
-		EventManager.getInstance().handleEvent(new CardPlayed(this, card), this, currentTurn, supply);
+		EventManager.getInstance().handleEvent(new CardPlayed(this, card));
 		card.play(this, currentTurn, supply);
-		EventManager.getInstance().handleEvent(new CardPlayFinished(this, card), this, currentTurn, supply);
+		EventManager.getInstance().handleEvent(new CardPlayFinished(this, card));
 	}
 
 	public void buyCard(Class<? extends Card> cardToBuy, Turn currentTurn, Supply supply) {
 		Card boughtCard = supply.takeCard(cardToBuy);
-		EventHandler.getInstance().buysCard(this, boughtCard);
-		discardPile.add(boughtCard);
+		EventManager.getInstance().handleEvent(new CardBought(this, boughtCard));
+		this.gainCard(boughtCard);
 	}
 
 	public void gainCard(Class<? extends Card> card, Supply supply) {
@@ -290,12 +298,12 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void gainCard(Card gainedCard, Location whereToPlaceCard) {
-		EventHandler.getInstance().gainsCard(this, gainedCard);
+		EventManager.getInstance().handleEvent(new CardGained(this, gainedCard));
 		whereToPlaceCard.putCard(this, gainedCard);
 	}
 
 	public void setCardAside(Card card) {
-		EventHandler.getInstance().setCardsAside(this, Util.createCardList(card));
+		EventManager.getInstance().handleEvent(new CardsSetAside(this, Util.createCardList(card)));
 		this.cardsSetAside.add(card);
 		removeCardsFromOtherPlaces(Util.createCardList(card));
 	}
@@ -348,19 +356,40 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void gameStarted(Game game) {
+		this.game = game;
 		strategy.gameStarted(game);
 	}
 
 	public void gameEnded(List<Player> winners, List<Player> players) {
-		EventHandler.getInstance().gameEnded(winners, players);
+		EventManager.getInstance().handleEvent(new GameEnded(winners, players));
+	}
+	
+
+	/**
+	 * 
+	 * replaced by decide(Decision<?> decision, CardEffect effect)
+	 * 
+	 * @param decision
+	 * @param effect
+	 * @param hand
+	 * @param currentTurn
+	 * @param supply
+	 */
+	@Deprecated
+	public void decide(Decision<?> decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
+		// checks to see if the new decision method would do the same
+		assert hand == this.hand;
+		assert currentTurn == game.getCurrentTurn();
+		assert supply == game.getSupply();
+		this.decide(decision, effect);
 	}
 
-	public void decide(Decision<?> decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
-		callCorrectDecisionMethod(decision, effect, hand, currentTurn, supply, strategy);
+	public void decide(Decision<?> decision, CardEffect effect) {
+		callCorrectDecisionMethod(decision, effect, hand, game.getCurrentTurn(), game.getSupply(), strategy);
 
 		// TODO: maybe move it somewhere else
 		if (!decision.isAnswered()) {
-			decision.chooseDefaultAnswer(hand, currentTurn, supply);
+			decision.chooseDefaultAnswer(hand, game.getCurrentTurn(), game.getSupply());
 		}
 	}
 
