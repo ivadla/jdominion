@@ -13,6 +13,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 	private Card choosenCard;
 	private Boolean cancelClicked;
 	private CardListView view;
+	private List<Card> currentlyDisplayedCards;
 
 	public CardListView view() {
 		return view;
@@ -20,17 +21,28 @@ public abstract class CardListController implements MouseListener, ActionListene
 
 	public CardListController() {
 		this.view = new CardListView();
-//		this.update();
 	}
 
 	public void update() {
-		List<CardImage> cardImages = new ArrayList<CardImage>();
-		for (Card card : getCardList()) {
-			CardImage cardImage = new CardImage(card);
-			cardImage.addMouseListener(this);
-			cardImages.add(cardImage);
+		List<Card> newCards = getCardList();
+		if(cardListChanged(newCards)) {
+			List<CardImage> cardImages = new ArrayList<CardImage>();
+			for (Card card : newCards) {
+				CardImage cardImage = new CardImage(card);
+				cardImage.addMouseListener(this);
+				cardImages.add(cardImage);
+			}
+			view().displayCards(cardImages);
+			//save a copy of the list for later reference
+			currentlyDisplayedCards = new ArrayList<Card>(newCards);
 		}
-		view().displayCards(cardImages);
+	}
+
+	private boolean cardListChanged(List<Card> newCards) {
+		if (newCards == null || currentlyDisplayedCards == null) {
+			return true;
+		}
+		return !(newCards.containsAll(currentlyDisplayedCards) && currentlyDisplayedCards.containsAll(newCards));
 	}
 	
 	protected abstract List<Card> getCardList();

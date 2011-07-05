@@ -217,4 +217,47 @@ public class CardImage extends JPanel {
 		return tooltip;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((card == null) ? 0 : card.hashCode());
+		result = prime * result + ((greyedOut == null) ? 0 : greyedOut.hashCode());
+		result = prime * result + ((longOverlayText == null) ? 0 : longOverlayText.hashCode());
+		result = prime * result + ((overlayText == null) ? 0 : overlayText.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CardImage other = (CardImage) obj;
+		if (card == null) {
+			if (other.card != null)
+				return false;
+		} else if (!card.getClass().equals(other.card.getClass()))
+			return false;
+		if (greyedOut == null) {
+			if (other.greyedOut != null)
+				return false;
+		} else if (!greyedOut.equals(other.greyedOut))
+			return false;
+		if (longOverlayText == null) {
+			if (other.longOverlayText != null)
+				return false;
+		} else if (!longOverlayText.equals(other.longOverlayText))
+			return false;
+		if (overlayText == null) {
+			if (other.overlayText != null)
+				return false;
+		} else if (!overlayText.equals(other.overlayText))
+			return false;
+		return true;
+	}
+
 }

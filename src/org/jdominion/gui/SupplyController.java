@@ -19,6 +19,7 @@ public class SupplyController implements MouseListener, ActionListener {
 	private SupplyView view;
 	private Class<? extends Card> choosenCardType;
 	private Boolean cancelClicked = false;
+	private List<CardImage> currentlyDisplayedCardImages;
 
 	public SupplyView getView() {
 		return view;
@@ -64,7 +65,23 @@ public class SupplyController implements MouseListener, ActionListener {
 			}
 
 		}
-		this.getView().update(cardImages);
+		if(cardImagesChange(cardImages)) {
+			this.getView().update(cardImages);
+			this.currentlyDisplayedCardImages = cardImages;
+		}
+	}
+	
+	private boolean cardImagesChange(List<CardImage> newCardImages) {
+		if (newCardImages == null && currentlyDisplayedCardImages == null) {
+			return false;
+		}
+		if (newCardImages == null || currentlyDisplayedCardImages == null) {
+			return true;
+		}
+		if (newCardImages.size() != currentlyDisplayedCardImages.size()) {
+			return true;
+		}
+		return !newCardImages.containsAll(currentlyDisplayedCardImages);
 	}
 
 	public synchronized Class<? extends Card> chooseCard(final Supply supply) {
