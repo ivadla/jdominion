@@ -26,7 +26,7 @@ public abstract class ChooseBetweenEffects extends CardEffectAction {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		ChooseBetweenEffectsDecision decision = createDecision(this.numberOfChoices, this.effects);
-		activePlayer.decide(decision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(decision, this);
 		List<CardEffect> chosenEffects = decision.getChosenEffects();
 
 		// execute chosen effects, but use the order of this.effects

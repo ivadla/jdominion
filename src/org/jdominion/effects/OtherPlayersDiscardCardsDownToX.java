@@ -18,7 +18,7 @@ public class OtherPlayersDiscardCardsDownToX extends CardEffectSimpleAttack {
 	protected void attackPlayer(Player playerToAttack, Turn currentTurn, Supply supply) {
 		while (playerToAttack.getHandSize() > numberOfCardsToKeep) {
 			ChooseCardFromHandToDiscard decision = new ChooseCardFromHandToDiscard(false, playerToAttack.getHand());
-			playerToAttack.decide(decision, this, playerToAttack.getHand(), currentTurn, supply);
+			playerToAttack.decide(decision, this);
 			playerToAttack.discardCardsFromHand(decision.getAnswer());
 		}		
 	}

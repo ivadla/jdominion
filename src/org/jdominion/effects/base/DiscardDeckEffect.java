@@ -14,7 +14,7 @@ public class DiscardDeckEffect extends CardEffectAction {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		DiscardDeckDecision decision = new DiscardDeckDecision();
-		activePlayer.decide(decision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(decision, this);
 
 		if (decision.getAnswer()) {
 			List<Card> deck = activePlayer.getCardsFromDeck(activePlayer.getDeckSize());

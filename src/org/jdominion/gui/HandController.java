@@ -1,9 +1,9 @@
 package org.jdominion.gui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
-import org.jdominion.Hand;
 
 public class HandController extends CardListController {
 
@@ -16,9 +16,7 @@ public class HandController extends CardListController {
 
 	@Override
 	protected List<Card> getCardList() {
-		Hand hand = guiInformationSource.getHand();
-		List<Card> cards = hand.getCardList();
-		return cards;
+		return  new ArrayList<Card>(guiInformationSource.getHand().getCardList());
 	}
 
 }

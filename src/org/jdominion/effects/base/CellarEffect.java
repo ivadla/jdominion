@@ -12,7 +12,7 @@ public class CellarEffect extends CardEffectAction {
 		int numberOfCardsToDraw = 0;
 		ChooseCardFromHandToDiscard decision = new ChooseCardFromHandToDiscard(true, activePlayer.getHand());
 		while(activePlayer.getHandSize() > 0){
-			activePlayer.decide(decision, this, activePlayer.getHand(), currentTurn, supply);
+			activePlayer.decide(decision, this);
 			if(decision.isCanceled()){
 				break;
 			} else {

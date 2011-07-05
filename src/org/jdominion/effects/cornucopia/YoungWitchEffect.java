@@ -34,7 +34,7 @@ public class YoungWitchEffect extends CardEffectSimpleAttack {
 		}
 		if (playerToAttack.getHand().contains(baneCard)) {
 			RevealBaneCard decision = new RevealBaneCard(playerToAttack.getHand().getCardByClass(baneCard));
-			playerToAttack.decide(decision, this, playerToAttack.getHand(), currentTurn, supply);
+			playerToAttack.decide(decision, this);
 			if (decision.getAnswer()) {
 				return;
 			}

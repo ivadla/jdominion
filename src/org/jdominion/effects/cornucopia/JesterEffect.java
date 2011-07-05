@@ -28,8 +28,7 @@ public class JesterEffect extends CardEffectSimpleAttack {
 			players.add(playerToAttack);
 			ChoosePlayerToGetCard decision = new ChoosePlayerToGetCard(players, revealedCard, currentTurn
 					.getActivePlayer());
-			currentTurn.getActivePlayer().decide(decision, this, currentTurn.getActivePlayer().getHand(), currentTurn,
-					supply);
+			currentTurn.getActivePlayer().decide(decision, this);
 			decision.getAnswer().get(0).getPlayer().gainCard(revealedCard.getClass(), supply);
 		}
 

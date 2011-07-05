@@ -31,7 +31,7 @@ public class HornOfPlentyEffect extends CardEffectTreasure {
 		}
 
 		ChooseCardToGain gainDecision = new ChooseCardToGain(permittedCards);
-		activePlayer.decide(gainDecision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(gainDecision, this);
 
 		Class<? extends Card> choosenCard = gainDecision.getAnswer();
 

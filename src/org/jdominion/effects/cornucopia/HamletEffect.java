@@ -13,7 +13,7 @@ public class HamletEffect extends CardEffectAction {
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		ChooseCardFromHandToDiscardForExtraAction actionDecision = new ChooseCardFromHandToDiscardForExtraAction(
 				activePlayer.getHand());
-		activePlayer.decide(actionDecision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(actionDecision, this);
 		if (!actionDecision.isCanceled()) {
 			activePlayer.discardCardsFromHand(actionDecision.getAnswer());
 			currentTurn.addActions(1);
@@ -21,7 +21,7 @@ public class HamletEffect extends CardEffectAction {
 
 		ChooseCardFromHandToDiscardForExtraBuy buyDecision = new ChooseCardFromHandToDiscardForExtraBuy(activePlayer
 				.getHand());
-		activePlayer.decide(buyDecision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(buyDecision, this);
 		if (!buyDecision.isCanceled()) {
 			activePlayer.discardCardsFromHand(buyDecision.getAnswer());
 			currentTurn.addBuys(1);

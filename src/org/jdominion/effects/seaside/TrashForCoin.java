@@ -15,7 +15,7 @@ public class TrashForCoin extends CardEffectAction {
 			return false;
 		}
 		ChooseCardsFromHandToTrash trashDecision = new ChooseCardsFromHandToTrash(false, 1, 1, activePlayer.getHand());
-		activePlayer.decide(trashDecision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(trashDecision, this);
 
 		assert trashDecision.getAnswer().size() == 1;
 		Card cardToTrash = trashDecision.getAnswer().get(0);

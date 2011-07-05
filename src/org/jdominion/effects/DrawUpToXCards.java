@@ -33,7 +33,7 @@ public class DrawUpToXCards extends CardEffectAction {
 
 			if (revealedCard.isOfType(Type.ACTION) && this.canSetAsideActionCards) {
 				PutInHand decision = new PutInHand(revealedCard);
-				activePlayer.decide(decision, this, activePlayer.getHand(), currentTurn, supply);
+				activePlayer.decide(decision, this);
 				if (decision.getAnswer()) {
 					activePlayer.addCardToHand(revealedCard);
 				} else {

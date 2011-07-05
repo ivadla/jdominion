@@ -48,7 +48,7 @@ public class StealTreasureCards extends CardEffectAttack {
 		
 		StealFromRevealedCards decision = new StealFromRevealedCards(revealedCards);
 		
-		activePlayer.decide(decision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(decision, this);
 		
 		for (RevealedCard revealedCard : decision.getAnswer()) {
 			if(revealedCard.getChoosenOption() == Discard.getInstance()) {

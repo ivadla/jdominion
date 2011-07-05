@@ -82,7 +82,7 @@ public class TournamentEffect extends CardEffectAction {
 
 		Supply prizesAndDuchySupply = new Supply(availablePrizesAndDuchy);
 		ChooseCardToGain decision = new ChooseCardToGain(prizesAndDuchySupply, chancelable);
-		activePlayer.decide(decision, this, activePlayer.getHand(), currentTurn, prizesAndDuchySupply);
+		activePlayer.decide(decision, this);
 
 		return prizesAndDuchySupply.takeCard((Class<? extends Card>) decision.getAnswer());
 	}
@@ -108,7 +108,7 @@ public class TournamentEffect extends CardEffectAction {
 	private boolean revealsProvince(Player player, Turn currentTurn, Supply supply) {
 		if (player.getHand().contains(Province.class)) {
 			RevealProvince decision = new RevealProvince();
-			player.decide(decision, this, player.getHand(), currentTurn, supply);
+			player.decide(decision, this);
 			if (decision.getAnswer()) {
 				player.revealCardFromHand(player.getHand().getCardByClass(Province.class));
 				return true;

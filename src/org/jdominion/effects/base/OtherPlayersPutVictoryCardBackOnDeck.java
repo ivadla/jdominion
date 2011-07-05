@@ -14,7 +14,7 @@ public class OtherPlayersPutVictoryCardBackOnDeck extends CardEffectSimpleAttack
 		if (playerToAttack.getHand().contains(Type.VICTORY)) {
 			ChooseVictoryCardFromHandToPutOnDeck decision = new ChooseVictoryCardFromHandToPutOnDeck(playerToAttack
 					.getHand());
-			playerToAttack.decide(decision, this, playerToAttack.getHand(), currentTurn, supply);
+			playerToAttack.decide(decision, this);
 			assert decision.getAnswer().size() == 1;
 			playerToAttack.placeOnDeck(decision.getAnswer().get(0));
 		} else {

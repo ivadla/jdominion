@@ -364,26 +364,6 @@ public class Player implements Serializable, IPlayer {
 		EventManager.getInstance().handleEvent(new GameEnded(winners, players));
 	}
 	
-
-	/**
-	 * 
-	 * replaced by decide(Decision<?> decision, CardEffect effect)
-	 * 
-	 * @param decision
-	 * @param effect
-	 * @param hand
-	 * @param currentTurn
-	 * @param supply
-	 */
-	@Deprecated
-	public void decide(Decision<?> decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
-		// checks to see if the new decision method would do the same
-		assert hand == this.hand;
-		assert currentTurn == game.getCurrentTurn();
-		assert supply == game.getSupply();
-		this.decide(decision, effect);
-	}
-
 	public void decide(Decision<?> decision, CardEffect effect) {
 		callCorrectDecisionMethod(decision, effect, hand, game.getCurrentTurn(), game.getSupply(), strategy);
 

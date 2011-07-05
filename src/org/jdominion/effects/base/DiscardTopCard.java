@@ -37,7 +37,7 @@ public class DiscardTopCard extends CardEffectAttack {
 		}
 
 		DiscardRevealedCard decision = new DiscardRevealedCard(revealedCards);
-		activePlayer.decide(decision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(decision, this);
 
 		for (RevealedCard revealedCard : decision.getAnswer()) {
 			if (revealedCard.getChoosenOption() == PutOnDeck.getInstance()) {

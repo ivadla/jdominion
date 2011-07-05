@@ -16,7 +16,7 @@ public abstract class CardEffectGainCard extends CardEffectAction {
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		Supply permittedCards = createSupplyOfPermittedCards(supply);
 		ChooseCardToGain gainDecision = new ChooseCardToGain(permittedCards);
-		activePlayer.decide(gainDecision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(gainDecision, this);
 
 		Class<? extends Card> choosenCard = gainDecision.getAnswer();
 

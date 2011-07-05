@@ -28,7 +28,7 @@ public class LoanEffect extends CardEffectTreasure {
 
 			if (revealedCard.isOfType(Type.TREASURE)) {
 				TrashRevealedCard decison = new TrashRevealedCard(revealedCard);
-				activePlayer.decide(decison, this, activePlayer.getHand(), currentTurn, supply);
+				activePlayer.decide(decison, this);
 				if (decison.getAnswer()) {
 					activePlayer.trashCard(revealedCard, currentTurn.getGame());
 				} else {

@@ -1,5 +1,6 @@
 package org.jdominion.gui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
@@ -45,7 +46,7 @@ public class GuiInformationSource implements IGuiInformationSource {
 
 	@Override
 	public List<Card> getPlayArea() {
-		return getCurrentTurn().getPlayedCards();
+		return new ArrayList<Card>(getCurrentTurn().getPlayedCards());
 	}
 
 }

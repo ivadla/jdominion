@@ -26,7 +26,7 @@ public abstract class TrashGainEffect extends CardEffectAction {
 			return false;
 		}
 		ChooseCardsFromHandToTrash trashDecision = createDecision(activePlayer.getHand());
-		activePlayer.decide(trashDecision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(trashDecision, this);
 		// TODO: decisions should make it impossible to decide something illegal
 		assert trashDecision.getAnswer().size() == 1;
 		Card cardToTrash = trashDecision.getAnswer().get(0);
@@ -40,7 +40,7 @@ public abstract class TrashGainEffect extends CardEffectAction {
 		}
 
 		ChooseCardToGain gainDecision = new ChooseCardToGain(availableCards);
-		activePlayer.decide(gainDecision, this, activePlayer.getHand(), currentTurn, supply);
+		activePlayer.decide(gainDecision, this);
 
 		Class<? extends Card> choosenCard = gainDecision.getAnswer();
 
