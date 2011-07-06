@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.effects.CardEffect;
+import org.jdominion.event.CalculatingCardCost;
 
 public abstract class Card implements Serializable {
 
@@ -20,6 +21,7 @@ public abstract class Card implements Serializable {
 	private final int cost;
 	private List<CardEffect> effects = new ArrayList<CardEffect>();
 	private final String name;
+	private Player owner;
 	private List<Type> types = new ArrayList<Type>();
 	private boolean isKingdomCard = true;
 	private boolean effectsDependOnEachOther = false;
@@ -28,7 +30,7 @@ public abstract class Card implements Serializable {
 	private static int maxCardID = 0;
 
 	public int getCost() {
-		return cost;
+		return CalculatingCardCost.calculateCost(this, cost);
 	}
 
 	public List<CardEffect> getEffects() {
@@ -37,6 +39,14 @@ public abstract class Card implements Serializable {
 
 	public String getName() {
 		return name;
+	}
+	
+	public Player getOwner() {
+		return owner;
+	}
+	
+	public void setOwner(Player owner) {
+		this.owner = owner;
 	}
 
 	public List<Type> getTypes() {

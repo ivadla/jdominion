@@ -257,6 +257,7 @@ public class Player implements Serializable, IPlayer {
 
 	public void trashCards(List<Card> cardsToTrash, Game game) {
 		for (Card cardToTrash : cardsToTrash) {
+			cardToTrash.setOwner(null);
 			if (hand.contains(cardToTrash)) {
 				removeCardFromHand(cardToTrash);
 			}
@@ -298,8 +299,9 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void gainCard(Card gainedCard, Location whereToPlaceCard) {
-		EventManager.getInstance().handleEvent(new CardGained(this, gainedCard));
+		gainedCard.setOwner(this);
 		whereToPlaceCard.putCard(this, gainedCard);
+		EventManager.getInstance().handleEvent(new CardGained(this, gainedCard));
 	}
 
 	public void setCardAside(Card card) {
