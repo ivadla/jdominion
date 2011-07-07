@@ -2,6 +2,7 @@ package org.jdominion.remote;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.Collection;
 import java.util.List;
 
 import org.jdominion.Card;
@@ -11,6 +12,7 @@ import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.decisions.Decision;
+import org.jdominion.extraGameData.ExtraGameData;
 import org.jdominion.gui.HumanStrategy;
 import org.jdominion.gui.IGuiInformationSource;
 import org.jdominion.gui.MainWindow;
@@ -102,6 +104,11 @@ public class RemoteClient implements IGuiInformationSource {
 	@Override
 	public List<Card> getPlayArea() {
 		return getCurrentTurn().getCardsInPlay();
+	}
+
+	@Override
+	public Collection<ExtraGameData<?>> getExtraGameData() {
+		return null;
 	}
 
 }

@@ -43,6 +43,7 @@ public class MainWindow extends JFrame {
 	private CardListController playAreaController = null;
 	private SupplyController supplyController = null;
 	private TurnController turnController = null;
+	private ExtraGameDataController extraGameDataController = null;
 
 	public MainWindow(final IGuiInformationSource guiInformationSource) {
 		try {
@@ -69,6 +70,7 @@ public class MainWindow extends JFrame {
 		this.playAreaController = new PlayAreaController(guiInformationSource);
 		this.supplyController = new SupplyController(guiInformationSource);
 		this.turnController = new TurnController(guiInformationSource);
+		this.extraGameDataController = new ExtraGameDataController(guiInformationSource);
 		this.setContentPane(getJContentPane());
 		this.setTitle("JDominion");
 	}
@@ -114,6 +116,7 @@ public class MainWindow extends JFrame {
 			leftPanel.add(getplayerTable());
 			turnController.getView().setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 			leftPanel.add(turnController.getView());
+			leftPanel.add(extraGameDataController.getView());
 			leftPanel.add(getCancelButton());
 		}
 		return leftPanel;
@@ -240,6 +243,7 @@ public class MainWindow extends JFrame {
 				playAreaController.update();
 				supplyController.update();
 				turnController.update();
+				extraGameDataController.update();
 			}
 		});
 	}

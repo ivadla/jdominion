@@ -1,6 +1,7 @@
 package org.jdominion.gui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jdominion.Card;
@@ -9,6 +10,7 @@ import org.jdominion.Hand;
 import org.jdominion.IPlayer;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
+import org.jdominion.extraGameData.ExtraGameData;
 
 public class GuiInformationSource implements IGuiInformationSource {
 
@@ -47,6 +49,11 @@ public class GuiInformationSource implements IGuiInformationSource {
 	@Override
 	public List<Card> getPlayArea() {
 		return new ArrayList<Card>(getCurrentTurn().getPlayedCards());
+	}
+
+	@Override
+	public Collection<ExtraGameData<?>> getExtraGameData() {
+		return game.getAllExtraGameData();
 	}
 
 }
