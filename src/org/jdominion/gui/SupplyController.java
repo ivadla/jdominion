@@ -54,6 +54,7 @@ public class SupplyController implements MouseListener, ActionListener {
 					cardImage.setToolTipText(("Available " + pile.getCardName() + ": " + pile.getNumberOfCardsInPile()));
 					cardImage.setGreyedOut(!availableCards.isCardAvailable(pile.getCardClass()));
 					cardImage.setOverlayText(Integer.toString(pile.getNumberOfCardsInPile()));
+					cardImage.setDisplayCost(true);
 					cardImages.add(cardImage);
 				} catch (InstantiationException e) {
 					// TODO Auto-generated catch block

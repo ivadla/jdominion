@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.color.ColorSpace;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.io.File;
@@ -37,6 +39,7 @@ public class CardImage extends JPanel {
 	private String overlayText = null;
 	private String longOverlayText = null;
 	private ImageToolTip tooltip = null;
+	private boolean displayCost = false;
 
 	public Card getCard() {
 		return card;
@@ -66,6 +69,14 @@ public class CardImage extends JPanel {
 	public void setLongOverlayText(String longOverlayText) {
 		this.longOverlayText = longOverlayText;
 		this.repaint();
+	}
+
+	public void setDisplayCost(boolean displayCost) {
+		this.displayCost = displayCost;
+	}
+
+	public boolean displayCost() {
+		return displayCost;
 	}
 
 	public CardImage(Card card) {
@@ -172,29 +183,31 @@ public class CardImage extends JPanel {
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-		
+
+		if (this.displayCost) {
+			drawString(g2d, Integer.toString(card.getCost()), Color.YELLOW, Color.BLACK, 4, getHeight() - 4);
+		}
 		if (this.getOverlayText() != null) {
-			g2d.setColor(Color.WHITE);
-			g2d.drawString(getOverlayText(), getWidth() - 26, getHeight() - 5);
-			g2d.drawString(getOverlayText(), getWidth() - 26, getHeight() - 3);
-			g2d.drawString(getOverlayText(), getWidth() - 24, getHeight() - 3);
-			g2d.drawString(getOverlayText(), getWidth() - 24, getHeight() - 5);
-			
-			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-			g2d.setColor(Color.BLUE);
-			g2d.drawString(getOverlayText(), getWidth() - 25, getHeight() - 4);
+			Rectangle2D boundingBox = g2d.getFont().getStringBounds(getOverlayText(),
+					new FontRenderContext(null, true, false));
+			drawString(g2d, getOverlayText(), Color.MAGENTA, Color.BLACK,
+					getWidth() - (int) boundingBox.getWidth() - 4, getHeight() - 4);
 		}
 		if (this.getLongOverlayText() != null) {
-			g2d.setColor(Color.WHITE);
-			g2d.drawString(getLongOverlayText(), 11, 16);
-			g2d.drawString(getLongOverlayText(), 11, 14);
-			g2d.drawString(getLongOverlayText(), 9, 14);
-			g2d.drawString(getLongOverlayText(), 9, 16);
-			
-			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-			g2d.setColor(Color.GREEN);
-			g2d.drawString(getLongOverlayText(), 10, 15);
+			drawString(g2d, getLongOverlayText(), Color.GREEN, Color.BLACK, 10, 20);
 		}
+	}
+
+	private void drawString(Graphics2D g2d, String string, Color color, Color backgroundColor, int x, int y) {
+		g2d.setColor(backgroundColor);
+		g2d.drawString(string, x - 1, y - 1);
+		g2d.drawString(string, x - 1, y + 1);
+		g2d.drawString(string, x + 1, y + 1);
+		g2d.drawString(string, x + 1, y - 1);
+
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		g2d.setColor(color);
+		g2d.drawString(string, x, y);
 	}
 
 	private void drawImage(Graphics g) {
