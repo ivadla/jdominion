@@ -102,8 +102,7 @@ public class ClassFinder {
 		for (Class classInCardsPackage : classesInCardsPackage) {
 			if (classInCardsPackage.getSuperclass() == Card.class && !Modifier.isAbstract(classInCardsPackage.getModifiers())) {
 				try {
-					Card card = (Card) classInCardsPackage.newInstance();
-					if (card.isKingdomCard()) {
+					if (CardClassInfo.getInstance().isKingdomCard(classInCardsPackage)) {
 						kingdomCards.add((Class<? extends Card>) classInCardsPackage);
 					}
 				} catch (Exception e) {

@@ -35,7 +35,7 @@ public class CardFactory {
 			return 40;
 		} else if (cardClass == Gold.class) {
 			return 30;
-		} else if (cardClass.newInstance().isOfType(Type.VICTORY)) {
+		} else if (CardClassInfo.getInstance().isOfType(cardClass, Type.VICTORY)) {
 			return getNumberOfVictoryCards(numberOfPlayers);
 		} else {
 			return 10;
@@ -83,20 +83,14 @@ public class CardFactory {
 
 			@Override
 			public int compare(Class<? extends Card> cardClass1, Class<? extends Card> cardClass2) {
-				try {
-					Card card1 = cardClass1.newInstance();
-					Card card2 = cardClass2.newInstance();
-					if (card1.getCost() < card2.getCost()) {
-						return -1;
-					} else if (card1.getCost() > card2.getCost()) {
-						return 1;
-					} else {
-						return card1.getName().compareToIgnoreCase(card2.getName());
-					}
-				} catch (InstantiationException e) {
-					throw new RuntimeException("Error while sorting cards", e);
-				} catch (IllegalAccessException e) {
-					throw new RuntimeException("Error while sorting cards", e);
+				if (CardClassInfo.getInstance().getCost(cardClass1) < CardClassInfo.getInstance().getCost(cardClass2)) {
+					return -1;
+				} else if (CardClassInfo.getInstance().getCost(cardClass1) > CardClassInfo.getInstance().getCost(
+						cardClass2)) {
+					return 1;
+				} else {
+					return CardClassInfo.getInstance().getName(cardClass1)
+							.compareToIgnoreCase(CardClassInfo.getInstance().getName(cardClass2));
 				}
 			}
 		});
