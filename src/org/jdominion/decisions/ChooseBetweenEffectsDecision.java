@@ -28,4 +28,14 @@ public abstract class ChooseBetweenEffectsDecision extends MultipleChoice<Effect
 		return chosenEffects;
 	}
 
+	protected EffectChoice getChoice(Class<? extends CardEffect> type) {
+		for (EffectChoice choice : getChoices()) {
+			if (choice.getEffect().getClass() == type) {
+				return choice;
+			}
+		}
+		assert false;
+		return null;
+	}
+
 }

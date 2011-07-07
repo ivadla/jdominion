@@ -49,4 +49,9 @@ public class TrashCards extends CardEffectAction {
 
 		return trashedCards;
 	}
+
+	@Override
+	public String getText() {
+		return "Trash " + maximumNumberOfCardsToTrash + " Card" + (maximumNumberOfCardsToTrash > 1 ? "s" : "");
+	}
 }
