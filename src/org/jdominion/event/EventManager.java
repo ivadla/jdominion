@@ -83,8 +83,6 @@ public class EventManager {
 			// remove elements from the original list
 			for (EventHandlerContainer eventHandlerContainer : new ArrayList<EventHandlerContainer>(
 					eventHandlers.get(event.getClass()))) {
-				// TODO: add affected player to every event or as a parameter to
-				// this method
 				if (eventHandlerContainer.player == event.getAffectedPlayer() || eventHandlerContainer.player == null) {
 					eventHandlerContainer.eventHandler.handleEvent(event);
 					if (eventHandlerContainer.duration == Duration.ONCE) {
