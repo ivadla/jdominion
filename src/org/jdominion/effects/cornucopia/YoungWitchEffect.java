@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jdominion.Card;
+import org.jdominion.CardClassInfo;
 import org.jdominion.CardFactory;
 import org.jdominion.ClassFinder;
 import org.jdominion.Game;
@@ -13,6 +14,7 @@ import org.jdominion.Turn;
 import org.jdominion.cards.common.Curse;
 import org.jdominion.decisions.cornucopia.RevealBaneCard;
 import org.jdominion.effects.CardEffectSimpleAttack;
+import org.jdominion.extraGameData.BaneCard;
 
 public class YoungWitchEffect extends CardEffectSimpleAttack {
 
@@ -45,6 +47,7 @@ public class YoungWitchEffect extends CardEffectSimpleAttack {
 	@Override
 	public void gameStarted(Game game) {
 		baneCard = chooseBaneCard(game);
+		game.addExtraGameData(new BaneCard(baneCard));
 		game.getSupply().addCardPile(CardFactory.createCardPile(baneCard, game.getPlayers().size()));
 	}
 
@@ -61,15 +64,8 @@ public class YoungWitchEffect extends CardEffectSimpleAttack {
 	}
 
 	private boolean cardCosts2or3(Class<? extends Card> cardClass) {
-		try {
-			Card card = cardClass.newInstance();
-			if (card.getCost() == 2 || card.getCost() == 3) {
-				return true;
-			}
-		} catch (InstantiationException e) {
-			throw new RuntimeException("Error while creating a bane card", e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException("Error while creating a bane card", e);
+		if (CardClassInfo.getInstance().getCost(cardClass) == 2 || CardClassInfo.getInstance().getCost(cardClass) == 3) {
+			return true;
 		}
 		return false;
 	}
