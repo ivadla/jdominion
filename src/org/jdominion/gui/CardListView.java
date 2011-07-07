@@ -40,10 +40,24 @@ public class CardListView extends JScrollPane implements ComponentListener {
 		resizeCards();
 	}
 
+	public void addCard(CardImage card) {
+		getPanel().add(card);
+		resizeCard(card);
+	}
+
+	public void removeCard(CardImage cardToRemove) {
+		getPanel().remove(cardToRemove);
+		getPanel().repaint();
+	}
+
 	private void resizeCards() {
 		for (CardImage cardImage : this.cardImages) {
-			cardImage.setHeight(this.getHeight() - this.getHorizontalScrollBar().getHeight() - 10);
+			resizeCard(cardImage);
 		}
+	}
+
+	private void resizeCard(CardImage cardImage) {
+		cardImage.setHeight(this.getHeight() - this.getHorizontalScrollBar().getHeight() - 10);
 	}
 
 	@Override

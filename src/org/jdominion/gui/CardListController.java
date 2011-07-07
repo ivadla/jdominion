@@ -5,7 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.jdominion.Card;
 
 public abstract class CardListController implements MouseListener, ActionListener {
@@ -13,7 +19,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 	private Card choosenCard;
 	private Boolean cancelClicked;
 	private CardListView view;
-	private List<Card> currentlyDisplayedCards;
+	private Map<Card, CardImage> currentlyDisplayedCards;
 
 	public CardListView view() {
 		return view;
@@ -21,28 +27,75 @@ public abstract class CardListController implements MouseListener, ActionListene
 
 	public CardListController() {
 		this.view = new CardListView();
+		currentlyDisplayedCards = new HashMap<Card, CardImage>();
 	}
 
 	public void update() {
 		List<Card> newCards = getCardList();
-		if(cardListChanged(newCards)) {
-			List<CardImage> cardImages = new ArrayList<CardImage>();
-			for (Card card : newCards) {
-				CardImage cardImage = new CardImage(card);
-				cardImage.addMouseListener(this);
-				cardImages.add(cardImage);
-			}
-			view().displayCards(cardImages);
-			//save a copy of the list for later reference
-			currentlyDisplayedCards = new ArrayList<Card>(newCards);
+		
+		if (Collections.disjoint(newCards, currentlyDisplayedCards.keySet())) {
+			replaceCardsInView(newCards);
+		} else {
+			removeOldCards(newCards);
+			addNewCards(newCards);
 		}
 	}
 
-	private boolean cardListChanged(List<Card> newCards) {
-		if (newCards == null || currentlyDisplayedCards == null) {
-			return true;
+	/**
+	 * add the cards from newCards which are not already in the view
+	 * 
+	 * @param newCards
+	 */
+	private void addNewCards(List<Card> newCards) {
+		for (Card newCard : newCards) {
+			if (!currentlyDisplayedCards.containsKey(newCard)) {
+				addCardToView(newCard);
+			}
 		}
-		return !(newCards.containsAll(currentlyDisplayedCards) && currentlyDisplayedCards.containsAll(newCards));
+	}
+
+	/**
+	 * removes the cards from the view which are not in the List newCards
+	 * @param newCards
+	 */
+	private void removeOldCards(List<Card> newCards) {
+		Entry<Card, CardImage> entry;
+		for (Iterator<Entry<Card, CardImage>> iterator = currentlyDisplayedCards.entrySet().iterator(); iterator
+				.hasNext();) {
+			entry = iterator.next();
+			if (!newCards.contains(entry.getKey())) {
+				view.removeCard(entry.getValue());
+				iterator.remove();
+			}
+		}
+	}
+
+	/**
+	 * removes all cards from the view and replaces them with the newCards
+	 * 
+	 * @param newCards
+	 */
+	private void replaceCardsInView(List<Card> newCards) {
+		currentlyDisplayedCards = new HashMap<Card, CardImage>();
+		List<CardImage> newCardimages = new ArrayList<CardImage>();
+		for (Card card : newCards) {
+			CardImage cardImage = createCardImage(card);
+			currentlyDisplayedCards.put(card, cardImage);
+			newCardimages.add(cardImage);
+		}
+		view.displayCards(newCardimages);
+	}
+
+	private void addCardToView(Card newCard) {
+		CardImage cardImage = createCardImage(newCard);
+		view.addCard(cardImage);
+		currentlyDisplayedCards.put(newCard, cardImage);
+	}
+
+	private CardImage createCardImage(Card card) {
+		CardImage cardImage = new CardImage(card);
+		cardImage.addMouseListener(this);
+		return cardImage;
 	}
 	
 	protected abstract List<Card> getCardList();

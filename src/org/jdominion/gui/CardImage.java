@@ -40,6 +40,9 @@ public class CardImage extends JPanel {
 	private String longOverlayText = null;
 	private ImageToolTip tooltip = null;
 	private boolean displayCost = false;
+	private int oldWidth = 0;
+	private int oldHight = 0;
+	private BufferedImage oldImage = null;
 
 	public Card getCard() {
 		return card;
@@ -211,15 +214,36 @@ public class CardImage extends JPanel {
 	}
 
 	private void drawImage(Graphics g) {
-		BufferedImage imageToDraw = null;
-		if (greyedOut) {
-			imageToDraw = getGreyImage();
+		// don't resize if the image didn't change
+		if (this.getWidth() != oldWidth || this.getHeight() != oldHight || oldImage == null) {
+			BufferedImage imageToDraw = null;
+			if (greyedOut) {
+				imageToDraw = getGreyImage();
+			} else {
+				imageToDraw = image;
+			}
+			BufferedImage image = resampleImage(imageToDraw);
+			drawNewImage(g, image);
+			oldWidth = getWidth();
+			oldHight = getHeight();
+			oldImage = image;
 		} else {
-			imageToDraw = image;
+			redrawOldImage(g);
 		}
-		ResampleOp resampleOp = new ResampleOp(this.getWidth(), this.getHeight());
-		BufferedImage image = resampleOp.filter(imageToDraw, null); 
+	}
+
+	private void redrawOldImage(Graphics g) {
+		g.drawImage(oldImage, 0, 0, this.getWidth(), this.getHeight(), null);
+	}
+
+	private void drawNewImage(Graphics g, BufferedImage image) {
 		g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+	}
+
+	private BufferedImage resampleImage(BufferedImage imageToDraw) {
+		ResampleOp resampleOp = new ResampleOp(this.getWidth(), this.getHeight());
+		BufferedImage image = resampleOp.filter(imageToDraw, null);
+		return image;
 	}
 
 	@Override
@@ -253,7 +277,7 @@ public class CardImage extends JPanel {
 		if (card == null) {
 			if (other.card != null)
 				return false;
-		} else if (!card.getClass().equals(other.card.getClass()))
+		} else if (!card.equals(other.card))
 			return false;
 		if (greyedOut == null) {
 			if (other.greyedOut != null)
