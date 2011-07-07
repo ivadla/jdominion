@@ -55,13 +55,13 @@ public abstract class ChooseCardsFromHand extends Decision<List<Card>> {
 		for (Card card : answer) {
 			if (!hand.contains(card)) {
 				return false;
-			} else if(!isValidCard(card)) {
+			} else if (!isValidCard(card)) {
 				return false;
 			}
 		}
 		return true;
 	}
-	
+
 	// to be overwritten by subclasses
 	protected boolean isValidCard(Card card) {
 		return true;

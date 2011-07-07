@@ -22,8 +22,7 @@ public class RemodelEffect extends TrashGainEffect {
 
 	@Override
 	protected Supply createSupply(Supply supply, Card cardToTrash) {
-		return supply.createSupplyWithMaximumCost(cardToTrash.getCost()
-				+ addedValue);
+		return supply.createSupplyWithMaximumCost(cardToTrash.getCost() + addedValue);
 	}
 
 }

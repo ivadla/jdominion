@@ -40,8 +40,7 @@ public class TournamentEffect extends CardEffectAction {
 			}
 		}
 
-		if (activePlayerRevealedProvince
-				&& ((getAvailablePrizes(currentTurn.getGame()).size() > 0) || supply.isCardAvailable(Duchy.class))) {
+		if (activePlayerRevealedProvince && ((getAvailablePrizes(currentTurn.getGame()).size() > 0) || supply.isCardAvailable(Duchy.class))) {
 
 			discardProvince(activePlayer);
 

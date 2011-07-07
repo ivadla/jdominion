@@ -7,10 +7,9 @@ import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 
-
 /**
- * This effect does nothing. It is just a placeholder for cases where a decision
- * is needed which does not come from a card. E.g. buying in the buy phase
+ * This effect does nothing. It is just a placeholder for cases where a decision is needed which does not come from a
+ * card. E.g. buying in the buy phase
  */
 public class NullEffect extends CardEffect {
 

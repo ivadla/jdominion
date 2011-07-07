@@ -33,12 +33,12 @@ public abstract class GenericAI implements IStrategy, Serializable {
 	}
 
 	@Override
-	public abstract String getName();	
+	public abstract String getName();
 
 	@Override
 	public boolean canWorkWithSupply(Supply supply) {
-		for(Class<? extends Card> card: getNeededCards()) {
-			if(!supply.isCardAvailable(card)) {
+		for (Class<? extends Card> card : getNeededCards()) {
+			if (!supply.isCardAvailable(card)) {
 				return false;
 			}
 		}
@@ -59,26 +59,28 @@ public abstract class GenericAI implements IStrategy, Serializable {
 		// TODO: implement a generic decision
 	}
 
-	protected void setCardFromSupplyAsAnswer(ChooseCardFromSupply decision, List<Class<? extends Card>> cardClassesOrderedByPriority, boolean cancelDecisionIfNoCardIsAvailable) {
-		for(Class<? extends Card>  cardClass: cardClassesOrderedByPriority) {
-			if(decision.getAvailableCards().isCardAvailable(cardClass)){
+	protected void setCardFromSupplyAsAnswer(ChooseCardFromSupply decision, List<Class<? extends Card>> cardClassesOrderedByPriority,
+			boolean cancelDecisionIfNoCardIsAvailable) {
+		for (Class<? extends Card> cardClass : cardClassesOrderedByPriority) {
+			if (decision.getAvailableCards().isCardAvailable(cardClass)) {
 				decision.setAnswer(cardClass);
 				return;
 			}
 		}
-		if(cancelDecisionIfNoCardIsAvailable) {
+		if (cancelDecisionIfNoCardIsAvailable) {
 			decision.setCanceled(true);
 		}
 	}
 
-	protected void setCardFromHandAsAnswer(ChooseCardsFromHand decision, Hand hand, List<Class<? extends Card>> cardClassesOrderedByPriority, boolean cancelDecisionIfNoCardIsInHand) {
+	protected void setCardFromHandAsAnswer(ChooseCardsFromHand decision, Hand hand, List<Class<? extends Card>> cardClassesOrderedByPriority,
+			boolean cancelDecisionIfNoCardIsInHand) {
 		for (Class<? extends Card> cardClass : cardClassesOrderedByPriority) {
 			if (hand.contains(cardClass)) {
 				decision.addAnswer(hand.getCardByClass(cardClass));
 				return;
 			}
 		}
-		if(cancelDecisionIfNoCardIsInHand) {
+		if (cancelDecisionIfNoCardIsInHand) {
 			decision.setCanceled(true);
 		}
 	}

@@ -6,6 +6,7 @@ import org.jdominion.Supply;
 public abstract class ChooseCardFromSupply extends Decision<Class<? extends Card>> {
 
 	private Supply availableCards;
+
 	public Supply getAvailableCards() {
 		return availableCards;
 	}

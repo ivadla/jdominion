@@ -34,8 +34,8 @@ public class TrashCards extends CardEffectAction {
 			if (activePlayer.getHandSize() == 0) {
 				return trashedCards;
 			}
-			ChooseCardsFromHandToTrash decision = new ChooseCardsFromHandToTrash(
-					trashedCards.size() >= minimumNumberOfCardsToTrash, 1, 1, activePlayer.getHand());
+			ChooseCardsFromHandToTrash decision = new ChooseCardsFromHandToTrash(trashedCards.size() >= minimumNumberOfCardsToTrash, 1, 1,
+					activePlayer.getHand());
 			activePlayer.decide(decision, this);
 
 			if (!decision.isCanceled()) {

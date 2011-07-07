@@ -62,7 +62,7 @@ public class RevealedCardsView extends JDialog {
 			}
 		});
 	}
-	
+
 	public void setVisible() {
 		EventQueue.invokeLater(new Runnable() {
 			@Override

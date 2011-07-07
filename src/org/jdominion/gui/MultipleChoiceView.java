@@ -19,8 +19,7 @@ public class MultipleChoiceView extends JDialog {
 	private ActionListener controller;
 	private MigLayout layoutManager = null;
 
-	public MultipleChoiceView(JFrame parent, ActionListener controller, final String userMessage,
-			final List<String> choices, final boolean canChooseMoreThanOne) {
+	public MultipleChoiceView(JFrame parent, ActionListener controller, final String userMessage, final List<String> choices, final boolean canChooseMoreThanOne) {
 		super(parent);
 		this.controller = controller;
 		EventQueue.invokeLater(new Runnable() {

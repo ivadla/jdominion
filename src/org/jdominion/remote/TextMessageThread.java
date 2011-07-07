@@ -37,7 +37,7 @@ public class TextMessageThread extends Thread {
 			}
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		try {

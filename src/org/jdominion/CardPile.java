@@ -17,8 +17,7 @@ public class CardPile implements Serializable {
 		this.cards = cards;
 	}
 
-	public CardPile(Class<? extends Card> cardClass, int numberOfCardsInPile) throws InstantiationException,
-			IllegalAccessException {
+	public CardPile(Class<? extends Card> cardClass, int numberOfCardsInPile) throws InstantiationException, IllegalAccessException {
 		cards = new ArrayList<Card>();
 		for (int i = 0; i < numberOfCardsInPile; i++) {
 			cards.add(cardClass.newInstance());

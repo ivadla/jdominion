@@ -47,15 +47,12 @@ public class Statistics {
 	}
 
 	public String getStatistics() {
-		String statisticsText = gameCounter + " Games simulated. Average number of turns: "
-				+ ((double) turnCounter / (double) gameCounter) + ".\n";
+		String statisticsText = gameCounter + " Games simulated. Average number of turns: " + ((double) turnCounter / (double) gameCounter) + ".\n";
 		for (PlayerInformationContainer playerInfo : playerInformation) {
-			statisticsText += playerInfo.getName() + " with parameters "
-					+ StringUtils.join(playerInfo.getParameters(), ",") + " won "
+			statisticsText += playerInfo.getName() + " with parameters " + StringUtils.join(playerInfo.getParameters(), ",") + " won "
 					+ formatValueAndPercentage(statistics[playerInfo.getId()][0]);
 			for (int i = 1; i < playerInformation.size(); i++) {
-				statisticsText += "; tied with " + (i + 1) + " players "
-						+ formatValueAndPercentage(statistics[playerInfo.getId()][i]);
+				statisticsText += "; tied with " + (i + 1) + " players " + formatValueAndPercentage(statistics[playerInfo.getId()][i]);
 				;
 			}
 			statisticsText += getExtraStatistics(playerInfo.getId());
@@ -70,8 +67,7 @@ public class Statistics {
 		String statisticsText = description + ";" + gameCounter + ";" + turnCounter + ";";
 		for (PlayerInformationContainer playerInfo : playerInformation) {
 			title += "playerName;parameters;numOfGamesWon;";
-			statisticsText += playerInfo.getName() + ";" + StringUtils.join(playerInfo.getParameters(), ",") + ";"
-					+ statistics[playerInfo.getId()][0] + ";";
+			statisticsText += playerInfo.getName() + ";" + StringUtils.join(playerInfo.getParameters(), ",") + ";" + statistics[playerInfo.getId()][0] + ";";
 			for (int i = 1; i < playerInformation.size(); i++) {
 				title += "tiedWith" + (i + 1) + "players;";
 				statisticsText += statistics[playerInfo.getId()][i] + ";";

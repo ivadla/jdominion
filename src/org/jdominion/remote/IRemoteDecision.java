@@ -14,9 +14,9 @@ import org.jdominion.effects.CardEffect;
 public interface IRemoteDecision extends Remote {
 
 	public Decision<?> getDecision() throws RemoteException;
-	
+
 	public Supply getDecisionSupply() throws RemoteException;
-	
+
 	public CardEffect getDecisionEffect() throws RemoteException;
 
 	public void setDecision(Decision<?> decision) throws RemoteException;

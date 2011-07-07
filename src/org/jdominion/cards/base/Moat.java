@@ -7,7 +7,7 @@ import org.jdominion.effects.base.MoatEffect;
 public class Moat extends Card {
 
 	public Moat() {
-		super("Moat",2);
+		super("Moat", 2);
 		addCardEffect(new DrawCards(2));
 		addCardEffect(new MoatEffect());
 	}

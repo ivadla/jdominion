@@ -42,8 +42,7 @@ public class GameConfigurationController implements ActionListener {
 			strategyNames.add(strategy.getSimpleName());
 		}
 
-		this.view = new GameConfigurationWindow(playerNames, strategyNames, selectedStrategies, Config
-				.getNumberOfPlayers(), MAXIMUM_PLAYERS, this);
+		this.view = new GameConfigurationWindow(playerNames, strategyNames, selectedStrategies, Config.getNumberOfPlayers(), MAXIMUM_PLAYERS, this);
 	}
 
 	private Game createGame() {
@@ -82,13 +81,13 @@ public class GameConfigurationController implements ActionListener {
 		// TODO: make Configuration Window visible again when the MainWindow has
 		// been closed
 		// new Timer(100, new ActionListener() {
-		//			
+		//
 		// @Override
 		// public void actionPerformed(ActionEvent e) {
 		// if(gameThread.isAlive()) {
 		// setVisible(true);
 		// }
-		//				
+		//
 		// }
 		// });
 	}

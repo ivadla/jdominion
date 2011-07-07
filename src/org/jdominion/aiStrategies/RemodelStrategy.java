@@ -31,8 +31,7 @@ public class RemodelStrategy extends GenericAI {
 		return neededCards;
 	}
 
-	public void decide(ChooseCardsFromHandToTrash decision, RemodelEffect effect, Hand hand, Turn currentTurn,
-			Supply supply) {
+	public void decide(ChooseCardsFromHandToTrash decision, RemodelEffect effect, Hand hand, Turn currentTurn, Supply supply) {
 		List<Class<? extends Card>> cardsToTrash = new ArrayList<Class<? extends Card>>();
 		if (getGame().getTurnCounter() <= remodelIntoVictoryPointsAfterTurn) {
 			cardsToTrash.add(Estate.class);
@@ -43,8 +42,7 @@ public class RemodelStrategy extends GenericAI {
 		cardsToTrash.add(Curse.class);
 		cardsToTrash.add(Remodel.class);
 		cardsToTrash.add(Gold.class);
-		if (getGame().getTurnCounter() > remodelIntoVictoryPointsAfterTurn
-				&& (hand.countCoins() < 5 || hand.countCoins() >= 7)) {
+		if (getGame().getTurnCounter() > remodelIntoVictoryPointsAfterTurn && (hand.countCoins() < 5 || hand.countCoins() >= 7)) {
 			cardsToTrash.add(Silver.class);
 		}
 		cardsToTrash.add(Copper.class);

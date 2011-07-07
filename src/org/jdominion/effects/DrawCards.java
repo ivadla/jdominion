@@ -18,10 +18,10 @@ public class DrawCards extends CardEffectAction {
 		activePlayer.drawCardsIntoHand(this.numberOfCardsToDraw);
 		return true;
 	}
-	
+
 	@Override
 	public String getText() {
-		return "+ " + numberOfCardsToDraw + " Card" + (numberOfCardsToDraw > 1 ? "s": "");
+		return "+ " + numberOfCardsToDraw + " Card" + (numberOfCardsToDraw > 1 ? "s" : "");
 	}
 
 }

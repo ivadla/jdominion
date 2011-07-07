@@ -15,7 +15,7 @@ public class GainCardX extends CardEffectAction {
 	public GainCardX(Class<? extends Card> cardToGain) {
 		this(cardToGain, new DiscardPile());
 	}
-	
+
 	public GainCardX(Class<? extends Card> cardToGain, Location whereToPlaceCard) {
 		this.cardToGain = cardToGain;
 		this.whereToPlaceCard = whereToPlaceCard;

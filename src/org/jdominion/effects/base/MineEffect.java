@@ -31,8 +31,7 @@ public class MineEffect extends TrashGainEffect {
 	protected Supply createSupply(Supply supply, Card cardToTrash) {
 		List<CardPile> newPiles = new ArrayList<CardPile>();
 		for (CardPile pile : supply.getCardPiles()) {
-			if ((pile.getNumberOfCardsInPile() > 0) && (pile.isOfType(Type.TREASURE))
-					&& (pile.getCardCost() <= cardToTrash.getCost() + addedValue)) {
+			if ((pile.getNumberOfCardsInPile() > 0) && (pile.isOfType(Type.TREASURE)) && (pile.getCardCost() <= cardToTrash.getCost() + addedValue)) {
 				newPiles.add(pile);
 			}
 		}

@@ -25,8 +25,7 @@ public class CardFactory {
 		return (numberOfPlayers - 1) * 10;
 	}
 
-	private static int getNumberOfCardsForPile(Class<? extends Card> cardClass, int numberOfPlayers)
-			throws InstantiationException, IllegalAccessException {
+	private static int getNumberOfCardsForPile(Class<? extends Card> cardClass, int numberOfPlayers) throws InstantiationException, IllegalAccessException {
 		if (cardClass == Curse.class) {
 			return getNumberOfCurseCards(numberOfPlayers);
 		} else if (cardClass == Copper.class) {
@@ -85,12 +84,10 @@ public class CardFactory {
 			public int compare(Class<? extends Card> cardClass1, Class<? extends Card> cardClass2) {
 				if (CardClassInfo.getInstance().getCost(cardClass1) < CardClassInfo.getInstance().getCost(cardClass2)) {
 					return -1;
-				} else if (CardClassInfo.getInstance().getCost(cardClass1) > CardClassInfo.getInstance().getCost(
-						cardClass2)) {
+				} else if (CardClassInfo.getInstance().getCost(cardClass1) > CardClassInfo.getInstance().getCost(cardClass2)) {
 					return 1;
 				} else {
-					return CardClassInfo.getInstance().getName(cardClass1)
-							.compareToIgnoreCase(CardClassInfo.getInstance().getName(cardClass2));
+					return CardClassInfo.getInstance().getName(cardClass1).compareToIgnoreCase(CardClassInfo.getInstance().getName(cardClass2));
 				}
 			}
 		});

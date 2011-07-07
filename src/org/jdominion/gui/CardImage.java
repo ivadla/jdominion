@@ -133,15 +133,15 @@ public class CardImage extends JPanel {
 			BufferedImage cardImage = null;
 			String filename = "images/cards/" + card.getName().toLowerCase() + ".jpg";
 			try {
-				if(new File(filename).exists()) {
+				if (new File(filename).exists()) {
 					cardImage = ImageIO.read(new File(filename));
 				} else {
-					//TODO better error reporting
+					// TODO better error reporting
 					System.err.println("Error: Could not find image file: " + filename);
 					cardImage = createDummyImage(card);
 				}
 			} catch (IOException e) {
-				//TODO better error reporting
+				// TODO better error reporting
 				System.err.println("Error reading " + filename + ": " + e.getMessage());
 				throw new RuntimeException(e);
 			}
@@ -181,7 +181,7 @@ public class CardImage extends JPanel {
 	}
 
 	private void drawText(Graphics g) {
-		Graphics2D g2d = (Graphics2D)g;
+		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
@@ -191,10 +191,8 @@ public class CardImage extends JPanel {
 			drawString(g2d, Integer.toString(card.getCost()), Color.YELLOW, Color.BLACK, 4, getHeight() - 4);
 		}
 		if (this.getOverlayText() != null) {
-			Rectangle2D boundingBox = g2d.getFont().getStringBounds(getOverlayText(),
-					new FontRenderContext(null, true, false));
-			drawString(g2d, getOverlayText(), Color.MAGENTA, Color.BLACK,
-					getWidth() - (int) boundingBox.getWidth() - 4, getHeight() - 4);
+			Rectangle2D boundingBox = g2d.getFont().getStringBounds(getOverlayText(), new FontRenderContext(null, true, false));
+			drawString(g2d, getOverlayText(), Color.MAGENTA, Color.BLACK, getWidth() - (int) boundingBox.getWidth() - 4, getHeight() - 4);
 		}
 		if (this.getLongOverlayText() != null) {
 			drawString(g2d, getLongOverlayText(), Color.GREEN, Color.BLACK, 10, 20);

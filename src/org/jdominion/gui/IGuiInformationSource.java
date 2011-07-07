@@ -19,8 +19,8 @@ public interface IGuiInformationSource {
 	public Supply getSupply();
 
 	public Turn getCurrentTurn();
-	
+
 	public List<Card> getPlayArea();
-	
+
 	public Collection<ExtraGameData<?>> getExtraGameData();
 }

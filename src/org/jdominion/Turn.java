@@ -149,9 +149,7 @@ public class Turn implements Serializable {
 	}
 
 	private boolean isBasicTreasureCard(Card card) {
-		return card.isOfType(Type.TREASURE) 
-				&& card.getEffects().size() == 1
-				&& card.getEffects().get(0).getClass() == CardEffectTreasure.class;
+		return card.isOfType(Type.TREASURE) && card.getEffects().size() == 1 && card.getEffects().get(0).getClass() == CardEffectTreasure.class;
 	}
 
 	private void playOtherTreasureCards(Player activePlayer, Supply supply) {
@@ -172,8 +170,7 @@ public class Turn implements Serializable {
 		int availableCoins = this.extraMoney;
 		while (this.availableBuys > 0) {
 
-			ChooseCardToBuy buyDecision = new ChooseCardToBuy(supply.createSupplyWithMaximumCost(availableCoins),
-					availableBuys, availableCoins);
+			ChooseCardToBuy buyDecision = new ChooseCardToBuy(supply.createSupplyWithMaximumCost(availableCoins), availableBuys, availableCoins);
 			activePlayer.decide(buyDecision, new NullEffect());
 
 			if (buyDecision.isCanceled()) {

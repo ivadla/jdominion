@@ -32,7 +32,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 
 	public void update() {
 		List<Card> newCards = getCardList();
-		
+
 		if (Collections.disjoint(newCards, currentlyDisplayedCards.keySet())) {
 			replaceCardsInView(newCards);
 		} else {
@@ -56,12 +56,12 @@ public abstract class CardListController implements MouseListener, ActionListene
 
 	/**
 	 * removes the cards from the view which are not in the List newCards
+	 * 
 	 * @param newCards
 	 */
 	private void removeOldCards(List<Card> newCards) {
 		Entry<Card, CardImage> entry;
-		for (Iterator<Entry<Card, CardImage>> iterator = currentlyDisplayedCards.entrySet().iterator(); iterator
-				.hasNext();) {
+		for (Iterator<Entry<Card, CardImage>> iterator = currentlyDisplayedCards.entrySet().iterator(); iterator.hasNext();) {
 			entry = iterator.next();
 			if (!newCards.contains(entry.getKey())) {
 				view.removeCard(entry.getValue());
@@ -97,7 +97,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 		cardImage.addMouseListener(this);
 		return cardImage;
 	}
-	
+
 	protected abstract List<Card> getCardList();
 
 	public synchronized Card chooseCard() {

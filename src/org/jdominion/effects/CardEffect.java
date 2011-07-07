@@ -55,7 +55,7 @@ public abstract class CardEffect implements Serializable {
 
 	public void getsRemovedFromHand(Player owner) {
 	}
-	
+
 	/**
 	 * This is called once for every effect-class which is used in the game.
 	 * 

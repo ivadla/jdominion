@@ -23,8 +23,7 @@ public class SelectCardsController implements WindowListener {
 	public SelectCardsController(JFrame parent, SupplyCreator supplycreator) {
 		this.supplycreator = supplycreator;
 		view = new SelectCardsView(parent, this, "Select cards",
-				"Choose up to 10 cards which should be included in the game. The rest will be choosen randomly.",
-				getCardList(), getSelectedCards());
+				"Choose up to 10 cards which should be included in the game. The rest will be choosen randomly.", getCardList(), getSelectedCards());
 	}
 
 	private List<Card> getCardList() {

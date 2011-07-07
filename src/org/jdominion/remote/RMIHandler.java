@@ -5,12 +5,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class RMIHandler {
-	
+
 	private static boolean alreadyInitialized = false;
 
 	public static void initializeRMI() {
-		
-		if(alreadyInitialized) {
+
+		if (alreadyInitialized) {
 			return;
 		}
 
@@ -29,7 +29,7 @@ public class RMIHandler {
 			// do nothing, error means registry already exists
 			System.out.println("java RMI registry already exists.");
 		}
-		
+
 		alreadyInitialized = true;
 
 	}

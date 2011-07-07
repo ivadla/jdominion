@@ -1,8 +1,8 @@
 package org.jdominion.extraGameData;
 
 /**
- * The subclasses of ExtraGameData are used by cards to store data in the Game
- * (e.g. tokens on trade-route mat) or Player (e.g. VP Chips)
+ * The subclasses of ExtraGameData are used by cards to store data in the Game (e.g. tokens on trade-route mat) or
+ * Player (e.g. VP Chips)
  * 
  */
 public abstract class ExtraGameData<E> {

@@ -24,7 +24,7 @@ public class Supply implements Serializable {
 			cardPiles.add(newCardPile);
 		}
 	}
-	
+
 	public CardPile getPile(Class<? extends Card> card) {
 		for (CardPile pile : cardPiles) {
 			if (pile.getCardClass() == card) {
@@ -37,15 +37,15 @@ public class Supply implements Serializable {
 	public boolean isCardAvailable(Class<? extends Card> card) {
 		return getNumberOfAvailableCards(card) > 0;
 	}
-	
+
 	public int getNumberOfAvailableCards(Class<? extends Card> card) {
 		CardPile pile = getPile(card);
-		if(pile == null) {
+		if (pile == null) {
 			return 0;
 		} else {
-			return pile.getNumberOfCardsInPile(); 
+			return pile.getNumberOfCardsInPile();
 		}
-		
+
 	}
 
 	public int getCardCost(Class<? extends Card> card) {

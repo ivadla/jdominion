@@ -25,21 +25,20 @@ public class HumanStrategy implements IStrategy {
 
 	private MainWindow mainWindow = null;
 	private Player player;
-	
+
 	public HumanStrategy() {
 	}
-	
+
 	public HumanStrategy(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
-	
 
 	@Override
 	public void gameStarted(Game game) {
-		if(mainWindow == null) {
+		if (mainWindow == null) {
 			initializeMainWindow(game);
 		}
-		
+
 	}
 
 	public void initializeMainWindow(Game game) {
@@ -47,10 +46,10 @@ public class HumanStrategy implements IStrategy {
 		for (Player player : game.getPlayers()) {
 			players.add(player);
 		}
-		
+
 		mainWindow = new MainWindow(new GuiInformationSource(game, player.getHand(), players, game.getSupply()));
 		mainWindow.setVisible(true);
-		
+
 		GUIEventHandler observer = new GUIEventHandler(mainWindow);
 		observer.registerForEvents(EventManager.getInstance());
 	}
@@ -59,7 +58,7 @@ public class HumanStrategy implements IStrategy {
 	public String getName() {
 		return "Human";
 	}
-	
+
 	@Override
 	public List<Class<? extends Card>> getNeededCards() {
 		return new ArrayList<Class<? extends Card>>();
@@ -85,9 +84,7 @@ public class HumanStrategy implements IStrategy {
 		do {
 			choosenCards = new ArrayList<Card>();
 			for (int i = 0; i < decision.getMaximumNumberOfCards(); i++) {
-				Card choosenCard = mainWindow.chooseCardFromHand(decision.getUserMessage(), i >= decision
-						.getMinimumNumberOfCards()
-						|| decision.isCancelable());
+				Card choosenCard = mainWindow.chooseCardFromHand(decision.getUserMessage(), i >= decision.getMinimumNumberOfCards() || decision.isCancelable());
 				if (choosenCard == null) {
 					if (choosenCards.isEmpty()) {
 						decision.setCanceled(true);
@@ -105,8 +102,7 @@ public class HumanStrategy implements IStrategy {
 	public void decide(ChooseCardFromSupply decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
 		Class<? extends Card> choosenCard;
 		while (!decision.isAnswered()) {
-			choosenCard = mainWindow.chooseCardFromSupply(decision.getUserMessage(), decision.getAvailableCards(),
-					decision.isCancelable());
+			choosenCard = mainWindow.chooseCardFromSupply(decision.getUserMessage(), decision.getAvailableCards(), decision.isCancelable());
 			if (choosenCard == null) {
 				decision.setCanceled(true);
 			} else {
@@ -114,21 +110,22 @@ public class HumanStrategy implements IStrategy {
 			}
 		}
 	}
-	
-	public void decide(YesNoDecision decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) { 
-		boolean answer =  mainWindow.askUser(decision.getUserMessage());
+
+	public void decide(YesNoDecision decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
+		boolean answer = mainWindow.askUser(decision.getUserMessage());
 		decision.setAnswer(answer);
 	}
-	
+
 	public void decide(ChooseFromRevealedCards decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
 		decision.chooseDefaultAnswer(hand, currentTurn, supply);
 		mainWindow.chooseFromRevealedCards(decision);
 		decision.setAnswer(decision.getRevealedCards());
 	}
-	
+
 	public void decide(MultipleChoice<Choice> decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
-		
-		List<Choice> answer = mainWindow.multipleChoice(decision.getUserMessage(), decision.isCancelable(), decision.getMinAnswers(), decision.getMaxAnswers(), decision.getChoices());
+
+		List<Choice> answer = mainWindow.multipleChoice(decision.getUserMessage(), decision.isCancelable(), decision.getMinAnswers(), decision.getMaxAnswers(),
+				decision.getChoices());
 		decision.setAnswer(answer);
 	}
 

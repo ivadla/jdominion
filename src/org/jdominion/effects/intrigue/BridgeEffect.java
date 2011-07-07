@@ -14,13 +14,10 @@ import org.jdominion.event.EventManager.Duration;
 public class BridgeEffect extends CardEffectAction implements IEventHandler {
 
 	/**
-	 * currentCostDecrement is increased by 1 every time the bridge is played
-	 * and reduced to 0 at the end of the turn we have to do this, because a
-	 * throne room can play the same card twice, but we can't register twice for
-	 * the event
+	 * currentCostDecrement is increased by 1 every time the bridge is played and reduced to 0 at the end of the turn we
+	 * have to do this, because a throne room can play the same card twice, but we can't register twice for the event
 	 * 
-	 * TODO: maybe it's better to allow multiple registrations for the same
-	 * event
+	 * TODO: maybe it's better to allow multiple registrations for the same event
 	 */
 	private int currentCostDecrement = 0;
 	public boolean registeredAsEventHandler = false;

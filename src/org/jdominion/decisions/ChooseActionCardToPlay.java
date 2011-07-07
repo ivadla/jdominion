@@ -11,7 +11,7 @@ public class ChooseActionCardToPlay extends ChooseCardsFromHand {
 	public ChooseActionCardToPlay(Hand hand, boolean cancelable) {
 		super("Choose an action card to play", cancelable, 1, 1, hand);
 	}
-	
+
 	public ChooseActionCardToPlay(Hand hand) {
 		super("Choose an action card to play", true, 1, 1, hand);
 	}

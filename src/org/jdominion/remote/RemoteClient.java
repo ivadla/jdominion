@@ -22,7 +22,7 @@ public class RemoteClient implements IGuiInformationSource {
 	private IRemoteDecision server;
 	private HumanStrategy decisionHandler;
 	private MainWindow mainWindow;
-	
+
 	public RemoteClient() {
 		try {
 			server = (IRemoteDecision) Naming.lookup("//localhost/RemoteStrategyServer");
@@ -31,7 +31,7 @@ public class RemoteClient implements IGuiInformationSource {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void run() throws RemoteException {
 		mainWindow = new MainWindow(this);
 		mainWindow.setVisible(true);
@@ -39,9 +39,9 @@ public class RemoteClient implements IGuiInformationSource {
 		decisionHandler = new HumanStrategy(mainWindow);
 		handleDecision();
 	}
-	
+
 	private void handleDecision() throws RemoteException {
-		while(true) {
+		while (true) {
 			Decision decision = server.getDecision();
 			mainWindow.update();
 			Player.callCorrectDecisionMethod(decision, server.getDecisionEffect(), getHand(), getCurrentTurn(), server.getDecisionSupply(), decisionHandler);
@@ -51,16 +51,16 @@ public class RemoteClient implements IGuiInformationSource {
 
 	/**
 	 * @param args
-	 * @throws RemoteException 
+	 * @throws RemoteException
 	 */
 	public static void main(String[] args) throws RemoteException {
 		// Create and install a security manager
-//		if (System.getSecurityManager() == null) {
-//			System.setSecurityManager(new RMISecurityManager());
-//		}
-		
+		// if (System.getSecurityManager() == null) {
+		// System.setSecurityManager(new RMISecurityManager());
+		// }
+
 		RemoteClient client = new RemoteClient();
-		
+
 		client.run();
 
 	}

@@ -21,7 +21,7 @@ public class AddExtraMoney extends CardEffectAction {
 
 	@Override
 	public String getText() {
-		return "+ " + coinsToAdd + " Coin" + (coinsToAdd > 1 ? "s": "");
+		return "+ " + coinsToAdd + " Coin" + (coinsToAdd > 1 ? "s" : "");
 	}
 
 }

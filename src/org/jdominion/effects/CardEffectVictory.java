@@ -10,7 +10,7 @@ import org.jdominion.Turn;
 public class CardEffectVictory extends CardEffect {
 
 	private int victoryPoints;
-	
+
 	protected CardEffectVictory() {
 		super(Card.Type.VICTORY);
 	}

@@ -66,7 +66,7 @@ public class Game implements Serializable, ICurrentTurn {
 	public void addCardsToTrash(List<Card> cardsToTrash) {
 		this.trash.addAll(cardsToTrash);
 	}
-	
+
 	public void removeCardFromTrash(Card cardToRemove) {
 		this.trash.remove(cardToRemove);
 	}
@@ -95,21 +95,17 @@ public class Game implements Serializable, ICurrentTurn {
 		this.extraGameData = new HashMap<Class<? extends ExtraGameData<?>>, ExtraGameData<?>>();
 	}
 
-	public Game(List<String> playerNames, List<Class<? extends IStrategy>> playerStrategies,
-			List<Class<? extends Card>> kingdomCardsToAddToSupply) {
-		this(createPlayersFromStrategies(playerNames, playerStrategies), CardFactory.createSupply(playerStrategies
-				.size(), kingdomCardsToAddToSupply));
+	public Game(List<String> playerNames, List<Class<? extends IStrategy>> playerStrategies, List<Class<? extends Card>> kingdomCardsToAddToSupply) {
+		this(createPlayersFromStrategies(playerNames, playerStrategies), CardFactory.createSupply(playerStrategies.size(), kingdomCardsToAddToSupply));
 	}
 
-	private static List<Player> createPlayersFromStrategies(List<String> playerNames,
-			List<Class<? extends IStrategy>> playerStrategies) {
+	private static List<Player> createPlayersFromStrategies(List<String> playerNames, List<Class<? extends IStrategy>> playerStrategies) {
 		assert !playerNames.isEmpty() : "The game needs players";
 		assert playerNames.size() == playerStrategies.size() : "There should be one strategy for each player";
 		List<Player> players = new ArrayList<Player>();
 		for (int i = 0; i < playerNames.size(); i++) {
 			try {
-				players.add(new Player(playerNames.get(i), CardFactory.createInitialDeck(), playerStrategies.get(i)
-						.newInstance()));
+				players.add(new Player(playerNames.get(i), CardFactory.createInitialDeck(), playerStrategies.get(i).newInstance()));
 			} catch (Exception e) {
 				throw new RuntimeException("Error while creating player " + playerNames.get(i), e);
 			}
@@ -164,7 +160,7 @@ public class Game implements Serializable, ICurrentTurn {
 			}
 		}
 	}
-	
+
 	private void informPlayersAboutGameStart() {
 		for (Player player : players) {
 			player.gameStarted(this);

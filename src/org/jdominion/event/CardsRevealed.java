@@ -15,8 +15,7 @@ public class CardsRevealed extends Event {
 	}
 
 	public CardsRevealed(Player revealingPlayer, List<Card> revealedCards) {
-		super(revealingPlayer.getName() + " reveals " + Util.convertCardListToString(revealedCards) + ".",
-				revealingPlayer);
+		super(revealingPlayer.getName() + " reveals " + Util.convertCardListToString(revealedCards) + ".", revealingPlayer);
 		this.revealedCards = revealedCards;
 	}
 }

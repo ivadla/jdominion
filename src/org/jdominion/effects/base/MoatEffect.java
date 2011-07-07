@@ -28,7 +28,7 @@ public class MoatEffect extends CardEffectReaction implements IEventHandler {
 	public void handleEvent(Event event) {
 		if (event instanceof Attack) {
 			Attack attackEvent = (Attack) event;
-			if(attackEvent.getAttackedPlayer() == this.getOwner()) {
+			if (attackEvent.getAttackedPlayer() == this.getOwner()) {
 				attackEvent.setCanceled(true);
 			}
 		} else if (event instanceof CardPlayFinished) {

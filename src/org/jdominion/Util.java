@@ -12,11 +12,11 @@ public class Util {
 		cardList.add(card);
 		return cardList;
 	}
-	
+
 	public static int countCardsOfType(List<Card> cardList, Type cardType) {
 		int counter = 0;
-		for(Card card: cardList) {
-			if(card.isOfType(cardType)) {
+		for (Card card : cardList) {
+			if (card.isOfType(cardType)) {
 				counter++;
 			}
 		}

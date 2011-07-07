@@ -10,5 +10,5 @@ public class Cellar extends Card {
 		this.addCardEffect(new AddActions(1));
 		this.addCardEffect(new CellarEffect());
 	}
-	
+
 }

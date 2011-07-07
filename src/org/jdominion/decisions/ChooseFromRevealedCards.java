@@ -32,9 +32,9 @@ public abstract class ChooseFromRevealedCards extends Decision<List<RevealedCard
 			if (!revealedCard.getOptions().contains(revealedCard.getChoosenOption())) {
 				return false;
 			}
-	
+
 		}
-		if(answer.size() != getRevealedCards().size()) {
+		if (answer.size() != getRevealedCards().size()) {
 			return false;
 		}
 		return true;

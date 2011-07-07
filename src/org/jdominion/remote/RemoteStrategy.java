@@ -49,7 +49,7 @@ public class RemoteStrategy extends UnicastRemoteObject implements IStrategy, IR
 
 		if (decision instanceof ChooseCardFromSupply || decision instanceof ChooseCardsFromHand) {
 			assert this.answeredDecision == null && this.unansweredDecision == null;
-			
+
 			this.unansweredDecision = decision;
 			this.decisionEffect = effect;
 			this.decisionSupply = supply;
@@ -67,7 +67,7 @@ public class RemoteStrategy extends UnicastRemoteObject implements IStrategy, IR
 			// answeredDecision).getAnswer());
 			// ((decision.getClass()) decision).setAnswer(((decision.getClass())
 			// answeredDecision).getAnswer());
-			if(answeredDecision.isCanceled()) {
+			if (answeredDecision.isCanceled()) {
 				decision.setCanceled(answeredDecision.isCanceled());
 			} else {
 				decision.getClass().cast(decision).setAnswer((decision.getClass().cast(answeredDecision)).getAnswer());

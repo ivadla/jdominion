@@ -27,8 +27,7 @@ public class ChapelMoney extends BuyOneTypeOfActionCard {
 		this(6);
 	}
 
-	public void decide(ChooseCardsFromHandToTrash decision, TrashCards effect, Hand hand, Turn currentTurn,
-			Supply supply) {
+	public void decide(ChooseCardsFromHandToTrash decision, TrashCards effect, Hand hand, Turn currentTurn, Supply supply) {
 		List<Class<? extends Card>> cardsToTrash = new ArrayList<Class<? extends Card>>();
 		cardsToTrash.add(Curse.class);
 		cardsToTrash.add(Estate.class);

@@ -20,7 +20,7 @@ public class TrashForCoin extends CardEffectAction {
 		assert trashDecision.getAnswer().size() == 1;
 		Card cardToTrash = trashDecision.getAnswer().get(0);
 		assert cardToTrash != null;
-		
+
 		if (cardToTrash.getCost() > 0) {
 			currentTurn.addExtraMoney(cardToTrash.getCost());
 		}

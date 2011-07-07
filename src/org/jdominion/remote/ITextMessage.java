@@ -5,5 +5,5 @@ import java.rmi.RemoteException;
 
 public interface ITextMessage extends Remote {
 
-	public String getMessage()  throws RemoteException;
+	public String getMessage() throws RemoteException;
 }

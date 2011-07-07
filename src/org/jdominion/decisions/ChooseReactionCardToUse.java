@@ -8,7 +8,7 @@ import org.jdominion.Card.Type;
 import org.jdominion.event.Event;
 
 public class ChooseReactionCardToUse extends ChooseCardsFromHand {
-	
+
 	private Event event;
 
 	public ChooseReactionCardToUse(Hand hand, Event event) {
@@ -34,7 +34,7 @@ public class ChooseReactionCardToUse extends ChooseCardsFromHand {
 
 	@Override
 	public void chooseDefaultAnswer(Hand hand, Turn currentTurn, Supply supply) {
-		//TODO: we need to choose a card here, but first we have to make sure 
+		// TODO: we need to choose a card here, but first we have to make sure
 		// that we don't run into an endless loop if we choose a card here.
 		setCanceled(true);
 	}

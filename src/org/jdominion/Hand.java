@@ -24,7 +24,7 @@ public class Hand implements Serializable {
 
 	public List<Card> getCardList() {
 		// return a new list to hopefully prevent ConcurrentModificationException
-		// additionally it prevents messing with the hand contents 
+		// additionally it prevents messing with the hand contents
 		return new ArrayList<Card>(cardsInHand);
 	}
 
@@ -113,7 +113,7 @@ public class Hand implements Serializable {
 		}
 		return cheapestCard;
 	}
-	
+
 	public List<Card> getCardsOfType(Card.Type type) {
 		List<Card> cardsOfType = new ArrayList<Card>();
 		for (Card card : getCardList()) {

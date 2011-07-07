@@ -50,16 +50,14 @@ public class EventManager {
 	}
 
 	/**
-	 * Add an event handler which will only be called if the specified player
-	 * triggers the event
+	 * Add an event handler which will only be called if the specified player triggers the event
 	 * 
 	 * @param eventHandler
 	 * @param eventType
 	 * @param duration
 	 * @param player
 	 */
-	public void addEventHandler(IEventHandler eventHandler, Class<? extends Event> eventType, Duration duration,
-			Player player) {
+	public void addEventHandler(IEventHandler eventHandler, Class<? extends Event> eventType, Duration duration, Player player) {
 		if (!eventHandlers.containsKey(eventType)) {
 			eventHandlers.put(eventType, new ArrayList<EventHandlerContainer>());
 		}
@@ -81,8 +79,7 @@ public class EventManager {
 		if (eventHandlers.containsKey(event.getClass())) {
 			// use a copy of of the EventHandlerContainer-list to be able to
 			// remove elements from the original list
-			for (EventHandlerContainer eventHandlerContainer : new ArrayList<EventHandlerContainer>(
-					eventHandlers.get(event.getClass()))) {
+			for (EventHandlerContainer eventHandlerContainer : new ArrayList<EventHandlerContainer>(eventHandlers.get(event.getClass()))) {
 				if (eventHandlerContainer.player == event.getAffectedPlayer() || eventHandlerContainer.player == null) {
 					eventHandlerContainer.eventHandler.handleEvent(event);
 					if (eventHandlerContainer.duration == Duration.ONCE) {

@@ -9,19 +9,17 @@ import org.jdominion.cards.common.Copper;
 
 public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 
-	public ChooseCardsFromHandToDiscard(boolean cancelable, int minimumNumberOfCards, int maximumNumberOfCards,
-			Hand hand) {
+	public ChooseCardsFromHandToDiscard(boolean cancelable, int minimumNumberOfCards, int maximumNumberOfCards, Hand hand) {
 		super(getMessage("", cancelable), cancelable, minimumNumberOfCards, maximumNumberOfCards, hand);
 	}
 
-	protected ChooseCardsFromHandToDiscard(String extraMessage, boolean cancelable, int minimumNumberOfCards,
-			int maximumNumberOfCards, Hand hand) {
+	protected ChooseCardsFromHandToDiscard(String extraMessage, boolean cancelable, int minimumNumberOfCards, int maximumNumberOfCards, Hand hand) {
 		super(getMessage(extraMessage, cancelable), cancelable, minimumNumberOfCards, maximumNumberOfCards, hand);
 	}
 
 	protected static String getMessage(String extraMessage, boolean cancelable) {
 		String message = "Choose a card to discard";
-		if(extraMessage.length() > 0) {
+		if (extraMessage.length() > 0) {
 			message += " " + extraMessage;
 		}
 		if (cancelable) {

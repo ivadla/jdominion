@@ -11,9 +11,9 @@ public class CellarEffect extends CardEffectAction {
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		int numberOfCardsToDraw = 0;
 		ChooseCardFromHandToDiscard decision = new ChooseCardFromHandToDiscard(true, activePlayer.getHand());
-		while(activePlayer.getHandSize() > 0){
+		while (activePlayer.getHandSize() > 0) {
 			activePlayer.decide(decision, this);
-			if(decision.isCanceled()){
+			if (decision.isCanceled()) {
 				break;
 			} else {
 				activePlayer.discardCardsFromHand(decision.getAnswer());

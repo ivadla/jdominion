@@ -27,8 +27,7 @@ public class Attack extends CancelableEvent {
 		this.effect = effect;
 	}
 
-	public static boolean isBlocked(Player attackedPlayer, Player attacker, CardEffect effect, Turn currentTurn,
-			Supply supply) {
+	public static boolean isBlocked(Player attackedPlayer, Player attacker, CardEffect effect, Turn currentTurn, Supply supply) {
 		CancelableEvent event = new Attack(attackedPlayer, attacker, effect);
 		EventManager.getInstance().handleEvent(event);
 		return event.isCanceled();

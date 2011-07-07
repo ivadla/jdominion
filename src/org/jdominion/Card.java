@@ -40,11 +40,11 @@ public abstract class Card implements Serializable {
 	public String getName() {
 		return name;
 	}
-	
+
 	public Player getOwner() {
 		return owner;
 	}
-	
+
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
@@ -109,7 +109,7 @@ public abstract class Card implements Serializable {
 		effect.setCard(this);
 		if (!types.contains(effect.getType())) {
 			types.add(effect.getType());
-			if(effect.getType() == Type.ATTACK && !types.contains(Type.ACTION)) {
+			if (effect.getType() == Type.ATTACK && !types.contains(Type.ACTION)) {
 				types.add(Type.ACTION);
 			}
 		}
@@ -176,7 +176,7 @@ public abstract class Card implements Serializable {
 
 		return points;
 	}
-	
+
 	public int getAddedActions() {
 		int actions = 0;
 

@@ -15,7 +15,7 @@ public class AddActions extends CardEffectAction {
 
 	@Override
 	public String getText() {
-		return "+ " + numberOfActionsToAdd + " Action" + (numberOfActionsToAdd > 1 ? "s": "");
+		return "+ " + numberOfActionsToAdd + " Action" + (numberOfActionsToAdd > 1 ? "s" : "");
 	}
 
 	@Override

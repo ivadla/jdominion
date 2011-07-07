@@ -26,7 +26,7 @@ public class ChapelLab extends GenericAI {
 	public String getName() {
 		return "ChapelLab";
 	}
-	
+
 	@Override
 	public List<Class<? extends Card>> getNeededCards() {
 		List<Class<? extends Card>> neededCards = new ArrayList<Class<? extends Card>>();
@@ -35,8 +35,7 @@ public class ChapelLab extends GenericAI {
 		return neededCards;
 	}
 
-	public void decide(ChooseCardsFromHandToTrash decision, TrashCards effect, Hand hand, Turn currentTurn,
-			Supply supply) {
+	public void decide(ChooseCardsFromHandToTrash decision, TrashCards effect, Hand hand, Turn currentTurn, Supply supply) {
 		List<Class<? extends Card>> cardsToTrash = new ArrayList<Class<? extends Card>>();
 		cardsToTrash.add(Curse.class);
 		if (currentTurn.getTurnNumber() <= buyEstatesAfterTurn) {

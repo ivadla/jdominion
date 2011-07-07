@@ -11,5 +11,5 @@ public class Tournament extends Card {
 		addCardEffect(new AddActions(1));
 		addCardEffect(new TournamentEffect());
 	}
-	
+
 }

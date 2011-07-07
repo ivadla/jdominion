@@ -17,7 +17,7 @@ public class JesterEffect extends CardEffectSimpleAttack {
 	@Override
 	protected void attackPlayer(Player playerToAttack, Turn currentTurn, Supply supply) {
 		Card revealedCard = playerToAttack.revealCard();
-		if(revealedCard == null) {
+		if (revealedCard == null) {
 			return;
 		}
 		if (revealedCard.isOfType(Type.VICTORY)) {
@@ -26,8 +26,7 @@ public class JesterEffect extends CardEffectSimpleAttack {
 			List<Player> players = new ArrayList<Player>();
 			players.add(currentTurn.getActivePlayer());
 			players.add(playerToAttack);
-			ChoosePlayerToGetCard decision = new ChoosePlayerToGetCard(players, revealedCard, currentTurn
-					.getActivePlayer());
+			ChoosePlayerToGetCard decision = new ChoosePlayerToGetCard(players, revealedCard, currentTurn.getActivePlayer());
 			currentTurn.getActivePlayer().decide(decision, this);
 			decision.getAnswer().get(0).getPlayer().gainCard(revealedCard.getClass(), supply);
 		}

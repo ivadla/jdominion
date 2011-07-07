@@ -93,8 +93,7 @@ public class RevealedCardsController implements MouseListener, ActionListener, W
 	}
 
 	private Option findNextOption(RevealedCard revealedCard) {
-		int indexOfNewOption = (revealedCard.getOptions().indexOf(revealedCard.getChoosenOption()) + 1)
-				% revealedCard.getOptions().size();
+		int indexOfNewOption = (revealedCard.getOptions().indexOf(revealedCard.getChoosenOption()) + 1) % revealedCard.getOptions().size();
 		return revealedCard.getOptions().get(indexOfNewOption);
 	}
 

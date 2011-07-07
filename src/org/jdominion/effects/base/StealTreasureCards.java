@@ -28,10 +28,10 @@ public class StealTreasureCards extends CardEffectAttack {
 				List<Card> cardList = player.revealCards(2);
 				for (Card revealedCard : cardList) {
 					List<Option> optionList = new ArrayList<Option>();
-					if(revealedCard.isOfType(Type.TREASURE)) {
+					if (revealedCard.isOfType(Type.TREASURE)) {
 						optionList.add(Gain.getInstance());
 						optionList.add(Trash.getInstance());
-						if(Util.countCardsOfType(cardList, Type.TREASURE) > 1) {
+						if (Util.countCardsOfType(cardList, Type.TREASURE) > 1) {
 							optionList.add(Discard.getInstance());
 						}
 					} else {
@@ -45,22 +45,22 @@ public class StealTreasureCards extends CardEffectAttack {
 
 			return false;
 		}
-		
+
 		StealFromRevealedCards decision = new StealFromRevealedCards(revealedCards);
-		
+
 		activePlayer.decide(decision, this);
-		
+
 		for (RevealedCard revealedCard : decision.getAnswer()) {
-			if(revealedCard.getChoosenOption() == Discard.getInstance()) {
+			if (revealedCard.getChoosenOption() == Discard.getInstance()) {
 				revealedCard.getOwner().placeOnDiscardPile(revealedCard.getRevealedCard());
 			} else {
 				revealedCard.getOwner().trashCard(revealedCard.getRevealedCard(), currentTurn.getGame());
-				if(revealedCard.getChoosenOption() == Gain.getInstance()) {
+				if (revealedCard.getChoosenOption() == Gain.getInstance()) {
 					currentTurn.getGame().removeCardFromTrash(revealedCard.getRevealedCard());
 					activePlayer.gainCard(revealedCard.getRevealedCard());
-				}	
+				}
 			}
-			
+
 		}
 		return true;
 	}

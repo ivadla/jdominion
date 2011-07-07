@@ -26,9 +26,8 @@ public class GameConfigurationWindow extends JFrame {
 	private List<JTextField> playerNameTextFields = null;
 	private JComboBox playerNumberSelector = null;
 
-	public GameConfigurationWindow(final List<String> playerNames, final List<String> strategies,
-			final List<Integer> selectedStrategies, final int defaultNumberOfPlayers, final int maximumNumberOfPlayers,
-			ActionListener controller) {
+	public GameConfigurationWindow(final List<String> playerNames, final List<String> strategies, final List<Integer> selectedStrategies,
+			final int defaultNumberOfPlayers, final int maximumNumberOfPlayers, ActionListener controller) {
 		this.controller = controller;
 
 		EventQueue.invokeLater(new Runnable() {
@@ -51,10 +50,9 @@ public class GameConfigurationWindow extends JFrame {
 		return playerNumberSelector.getSelectedIndex() + 1;
 	}
 
-	private void initialize(List<String> playerNames, List<String> strategies, List<Integer> selectedStrategies,
-			int defaultNumberOfPlayers, int maximumNumberOfPlayers) {
-		initializePlayerSelectionTable(playerNames, strategies, selectedStrategies, defaultNumberOfPlayers,
-				maximumNumberOfPlayers);
+	private void initialize(List<String> playerNames, List<String> strategies, List<Integer> selectedStrategies, int defaultNumberOfPlayers,
+			int maximumNumberOfPlayers) {
+		initializePlayerSelectionTable(playerNames, strategies, selectedStrategies, defaultNumberOfPlayers, maximumNumberOfPlayers);
 		setContentPane(getContentPanel());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
@@ -64,10 +62,10 @@ public class GameConfigurationWindow extends JFrame {
 	private JPanel getContentPanel() {
 		if (contentPanel == null) {
 			contentPanel = new JPanel(new MigLayout());
-			contentPanel.add(getStartButton(), new CC().cell(0,0).spanY(2));
-			contentPanel.add(getPlayerSelectionTable(), new CC().cell(1,0));
-			contentPanel.add(getSelectSupplyCardsButton(), new CC().cell(1,1));
-			
+			contentPanel.add(getStartButton(), new CC().cell(0, 0).spanY(2));
+			contentPanel.add(getPlayerSelectionTable(), new CC().cell(1, 0));
+			contentPanel.add(getSelectSupplyCardsButton(), new CC().cell(1, 1));
+
 		}
 		return contentPanel;
 	}
@@ -79,7 +77,7 @@ public class GameConfigurationWindow extends JFrame {
 		}
 		return startButton;
 	}
-	
+
 	private JButton getSelectSupplyCardsButton() {
 		JButton button = new JButton("Select Cards for Supply");
 		button.setActionCommand("selectSupplyCards");
@@ -103,8 +101,8 @@ public class GameConfigurationWindow extends JFrame {
 
 	}
 
-	private void initializePlayerSelectionTable(List<String> playerNames, List<String> strategies,
-			List<Integer> selectedStrategies, int defaultNumberOfPlayers, int maximumNumberOfPlayers) {
+	private void initializePlayerSelectionTable(List<String> playerNames, List<String> strategies, List<Integer> selectedStrategies,
+			int defaultNumberOfPlayers, int maximumNumberOfPlayers) {
 		initializePlayerNameTextFields(playerNames);
 		initializeStrategieSelectors(strategies, selectedStrategies, maximumNumberOfPlayers);
 		playerSelectionTable = new JPanel(new MigLayout());
@@ -120,8 +118,7 @@ public class GameConfigurationWindow extends JFrame {
 		setEditableNumberOfPlayers(defaultNumberOfPlayers);
 	}
 
-	private void initializeStrategieSelectors(List<String> strategies, List<Integer> selectedStrategies,
-			int maximumNumberOfPlayers) {
+	private void initializeStrategieSelectors(List<String> strategies, List<Integer> selectedStrategies, int maximumNumberOfPlayers) {
 		strategieSelectors = new ArrayList<JComboBox>();
 		for (int i = 0; i < maximumNumberOfPlayers; i++) {
 			JComboBox strategySelector = new JComboBox(strategies.toArray());

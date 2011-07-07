@@ -14,7 +14,7 @@ public abstract class CardEffectReaction extends CardEffectAction {
 	public CardEffectReaction() {
 		super(Type.REACTION);
 	}
-	
+
 	protected Player getOwner() {
 		return owner;
 	}
@@ -31,7 +31,7 @@ public abstract class CardEffectReaction extends CardEffectAction {
 		this.owner = owner;
 		ReactionEventHandler.getInstance().addReactionCard(getCard(), owner);
 	}
-	
+
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		// reaction effects should not execute anything

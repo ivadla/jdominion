@@ -19,18 +19,18 @@ import org.jdominion.event.EventManager.Duration;
 public class RemoteOutput implements IEventHandler {
 
 	private TextMessageServer textMessageServer;
-	
+
 	public RemoteOutput() {
-		
+
 		try {
 			this.textMessageServer = new TextMessageServer();
-			//Thread.sleep(10000);
+			// Thread.sleep(10000);
 		} catch (RemoteException e) {
 			throw new RuntimeException(e);
 		}
-			//		} catch (InterruptedException e) {
-//			new RuntimeException(e);
-//		}
+		// } catch (InterruptedException e) {
+		// new RuntimeException(e);
+		// }
 	}
 
 	public void registerForEvents(EventManager eventManager) {

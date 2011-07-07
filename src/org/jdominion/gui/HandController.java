@@ -8,7 +8,7 @@ import org.jdominion.Card;
 public class HandController extends CardListController {
 
 	private IGuiInformationSource guiInformationSource;
-	
+
 	public HandController(IGuiInformationSource guiInformationSource) {
 		super();
 		this.guiInformationSource = guiInformationSource;
@@ -16,7 +16,7 @@ public class HandController extends CardListController {
 
 	@Override
 	protected List<Card> getCardList() {
-		return  new ArrayList<Card>(guiInformationSource.getHand().getCardList());
+		return new ArrayList<Card>(guiInformationSource.getHand().getCardList());
 	}
 
 }

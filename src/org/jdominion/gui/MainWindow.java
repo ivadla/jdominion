@@ -121,9 +121,9 @@ public class MainWindow extends JFrame {
 		}
 		return leftPanel;
 	}
-	
+
 	private JPanel getCentralPanel() {
-		if(centralPanel == null) {
+		if (centralPanel == null) {
 			MigLayout layout = new MigLayout(new LC().fill());
 			centralPanel = new JPanel(layout);
 			centralPanel.add(getMessageToUser(), new CC().wrap().growX());
@@ -191,8 +191,7 @@ public class MainWindow extends JFrame {
 	}
 
 	public String choose(List<String> options, String message) {
-		return (String) JOptionPane.showInputDialog(this, message, "Please choose", JOptionPane.PLAIN_MESSAGE, null,
-				options.toArray(), options.get(0));
+		return (String) JOptionPane.showInputDialog(this, message, "Please choose", JOptionPane.PLAIN_MESSAGE, null, options.toArray(), options.get(0));
 
 	}
 
@@ -215,23 +214,23 @@ public class MainWindow extends JFrame {
 		hideCancelButton();
 		return choosenCard;
 	}
-	
+
 	public boolean askUser(String message) {
 		int answer = JOptionPane.showConfirmDialog(this, message, "", JOptionPane.YES_NO_OPTION);
 		return (answer == JOptionPane.YES_OPTION);
 	}
-	
+
 	public void chooseFromRevealedCards(ChooseFromRevealedCards decision) {
 		showPromptMessage(decision.getUserMessage());
 		RevealedCardsController revealedCardsController = new RevealedCardsController(this, decision.getUserMessage(), decision);
 		revealedCardsController.askUser();
 	}
-	
+
 	public List<Choice> multipleChoice(String userMessage, boolean cancelable, int minAnswers, int maxAnswers, List<Choice> choices) {
 		showPromptMessage(userMessage);
 		MultipleChoiceController controller = new MultipleChoiceController(this, userMessage, cancelable, minAnswers, maxAnswers, choices);
 		return controller.askUser();
-		
+
 	}
 
 	public void update() {

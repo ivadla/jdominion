@@ -47,16 +47,15 @@ public class Simulator {
 
 	}
 
-	private void runRecursivelyWithAllParameterCombinations(IExtraStatistics statisticSupplier,
-			Deque<SimulationParameter> originalParameters) {
+	private void runRecursivelyWithAllParameterCombinations(IExtraStatistics statisticSupplier, Deque<SimulationParameter> originalParameters) {
 		Deque<SimulationParameter> parameters = new ArrayDeque<SimulationParameter>(originalParameters);
-		
+
 		// only run the simulation if we are at the last parameter
-		if(originalParameters.isEmpty()) {
+		if (originalParameters.isEmpty()) {
 			simulate(statisticSupplier);
 			return;
 		}
-		
+
 		SimulationParameter currentParameter = parameters.removeFirst();
 
 		// go through all possibilities for this parameter once
@@ -89,8 +88,7 @@ public class Simulator {
 				return strategy.getConstructor(parameterTypes).newInstance(parameterArray);
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("Error while creating Strategy " + strategy.getName() + " with parameters "
-					+ StringUtils.join(parameters, ","), e);
+			throw new RuntimeException("Error while creating Strategy " + strategy.getName() + " with parameters " + StringUtils.join(parameters, ","), e);
 		}
 	}
 
@@ -110,8 +108,7 @@ public class Simulator {
 
 	private Game createGame(List<Player> players) {
 
-		return new Game(players, CardFactory.createSupply(players.size(), new ArrayList<Class<? extends Card>>(
-				getNeededKingdomCards(players))));
+		return new Game(players, CardFactory.createSupply(players.size(), new ArrayList<Class<? extends Card>>(getNeededKingdomCards(players))));
 	}
 
 	private Set<Class<? extends Card>> getNeededKingdomCards(List<Player> players) {
@@ -128,8 +125,7 @@ public class Simulator {
 		for (PlayerInformationContainer playerInfo : players) {
 			IStrategy strategy = initializeStrategy(playerInfo.getStrategy(), playerInfo.getParameters());
 			playerInfo.setName(strategy.getName());
-			realPlayers.add(new Player(playerInfo.getId(), strategy.getName(), CardFactory.createInitialDeck(),
-					strategy));
+			realPlayers.add(new Player(playerInfo.getId(), strategy.getName(), CardFactory.createInitialDeck(), strategy));
 		}
 
 		Collections.shuffle(realPlayers);

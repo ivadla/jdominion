@@ -293,7 +293,7 @@ public class Player implements Serializable, IPlayer {
 			gainCard(supply.takeCard(card), whereToPlaceCard);
 		}
 	}
-	
+
 	public void gainCard(Card gainedCard) {
 		this.gainCard(gainedCard, new DiscardPile());
 	}
@@ -365,7 +365,7 @@ public class Player implements Serializable, IPlayer {
 	public void gameEnded(List<Player> winners, List<Player> players) {
 		EventManager.getInstance().handleEvent(new GameEnded(winners, players));
 	}
-	
+
 	public void decide(Decision<?> decision, CardEffect effect) {
 		callCorrectDecisionMethod(decision, effect, hand, game.getCurrentTurn(), game.getSupply(), strategy);
 
@@ -375,8 +375,7 @@ public class Player implements Serializable, IPlayer {
 		}
 	}
 
-	public static void callCorrectDecisionMethod(Decision<?> decision, CardEffect effect, Hand hand, Turn currentTurn,
-			Supply supply, IStrategy strategy) {
+	public static void callCorrectDecisionMethod(Decision<?> decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply, IStrategy strategy) {
 		// find the right decision method in the strategy to call
 		// TODO: improve this code or find a better way to solve this problem
 		Class<? extends Object> decisionClass = decision.getClass();
@@ -384,8 +383,7 @@ public class Player implements Serializable, IPlayer {
 			Class<? extends Object> effectClass = effect.getClass();
 			while (effectClass != Object.class) {
 				try {
-					Method decideMethode = strategy.getClass().getMethod("decide", decisionClass, effectClass,
-							Hand.class, Turn.class, Supply.class);
+					Method decideMethode = strategy.getClass().getMethod("decide", decisionClass, effectClass, Hand.class, Turn.class, Supply.class);
 					decideMethode.invoke(strategy, decision, effect, hand, currentTurn, supply);
 					break;
 				} catch (NoSuchMethodException e) {

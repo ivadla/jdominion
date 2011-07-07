@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import org.jdominion.IPlayer;
 
 public class PlayerStub implements IPlayer {
-	
+
 	private IRemotePlayer remotePlayer;
 
 	public PlayerStub(IRemotePlayer remotePlayer) {

@@ -14,15 +14,13 @@ import org.jdominion.decisions.revealedCards.RevealedCard;
 public class DiscardRevealedCard extends ChooseFromRevealedCards {
 
 	public DiscardRevealedCard(List<RevealedCard> revealedCards) {
-		super("Please choose whether to put the revealed cards back on top of the deck or to discard them", false,
-				revealedCards);
+		super("Please choose whether to put the revealed cards back on top of the deck or to discard them", false, revealedCards);
 	}
 
 	@Override
 	public void chooseDefaultAnswer(Hand hand, Turn currentTurn, Supply supply) {
 		for (RevealedCard revealedCard : getRevealedCards()) {
-			if (revealedCard.getRevealedCard().isOfType(Type.ACTION)
-					|| revealedCard.getRevealedCard().isOfType(Type.TREASURE)) {
+			if (revealedCard.getRevealedCard().isOfType(Type.ACTION) || revealedCard.getRevealedCard().isOfType(Type.TREASURE)) {
 				if (revealedCard.getOwner() == currentTurn.getActivePlayer()) {
 					revealedCard.setChoosenOption(PutOnDeck.getInstance());
 				} else {

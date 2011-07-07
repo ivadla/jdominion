@@ -37,7 +37,7 @@ public class SupplyController implements MouseListener, ActionListener {
 
 	public void update(Supply availableCards) {
 		List<CardImage> cardImages = new ArrayList<CardImage>();
-		
+
 		Supply completeSupply;
 
 		if (availableCards.isSubsetOf(guiInformationSource.getSupply())) {
@@ -45,7 +45,7 @@ public class SupplyController implements MouseListener, ActionListener {
 		} else {
 			completeSupply = availableCards;
 		}
-		
+
 		for (CardPile pile : completeSupply.getCardPiles()) {
 			if (pile.getNumberOfCardsInPile() > 0) {
 				try {
@@ -66,12 +66,12 @@ public class SupplyController implements MouseListener, ActionListener {
 			}
 
 		}
-		if(cardImagesChange(cardImages)) {
+		if (cardImagesChange(cardImages)) {
 			this.getView().update(cardImages);
 			this.currentlyDisplayedCardImages = cardImages;
 		}
 	}
-	
+
 	private boolean cardImagesChange(List<CardImage> newCardImages) {
 		if (newCardImages == null && currentlyDisplayedCardImages == null) {
 			return false;

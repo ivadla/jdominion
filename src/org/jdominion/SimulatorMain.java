@@ -11,23 +11,22 @@ import org.jdominion.simulation.Simulator;
 public class SimulatorMain {
 
 	public static void main(String[] args) {
-		
+
 		Simulator simulator = new Simulator(100000);
 
 		simulator.addPlayer(WitchStrategy.class);
-		
-		
+
 		List<SimulationParameter> parameters = new ArrayList<SimulationParameter>();
 		parameters.add(new SimulationParameter(1, 2));
 		simulator.addPlayer(SmithyStrategy.class, parameters);
-		
+
 		parameters = new ArrayList<SimulationParameter>();
-		parameters.add(new SimulationParameter(18,20));
-		parameters.add(new SimulationParameter(20,22));
-		parameters.add(new SimulationParameter(20,22));
-		simulator.addPlayer(MoneyOnly.class,parameters);
-		
+		parameters.add(new SimulationParameter(18, 20));
+		parameters.add(new SimulationParameter(20, 22));
+		parameters.add(new SimulationParameter(20, 22));
+		simulator.addPlayer(MoneyOnly.class, parameters);
+
 		simulator.run(new Cursecounter());
 	}
-		
+
 }

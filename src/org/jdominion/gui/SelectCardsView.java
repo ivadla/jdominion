@@ -25,8 +25,8 @@ public class SelectCardsView extends JDialog implements ItemListener {
 	private Map<Checkbox, Card> checkboxCardMapping;
 	private SelectCardsController controller;
 
-	public SelectCardsView(JFrame parent, SelectCardsController controller, String title, final String messageToUser,
-			final List<Card> cards, final List<Card> selectedCards) {
+	public SelectCardsView(JFrame parent, SelectCardsController controller, String title, final String messageToUser, final List<Card> cards,
+			final List<Card> selectedCards) {
 		super(parent, title, false);
 		this.controller = controller;
 		this.addWindowListener(controller);

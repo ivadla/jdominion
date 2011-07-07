@@ -15,8 +15,7 @@ public class CardsDiscarded extends Event {
 	}
 
 	public CardsDiscarded(Player discardingPlayer, List<Card> discardedCards) {
-		super(discardingPlayer.getName() + " discards " + Util.convertCardListToString(discardedCards) + ".",
-				discardingPlayer);
+		super(discardingPlayer.getName() + " discards " + Util.convertCardListToString(discardedCards) + ".", discardingPlayer);
 		this.discardedCards = discardedCards;
 	}
 

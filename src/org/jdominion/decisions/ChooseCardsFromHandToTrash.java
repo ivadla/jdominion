@@ -12,8 +12,7 @@ public class ChooseCardsFromHandToTrash extends ChooseCardsFromHand {
 		super("Choose a Card to Trash", cancelable, minimumNumberOfCards, maximumNumberOfCards, hand);
 	}
 
-	protected ChooseCardsFromHandToTrash(String message, boolean cancelable, int minimumNumberOfCards,
-			int maximumNumberOfCards, Hand hand) {
+	protected ChooseCardsFromHandToTrash(String message, boolean cancelable, int minimumNumberOfCards, int maximumNumberOfCards, Hand hand) {
 		super(message, cancelable, minimumNumberOfCards, maximumNumberOfCards, hand);
 	}
 

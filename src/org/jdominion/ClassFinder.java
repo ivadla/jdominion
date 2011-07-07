@@ -16,8 +16,7 @@ import org.jdominion.remote.RemoteStrategy;
 public class ClassFinder {
 
 	/**
-	 * Scans all classes accessible from the context class loader which belong
-	 * to the given package and subpackages.
+	 * Scans all classes accessible from the context class loader which belong to the given package and subpackages.
 	 * 
 	 * @param packageName
 	 *            The base package
@@ -46,8 +45,7 @@ public class ClassFinder {
 	}
 
 	/**
-	 * Recursive method used to find all classes in a given directory and
-	 * subdirs.
+	 * Recursive method used to find all classes in a given directory and subdirs.
 	 * 
 	 * @param directory
 	 *            The base directory
@@ -77,8 +75,8 @@ public class ClassFinder {
 						// happen, for example, in classes, which depend on
 						// Spring to inject some beans, and which fail,
 						// if dependency is not fulfilled
-						_class = Class.forName(packageName + '.' + fileName.substring(0, fileName.length() - 6), false,
-								Thread.currentThread().getContextClassLoader());
+						_class = Class.forName(packageName + '.' + fileName.substring(0, fileName.length() - 6), false, Thread.currentThread()
+								.getContextClassLoader());
 					}
 					classes.add(_class);
 				} catch (ClassNotFoundException e) {

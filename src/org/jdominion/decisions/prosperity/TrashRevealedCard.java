@@ -9,8 +9,8 @@ import org.jdominion.decisions.YesNoDecision;
 
 public class TrashRevealedCard extends YesNoDecision {
 
-	private Card revealedCard; 
-	
+	private Card revealedCard;
+
 	public Card getRevealedCard() {
 		return revealedCard;
 	}
@@ -22,7 +22,7 @@ public class TrashRevealedCard extends YesNoDecision {
 
 	@Override
 	public void chooseDefaultAnswer(Hand hand, Turn currentTurn, Supply supply) {
-		if(revealedCard.getClass() == Copper.class) {
+		if (revealedCard.getClass() == Copper.class) {
 			setAnswer(true);
 		} else {
 			setAnswer(false);

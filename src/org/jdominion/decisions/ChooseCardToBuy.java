@@ -18,8 +18,7 @@ public class ChooseCardToBuy extends ChooseCardFromSupply {
 	}
 
 	public ChooseCardToBuy(Supply availableCards, int availableBuys, int availableCoins) {
-		super("Please choose a card to buy. You have " + availableBuys + " buys and " + availableCoins + " coins.",
-				availableCards, true);
+		super("Please choose a card to buy. You have " + availableBuys + " buys and " + availableCoins + " coins.", availableCards, true);
 		this.availableBuys = availableBuys;
 		this.availableCoins = availableCoins;
 

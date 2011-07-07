@@ -32,8 +32,7 @@ public class StealFromRevealedCards extends ChooseFromRevealedCards {
 				if (otherCard.getOwner() == card.getOwner()) {
 					if (newOption != Discard.getInstance() && otherCard.getChoosenOption() != Discard.getInstance()) {
 						otherCard.setChoosenOption(Discard.getInstance());
-					} else if (newOption == Discard.getInstance()
-							&& otherCard.getChoosenOption() == Discard.getInstance()) {
+					} else if (newOption == Discard.getInstance() && otherCard.getChoosenOption() == Discard.getInstance()) {
 						otherCard.setChoosenOption(Trash.getInstance());
 					}
 				}
@@ -52,8 +51,7 @@ public class StealFromRevealedCards extends ChooseFromRevealedCards {
 				costOfMostExpensiveCard = -1;
 			}
 			if (revealedCard.getRevealedCard().getCost() > costOfMostExpensiveCard) {
-				if (revealedCard.getOptions().contains(Trash.getInstance())
-						&& revealedCard.getOptions().contains(Gain.getInstance())) {
+				if (revealedCard.getOptions().contains(Trash.getInstance()) && revealedCard.getOptions().contains(Gain.getInstance())) {
 					if (revealedCard.getRevealedCard().getCost() == 0) {
 						changeOption(revealedCard, Trash.getInstance());
 					} else {
@@ -81,8 +79,7 @@ public class StealFromRevealedCards extends ChooseFromRevealedCards {
 						playerHasTrashedOrStolenCard.put(revealedCard.getOwner(), false);
 					}
 				}
-				if (revealedCard.getChoosenOption() == Gain.getInstance()
-						|| revealedCard.getChoosenOption() == Trash.getInstance()) {
+				if (revealedCard.getChoosenOption() == Gain.getInstance() || revealedCard.getChoosenOption() == Trash.getInstance()) {
 					if (playerHasTrashedOrStolenCard.get(revealedCard.getOwner())) {
 						return false;
 					} else {

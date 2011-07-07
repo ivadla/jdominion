@@ -19,8 +19,7 @@ public class MultipleChoiceController implements ActionListener {
 	private JFrame parent;
 	private String userMessage;
 
-	public MultipleChoiceController(JFrame parent, String userMessage, boolean cancelable, int minAnswers,
-			int maxAnswers, List<Choice> choices) {
+	public MultipleChoiceController(JFrame parent, String userMessage, boolean cancelable, int minAnswers, int maxAnswers, List<Choice> choices) {
 		this.choices = choices;
 		this.parent = parent;
 		this.userMessage = userMessage;

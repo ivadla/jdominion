@@ -21,8 +21,7 @@ public class MoneyOnly extends GenericAI {
 	private int coinsToHaveBeforeFirstDuchy;
 	private int coinsToHaveBeforeFirstEstate;
 
-	public MoneyOnly(int coinsToHaveBeforeFirstProvince, int coinsToHaveBeforeFirstDuchy,
-			int coinsToHaveBeforeFirstEstate) {
+	public MoneyOnly(int coinsToHaveBeforeFirstProvince, int coinsToHaveBeforeFirstDuchy, int coinsToHaveBeforeFirstEstate) {
 		this.coinsToHaveBeforeFirstProvince = coinsToHaveBeforeFirstProvince;
 		this.coinsToHaveBeforeFirstDuchy = coinsToHaveBeforeFirstDuchy;
 		this.coinsToHaveBeforeFirstEstate = coinsToHaveBeforeFirstEstate;
@@ -33,11 +32,11 @@ public class MoneyOnly extends GenericAI {
 		// of winning starting to buy a province when we have 19 coins results
 		// in ~16.773 turns for 4 provinces. Other values for this case:
 		// value avg.turns
-		// 16	16,789707
-		// 17	16,786658
-		// 18	16,779344
-		// 19	16,773033
-		// 20	16,781988
+		// 16 16,789707
+		// 17 16,786658
+		// 18 16,779344
+		// 19 16,773033
+		// 20 16,781988
 
 		this(19, 1000, 1000);
 	}

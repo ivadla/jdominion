@@ -16,9 +16,9 @@ public interface IStrategy {
 	public void setPlayer(Player player);
 
 	public String getName();
-	
+
 	public List<Class<? extends Card>> getNeededCards();
-	
+
 	public boolean canWorkWithSupply(Supply supply);
 
 	public void gameStarted(Game game);
