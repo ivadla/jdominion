@@ -44,6 +44,8 @@ Ideas/TODO:
     - gain
     - reveal
     - set aside
+    - put on top of your deck
     - pass? (probably not needed, it can be implemented in the effect for
       masquerade)
     - in play(not sure where to put that and which paramters it needs) 
+- use CardClassInfo in more places (e.g. cardpile/supply)   
