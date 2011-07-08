@@ -35,3 +35,15 @@ Ideas/TODO:
   setanswer has to be called. Look for a better way
 - use a typesafe way to check which button was pressed in the actionPerformed
   methods(we could use one anonymous inner class per button)
+- the player class should have methods for some terms which behave exactly as defined in
+  the rules (some of them already exist, but we have to verify if they to the
+  right thing). We need methods for the following things:
+    - look at
+    - discard
+    - trash
+    - gain
+    - reveal
+    - set aside
+    - pass? (probably not needed, it can be implemented in the effect for
+      masquerade)
+    - in play(not sure where to put that and which paramters it needs) 
