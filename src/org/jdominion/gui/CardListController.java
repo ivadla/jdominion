@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jdominion.Card;
+import org.jdominion.CardList;
 
 public abstract class CardListController implements MouseListener, ActionListener {
 
@@ -31,9 +31,9 @@ public abstract class CardListController implements MouseListener, ActionListene
 	}
 
 	public void update() {
-		List<Card> newCards = getCardList();
+		CardList newCards = getCardList();
 
-		if (Collections.disjoint(newCards, currentlyDisplayedCards.keySet())) {
+		if (newCards.disjoint(currentlyDisplayedCards.keySet())) {
 			replaceCardsInView(newCards);
 		} else {
 			removeOldCards(newCards);
@@ -46,7 +46,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 	 * 
 	 * @param newCards
 	 */
-	private void addNewCards(List<Card> newCards) {
+	private void addNewCards(CardList newCards) {
 		for (Card newCard : newCards) {
 			if (!currentlyDisplayedCards.containsKey(newCard)) {
 				addCardToView(newCard);
@@ -59,7 +59,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 	 * 
 	 * @param newCards
 	 */
-	private void removeOldCards(List<Card> newCards) {
+	private void removeOldCards(CardList newCards) {
 		Entry<Card, CardImage> entry;
 		for (Iterator<Entry<Card, CardImage>> iterator = currentlyDisplayedCards.entrySet().iterator(); iterator.hasNext();) {
 			entry = iterator.next();
@@ -75,7 +75,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 	 * 
 	 * @param newCards
 	 */
-	private void replaceCardsInView(List<Card> newCards) {
+	private void replaceCardsInView(CardList newCards) {
 		currentlyDisplayedCards = new HashMap<Card, CardImage>();
 		List<CardImage> newCardimages = new ArrayList<CardImage>();
 		for (Card card : newCards) {
@@ -98,7 +98,7 @@ public abstract class CardListController implements MouseListener, ActionListene
 		return cardImage;
 	}
 
-	protected abstract List<Card> getCardList();
+	protected abstract CardList getCardList();
 
 	public synchronized Card chooseCard() {
 		this.choosenCard = null;

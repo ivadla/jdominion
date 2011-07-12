@@ -1,37 +1,33 @@
 package org.jdominion.extraGameData;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.jdominion.CardList;
 
-import org.jdominion.Card;
-import org.jdominion.Util;
+public class ExtraGameDataCardList extends ExtraGameData<CardList> {
 
-public class ExtraGameDataCardList extends ExtraGameData<List<Card>> {
-
-	private List<Card> cards;
+	private CardList cards;
 
 	public ExtraGameDataCardList(String name, boolean isVisibleByAllPlayers) {
 		super(name, isVisibleByAllPlayers);
-		cards = new ArrayList<Card>();
+		cards = new CardList();
 	}
 
 	@Override
-	public void add(List<Card> data) {
+	public void add(CardList data) {
 		cards.addAll(data);
 	}
 
 	@Override
-	public List<Card> get() {
+	public CardList get() {
 		return cards;
 	}
 
 	@Override
 	public String getContentsAsString() {
-		return Util.convertCardListToString(cards);
+		return cards.convertToString();
 	}
 
 	@Override
-	public void set(List<Card> data) {
+	public void set(CardList data) {
 		assert cards.isEmpty() : "Possible losing track of cards " + getContentsAsString();
 		this.cards = data;
 	}

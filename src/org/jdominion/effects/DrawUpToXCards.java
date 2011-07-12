@@ -1,9 +1,7 @@
 package org.jdominion.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -22,14 +20,14 @@ public class DrawUpToXCards extends CardEffectAction {
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
-		List<Card> setAsideCards = new ArrayList<Card>();
+		CardList setAsideCards = new CardList();
 		while (activePlayer.getHandSize() < this.maxCardsInHand) {
-			List<Card> revealedCards = activePlayer.revealCards(1);
+			CardList revealedCards = activePlayer.revealCards(1);
 			if (revealedCards.isEmpty()) { // no cards left to draw
 				break;
 			}
 
-			Card revealedCard = revealedCards.get(0);
+			Card revealedCard = revealedCards.getFirst();
 
 			if (revealedCard.isOfType(Type.ACTION) && this.canSetAsideActionCards) {
 				PutInHand decision = new PutInHand(revealedCard);

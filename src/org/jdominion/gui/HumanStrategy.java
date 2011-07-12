@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Game;
 import org.jdominion.Hand;
 import org.jdominion.IPlayer;
@@ -80,9 +81,9 @@ public class HumanStrategy implements IStrategy {
 	}
 
 	public void decide(ChooseCardsFromHand decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
-		List<Card> choosenCards;
+		CardList choosenCards;
 		do {
-			choosenCards = new ArrayList<Card>();
+			choosenCards = new CardList();
 			for (int i = 0; i < decision.getMaximumNumberOfCards(); i++) {
 				Card choosenCard = mainWindow.chooseCardFromHand(decision.getUserMessage(), i >= decision.getMinimumNumberOfCards() || decision.isCancelable());
 				if (choosenCard == null) {

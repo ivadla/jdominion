@@ -26,7 +26,7 @@ public class Turn implements Serializable {
 	private Player activePlayer;
 	private Game game;
 
-	private List<Card> playedCards = new ArrayList<Card>();
+	private CardList playedCards = new CardList();
 
 	public int getTurnNumber() {
 		return turnNumber;
@@ -75,11 +75,11 @@ public class Turn implements Serializable {
 		return game;
 	}
 
-	public List<Card> getPlayedCards() {
+	public CardList getPlayedCards() {
 		return playedCards;
 	}
 
-	public List<Card> getCardsInPlay() {
+	public CardList getCardsInPlay() {
 		// TODO: this should be different with duration cards
 		return playedCards;
 	}
@@ -126,7 +126,7 @@ public class Turn implements Serializable {
 			if (playDecision.isCanceled()) {
 				return;
 			}
-			Card choosenCard = playDecision.getAnswer().get(0);
+			Card choosenCard = playDecision.getAnswer().getFirst();
 			assert choosenCard.isOfType(Card.Type.ACTION);
 			this.availableActions--;
 			this.playedCards.add(choosenCard);
@@ -140,7 +140,7 @@ public class Turn implements Serializable {
 	}
 
 	private void playBasicTreasureCards(Player activePlayer, Supply supply) {
-		for (Card cardInHand : new ArrayList<Card>(activePlayer.getHand().getCardList())) {
+		for (Card cardInHand : new CardList(activePlayer.getHand().getCardList())) {
 			if (isBasicTreasureCard(cardInHand)) {
 				this.playedCards.add(cardInHand);
 				activePlayer.playCard(cardInHand, this, supply);
@@ -159,7 +159,7 @@ public class Turn implements Serializable {
 			if (playDecision.isCanceled()) {
 				return;
 			}
-			Card choosenCard = playDecision.getAnswer().get(0);
+			Card choosenCard = playDecision.getAnswer().getFirst();
 			assert choosenCard.isOfType(Card.Type.TREASURE);
 			this.playedCards.add(choosenCard);
 			activePlayer.playCard(choosenCard, this, supply);

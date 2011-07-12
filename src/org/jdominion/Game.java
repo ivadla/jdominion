@@ -27,7 +27,7 @@ public class Game implements Serializable, ICurrentTurn {
 	private List<Player> winners = null;
 	private int turnCounter = 0;
 	private Turn currentTurn = null;
-	private List<Card> trash;
+	private CardList trash;
 	private Map<Class<? extends ExtraGameData<?>>, ExtraGameData<?>> extraGameData;
 
 	private void setPlayers(List<Player> players) {
@@ -63,7 +63,7 @@ public class Game implements Serializable, ICurrentTurn {
 		return currentTurn;
 	}
 
-	public void addCardsToTrash(List<Card> cardsToTrash) {
+	public void addCardsToTrash(CardList cardsToTrash) {
 		this.trash.addAll(cardsToTrash);
 	}
 
@@ -71,7 +71,7 @@ public class Game implements Serializable, ICurrentTurn {
 		this.trash.remove(cardToRemove);
 	}
 
-	public List<Card> getTrash() {
+	public CardList getTrash() {
 		return trash;
 	}
 
@@ -91,7 +91,7 @@ public class Game implements Serializable, ICurrentTurn {
 	public Game(List<Player> players, Supply supply) {
 		this.setPlayers(players);
 		this.supply = supply;
-		this.trash = new ArrayList<Card>();
+		this.trash = new CardList();
 		this.extraGameData = new HashMap<Class<? extends ExtraGameData<?>>, ExtraGameData<?>>();
 	}
 

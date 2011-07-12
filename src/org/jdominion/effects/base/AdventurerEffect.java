@@ -1,9 +1,7 @@
 package org.jdominion.effects.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -20,12 +18,12 @@ public class AdventurerEffect extends CardEffectAction {
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
-		List<Card> revealedTreasureCards = new ArrayList<Card>();
-		List<Card> otherRevealedCards = new ArrayList<Card>();
+		CardList revealedTreasureCards = new CardList();
+		CardList otherRevealedCards = new CardList();
 		while (revealedTreasureCards.size() < treasureCardsToReveal) {
-			List<Card> revealedCards = activePlayer.revealCards(1);
+			CardList revealedCards = activePlayer.revealCards(1);
 			if (revealedCards.size() == 1) {
-				if (revealedCards.get(0).isOfType(Card.Type.TREASURE)) {
+				if (revealedCards.getFirst().isOfType(Card.Type.TREASURE)) {
 					revealedTreasureCards.addAll(revealedCards);
 				} else {
 					otherRevealedCards.addAll(revealedCards);

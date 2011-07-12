@@ -1,21 +1,18 @@
 package org.jdominion.event;
 
-import java.util.List;
-
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
-import org.jdominion.Util;
 
 public class CardsTrashed extends Event {
 
-	private List<Card> trashedCards;
+	private CardList trashedCards;
 
-	public List<Card> getTrashedCards() {
+	public CardList getTrashedCards() {
 		return trashedCards;
 	}
 
-	public CardsTrashed(Player cardsOwner, List<Card> trashedCards) {
-		super(cardsOwner.getName() + " trashes " + Util.convertCardListToString(trashedCards) + ".", cardsOwner);
+	public CardsTrashed(Player cardsOwner, CardList trashedCards) {
+		super(cardsOwner.getName() + " trashes " + trashedCards.convertToString() + ".", cardsOwner);
 		this.trashedCards = trashedCards;
 	}
 

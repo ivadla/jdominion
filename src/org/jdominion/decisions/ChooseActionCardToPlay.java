@@ -1,10 +1,9 @@
 package org.jdominion.decisions;
 
-import java.util.List;
-
 import org.jdominion.Card;
-import org.jdominion.Card.Type;
+import org.jdominion.CardList;
 import org.jdominion.Hand;
+import org.jdominion.Card.Type;
 
 public class ChooseActionCardToPlay extends ChooseCardsFromHand {
 
@@ -17,9 +16,9 @@ public class ChooseActionCardToPlay extends ChooseCardsFromHand {
 	}
 
 	@Override
-	public boolean isValidAnswer(List<Card> answer) {
+	public boolean isValidAnswer(CardList answer) {
 		if (super.isValidAnswer(answer)) {
-			if (answer.size() == 1 && answer.get(0).isOfType(Type.ACTION)) {
+			if (answer.size() == 1 && answer.getFirst().isOfType(Type.ACTION)) {
 				return true;
 			}
 		}

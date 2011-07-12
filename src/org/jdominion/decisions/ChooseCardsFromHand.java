@@ -1,14 +1,12 @@
 package org.jdominion.decisions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Hand;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 
-public abstract class ChooseCardsFromHand extends Decision<List<Card>> {
+public abstract class ChooseCardsFromHand extends Decision<CardList> {
 
 	private int minimumNumberOfCards;
 	private int maximumNumberOfCards;
@@ -23,11 +21,11 @@ public abstract class ChooseCardsFromHand extends Decision<List<Card>> {
 	}
 
 	public boolean addAnswer(Card choosenCard) {
-		List<Card> choosenCards;
+		CardList choosenCards;
 		if (isAnswered()) {
-			choosenCards = new ArrayList<Card>(getAnswer());
+			choosenCards = new CardList(getAnswer());
 		} else {
-			choosenCards = new ArrayList<Card>();
+			choosenCards = new CardList();
 		}
 		choosenCards.add(choosenCard);
 		if (isValidAnswer(choosenCards)) {
@@ -45,7 +43,7 @@ public abstract class ChooseCardsFromHand extends Decision<List<Card>> {
 	}
 
 	@Override
-	public boolean isValidAnswer(List<Card> answer) {
+	public boolean isValidAnswer(CardList answer) {
 		if (answer.size() < minimumNumberOfCards) {
 			return false;
 		}
@@ -70,9 +68,9 @@ public abstract class ChooseCardsFromHand extends Decision<List<Card>> {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void chooseDefaultAnswer(Hand hand, Turn currentTurn, Supply supply) {
-		List<Card> choosenCards = new ArrayList<Card>();
+		CardList choosenCards = new CardList();
 		Hand copyOfHand = new Hand();
-		copyOfHand.set(new ArrayList<Card>(hand.getCardList()));
+		copyOfHand.set(new CardList(hand.getCardList()));
 		for (int i = 0; i < getMinimumNumberOfCards(); i++) {
 			Card choosenCard = chooseCardForDefaultAnswer(copyOfHand);
 			choosenCards.add(choosenCard);

@@ -1,8 +1,6 @@
 package org.jdominion.gui;
 
-import java.util.List;
-
-import org.jdominion.Card;
+import org.jdominion.CardList;
 
 public class PlayAreaController extends CardListController {
 
@@ -13,7 +11,7 @@ public class PlayAreaController extends CardListController {
 	}
 
 	@Override
-	protected List<Card> getCardList() {
+	protected CardList getCardList() {
 		return this.guiInformationSource.getPlayArea();
 	}
 

@@ -11,14 +11,14 @@ public class CardPile implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Card> cards;
+	private CardList cards;
 
-	public CardPile(List<Card> cards) {
+	public CardPile(CardList cards) {
 		this.cards = cards;
 	}
 
 	public CardPile(Class<? extends Card> cardClass, int numberOfCardsInPile) throws InstantiationException, IllegalAccessException {
-		cards = new ArrayList<Card>();
+		cards = new CardList();
 		for (int i = 0; i < numberOfCardsInPile; i++) {
 			cards.add(cardClass.newInstance());
 		}
@@ -28,26 +28,26 @@ public class CardPile implements Serializable {
 		if (cards.isEmpty()) {
 			return null;
 		}
-		return cards.get(0).getClass();
+		return cards.getFirst().getClass();
 	}
 
 	public String getCardName() {
 		if (cards.isEmpty()) {
 			return null;
 		}
-		return cards.get(0).getName();
+		return cards.getFirst().getName();
 	}
 
 	public int getCardCost() {
 		assert !cards.isEmpty();
-		return cards.get(0).getCost();
+		return cards.getFirst().getCost();
 	}
 
 	public List<CardEffect> getCardEffects() {
 		if (cards.isEmpty()) {
 			return new ArrayList<CardEffect>();
 		}
-		return cards.get(0).getEffects();
+		return cards.getFirst().getEffects();
 	}
 
 	public int getNumberOfCardsInPile() {
@@ -56,11 +56,13 @@ public class CardPile implements Serializable {
 
 	public boolean isOfType(Card.Type type) {
 		assert !cards.isEmpty();
-		return cards.get(0).isOfType(type);
+		return cards.getFirst().isOfType(type);
 	}
 
 	public Card takeCard() {
 		assert !cards.isEmpty();
-		return cards.remove(0);
+		Card card = cards.getFirst();
+		cards.remove(card);
+		return card;
 	}
 }

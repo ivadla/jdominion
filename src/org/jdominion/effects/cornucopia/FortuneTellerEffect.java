@@ -1,9 +1,7 @@
 package org.jdominion.effects.cornucopia;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -15,7 +13,7 @@ public class FortuneTellerEffect extends CardEffectSimpleAttack {
 	@Override
 	protected void attackPlayer(Player playerToAttack, Turn currentTurn, Supply supply) {
 
-		List<Card> setAsideCards = new ArrayList<Card>();
+		CardList setAsideCards = new CardList();
 		while ((playerToAttack.getDeckSize() + playerToAttack.getDiscardPileSize()) > 0) {
 			Card revealedCard = playerToAttack.revealCard();
 			if (revealedCard.isOfType(Type.VICTORY) || revealedCard.isOfType(Type.CURSE)) {

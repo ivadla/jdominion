@@ -19,7 +19,7 @@ public class ThroneRoomEffect extends CardEffectAction {
 		ChooseActionCardToPlay decision = new ChooseActionCardToPlay(activePlayer.getHand(), false);
 		activePlayer.decide(decision, this);
 		assert decision.getAnswer().size() == 1;
-		Card choosenCard = decision.getAnswer().get(0);
+		Card choosenCard = decision.getAnswer().getFirst();
 		assert choosenCard.isOfType(Type.ACTION);
 		currentTurn.getPlayedCards().add(choosenCard);
 		activePlayer.playCard(choosenCard, currentTurn, supply);

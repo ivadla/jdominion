@@ -1,8 +1,6 @@
 package org.jdominion;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Hand implements Serializable {
 
@@ -10,7 +8,7 @@ public class Hand implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Card> cardsInHand = new ArrayList<Card>();
+	private CardList cardsInHand = new CardList();
 
 	/**
 	 * Don't call this method directly use player.addCardsToHand instead
@@ -18,14 +16,14 @@ public class Hand implements Serializable {
 	 * @param Cards
 	 *            to add to the hand
 	 */
-	public void addAll(List<Card> cards) {
+	public void addAll(CardList cards) {
 		cardsInHand.addAll(cards);
 	}
 
-	public List<Card> getCardList() {
+	public CardList getCardList() {
 		// return a new list to hopefully prevent ConcurrentModificationException
 		// additionally it prevents messing with the hand contents
-		return new ArrayList<Card>(cardsInHand);
+		return new CardList(cardsInHand);
 	}
 
 	/**
@@ -34,7 +32,7 @@ public class Hand implements Serializable {
 	 * @deprecated
 	 * @param newHandCards
 	 */
-	public void set(List<Card> newHandCards) {
+	public void set(CardList newHandCards) {
 		assert cardsInHand.isEmpty() : "Hand has to be empty to prevent the loss of cards";
 		cardsInHand = newHandCards;
 	}
@@ -114,8 +112,8 @@ public class Hand implements Serializable {
 		return cheapestCard;
 	}
 
-	public List<Card> getCardsOfType(Card.Type type) {
-		List<Card> cardsOfType = new ArrayList<Card>();
+	public CardList getCardsOfType(Card.Type type) {
+		CardList cardsOfType = new CardList();
 		for (Card card : getCardList()) {
 			if (card.isOfType(type)) {
 				cardsOfType.add(card);

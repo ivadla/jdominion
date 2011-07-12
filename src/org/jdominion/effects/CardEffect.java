@@ -1,9 +1,9 @@
 package org.jdominion.effects;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Game;
 import org.jdominion.Player;
 import org.jdominion.Supply;
@@ -35,7 +35,7 @@ public abstract class CardEffect implements Serializable {
 
 	public abstract boolean execute(Player activePlayer, Turn currentTurn, Supply supply);
 
-	public abstract int getVictoryPoints(Player owner, List<Card> allCardsOfPlayer);
+	public abstract int getVictoryPoints(Player owner, CardList allCardsOfPlayer);
 
 	public abstract int getCoins();
 

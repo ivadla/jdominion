@@ -1,21 +1,18 @@
 package org.jdominion.event;
 
-import java.util.List;
-
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
-import org.jdominion.Util;
 
 public class CardsSetAside extends Event {
 
-	private List<Card> cardsSetAside;
+	private CardList cardsSetAside;
 
-	public List<Card> getCardsSetAside() {
+	public CardList getCardsSetAside() {
 		return cardsSetAside;
 	}
 
-	public CardsSetAside(Player cardOwner, List<Card> cardsSetAside) {
-		super(cardOwner.getName() + " sets " + Util.convertCardListToString(cardsSetAside) + " aside.", cardOwner);
+	public CardsSetAside(Player cardOwner, CardList cardsSetAside) {
+		super(cardOwner.getName() + " sets " + cardsSetAside.convertToString() + " aside.", cardOwner);
 		this.cardsSetAside = cardsSetAside;
 	}
 

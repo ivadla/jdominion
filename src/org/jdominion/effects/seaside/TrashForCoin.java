@@ -18,7 +18,7 @@ public class TrashForCoin extends CardEffectAction {
 		activePlayer.decide(trashDecision, this);
 
 		assert trashDecision.getAnswer().size() == 1;
-		Card cardToTrash = trashDecision.getAnswer().get(0);
+		Card cardToTrash = trashDecision.getAnswer().getFirst();
 		assert cardToTrash != null;
 
 		if (cardToTrash.getCost() > 0) {

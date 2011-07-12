@@ -1,14 +1,18 @@
 package org.jdominion;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Deque;
 import java.util.List;
 
 import org.jdominion.Card.Type;
-import org.jdominion.cards.common.*;
+import org.jdominion.cards.common.Copper;
+import org.jdominion.cards.common.Curse;
+import org.jdominion.cards.common.Duchy;
+import org.jdominion.cards.common.Estate;
+import org.jdominion.cards.common.Gold;
+import org.jdominion.cards.common.Province;
+import org.jdominion.cards.common.Silver;
 
 public class CardFactory {
 
@@ -106,15 +110,15 @@ public class CardFactory {
 		}
 	}
 
-	public static Deque<Card> createInitialDeck() {
-		List<Card> deck = new ArrayList<Card>();
+	public static Deck createInitialDeck() {
+		Deck deck = new Deck();
 		for (int i = 0; i < 7; i++) {
 			deck.add(new Copper());
 		}
 		for (int i = 0; i < 3; i++) {
 			deck.add(new Estate());
 		}
-		Collections.shuffle(deck);
-		return new ArrayDeque<Card>(deck);
+		deck.shuffle();
+		return deck;
 	}
 }

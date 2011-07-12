@@ -1,8 +1,6 @@
 package org.jdominion.effects.base;
 
-import java.util.List;
-
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -17,7 +15,7 @@ public class DiscardDeckEffect extends CardEffectAction {
 		activePlayer.decide(decision, this);
 
 		if (decision.getAnswer()) {
-			List<Card> deck = activePlayer.getCardsFromDeck(activePlayer.getDeckSize());
+			CardList deck = activePlayer.getCardsFromDeck(activePlayer.getDeckSize());
 			activePlayer.placeOnDiscardPile(deck);
 		}
 

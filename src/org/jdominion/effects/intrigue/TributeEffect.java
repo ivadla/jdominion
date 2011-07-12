@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -13,15 +14,24 @@ public class TributeEffect extends CardEffectAction {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		Player nextPlayer = currentTurn.getNextPlayer();
-		List<Card> revealedCards = nextPlayer.revealCards(2);
+		CardList revealedCards = nextPlayer.revealCards(2);
 		if (revealedCards.isEmpty()) {
 			return false;
 		}
-		List<Card.Type> typesOfRevealedCards = new ArrayList<Card.Type>(revealedCards.get(0).getTypes());
-		if (revealedCards.size() == 2 && !revealedCards.get(0).getClass().equals(revealedCards.get(1).getClass())) {
-			typesOfRevealedCards.addAll(revealedCards.get(1).getTypes());
+		List<Class<? extends Card>> alreadyProcessedCards = new ArrayList<Class<? extends Card>>();
+		for (Card revealedCard : revealedCards) {
+			if (!alreadyProcessedCards.contains(revealedCard.getClass())) {
+				processTypes(activePlayer, currentTurn, revealedCard);
+				alreadyProcessedCards.add(revealedCard.getClass());
+			}
 		}
-		for (Card.Type cardType : typesOfRevealedCards) {
+
+		nextPlayer.placeOnDiscardPile(revealedCards);
+		return true;
+	}
+
+	private void processTypes(Player activePlayer, Turn currentTurn, Card revealedCard) {
+		for (Card.Type cardType : revealedCard.getTypes()) {
 			switch (cardType) {
 			case ACTION:
 				currentTurn.addActions(2);
@@ -36,7 +46,5 @@ public class TributeEffect extends CardEffectAction {
 				break;
 			}
 		}
-		nextPlayer.placeOnDiscardPile(revealedCards);
-		return true;
 	}
 }

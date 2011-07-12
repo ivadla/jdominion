@@ -1,9 +1,6 @@
 package org.jdominion.effects.seaside;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -15,7 +12,7 @@ public class DiscardCopper extends CardEffectSimpleAttack {
 	@Override
 	protected void attackPlayer(Player playerToAttack, Turn currentTurn, Supply supply) {
 		if (playerToAttack.getHand().contains(Copper.class)) {
-			List<Card> cardsToDiscard = new ArrayList<Card>();
+			CardList cardsToDiscard = new CardList();
 			cardsToDiscard.add(playerToAttack.getHand().getCardByClass(Copper.class));
 			playerToAttack.discardCardsFromHand(cardsToDiscard);
 		}

@@ -3,7 +3,7 @@ package org.jdominion.effects.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -22,12 +22,12 @@ public class DiscardTopCard extends CardEffectAttack {
 		List<RevealedCard> revealedCards = new ArrayList<RevealedCard>();
 		for (Player player : currentTurn.getGame().getPlayers()) {
 			if ((player == activePlayer) || !Attack.isBlocked(player, activePlayer, this, currentTurn, supply)) {
-				List<Card> cardList = player.revealCards(1);
+				CardList cardList = player.revealCards(1);
 				if (cardList.size() == 1) {
 					List<Option> optionList = new ArrayList<Option>();
 					optionList.add(PutOnDeck.getInstance());
 					optionList.add(Discard.getInstance());
-					revealedCards.add(new RevealedCard(cardList.get(0), player, optionList));
+					revealedCards.add(new RevealedCard(cardList.getFirst(), player, optionList));
 				}
 			}
 		}

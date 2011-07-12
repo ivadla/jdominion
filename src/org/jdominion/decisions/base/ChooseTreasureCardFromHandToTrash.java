@@ -26,7 +26,7 @@ public class ChooseTreasureCardFromHandToTrash extends ChooseCardsFromHandToTras
 			}
 		}
 		assert false : "There are no treasure cards in the hand";
-		return hand.getCardList().get(0);
+		return hand.getCardList().getFirst();
 	}
 
 	@Override

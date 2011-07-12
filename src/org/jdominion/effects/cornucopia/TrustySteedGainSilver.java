@@ -1,8 +1,6 @@
 package org.jdominion.effects.cornucopia;
 
-import java.util.List;
-
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -20,7 +18,7 @@ public class TrustySteedGainSilver extends CardEffectAction {
 		}
 
 		// discard deck
-		List<Card> deck = activePlayer.getCardsFromDeck(activePlayer.getDeckSize());
+		CardList deck = activePlayer.getCardsFromDeck(activePlayer.getDeckSize());
 		activePlayer.placeOnDiscardPile(deck);
 
 		return true;

@@ -4,10 +4,6 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Deque;
 import java.util.List;
 
 import org.jdominion.aiStrategies.IStrategy;
@@ -38,9 +34,9 @@ public class Player implements Serializable, IPlayer {
 	private String name;
 	private Hand hand;
 	private Game game;
-	private Deque<Card> deck;
-	private List<Card> discardPile;
-	private List<Card> cardsSetAside;
+	private Deck deck;
+	private CardList discardPile;
+	private CardList cardsSetAside;
 	private int turnCounter = 0;
 
 	private final IStrategy strategy;
@@ -51,18 +47,18 @@ public class Player implements Serializable, IPlayer {
 		strategy = null;
 	}
 
-	public Player(String name, Deque<Card> deck, IStrategy strategy) {
+	public Player(String name, Deck deck, IStrategy strategy) {
 		this.name = name;
 		this.deck = deck;
 		this.strategy = strategy;
 		this.strategy.setPlayer(this);
-		discardPile = new ArrayList<Card>();
+		discardPile = new CardList();
 		this.hand = new Hand();
-		this.cardsSetAside = new ArrayList<Card>();
+		this.cardsSetAside = new CardList();
 		drawNewHand();
 	}
 
-	public Player(int id, String name, Deque<Card> deck, IStrategy strategy) {
+	public Player(int id, String name, Deck deck, IStrategy strategy) {
 		this(name, deck, strategy);
 		this.id = id;
 	}
@@ -95,7 +91,7 @@ public class Player implements Serializable, IPlayer {
 		return discardPile.size();
 	}
 
-	public List<Card> getCardsSetAside() {
+	public CardList getCardsSetAside() {
 		return cardsSetAside;
 	}
 
@@ -111,31 +107,27 @@ public class Player implements Serializable, IPlayer {
 		return hand.contains(Card.Type.ACTION);
 	}
 
-	public List<Card> getCardsFromDeck(int numberOfCardsToGet) {
+	public CardList getCardsFromDeck(int numberOfCardsToGet) {
 		return drawCards(numberOfCardsToGet);
 	}
 
 	public Card revealCard() {
-		List<Card> cardsToReveal = revealCards(1);
-		if (cardsToReveal.size() == 1) {
-			return cardsToReveal.get(0);
-		}
-		return null;
+		return revealCards(1).getFirst();
 	}
 
-	public List<Card> revealCards(int numberOfCardsToReveal) {
-		List<Card> cardsToReveal = drawCards(numberOfCardsToReveal);
+	public CardList revealCards(int numberOfCardsToReveal) {
+		CardList cardsToReveal = drawCards(numberOfCardsToReveal);
 		EventManager.getInstance().handleEvent(new CardsRevealed(this, cardsToReveal));
 		return cardsToReveal;
 	}
 
 	public void revealCardFromHand(Card card) {
-		List<Card> cardList = new ArrayList<Card>();
+		CardList cardList = new CardList();
 		cardList.add(card);
 		revealCardsFromHand(cardList);
 	}
 
-	public void revealCardsFromHand(List<Card> cardsToReveal) {
+	public void revealCardsFromHand(CardList cardsToReveal) {
 		for (Card card : cardsToReveal) {
 			assert hand.contains(card);
 		}
@@ -147,13 +139,13 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void drawCardsIntoHand(int numberOfCardsToDraw) {
-		List<Card> drawnCards = drawCards(numberOfCardsToDraw);
+		CardList drawnCards = drawCards(numberOfCardsToDraw);
 		addCardsToHand(drawnCards);
 		EventManager.getInstance().handleEvent(new CardsDrawn(this, drawnCards.size()));
 	}
 
-	private List<Card> drawCards(int numberOfCardsToDraw) {
-		List<Card> cards = new ArrayList<Card>();
+	private CardList drawCards(int numberOfCardsToDraw) {
+		CardList cards = new CardList();
 		for (int i = 0; i < numberOfCardsToDraw; i++) {
 			Card card = drawCard();
 			if (card != null) {
@@ -167,7 +159,7 @@ public class Player implements Serializable, IPlayer {
 		if (deck.size() == 0) {
 			shuffleDeck();
 		}
-		return deck.pollFirst();
+		return deck.getTopCard();
 	}
 
 	public void drawNewHand() {
@@ -176,13 +168,13 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void addCardToHand(Card card) {
-		List<Card> cards = new ArrayList<Card>();
+		CardList cards = new CardList();
 		cards.add(card);
 		addCardsToHand(cards);
 	}
 
 	// TODO: make an event for this
-	public void addCardsToHand(List<Card> cards) {
+	public void addCardsToHand(CardList cards) {
 		removeCardsFromOtherPlaces(cards);
 		hand.addAll(cards);
 		for (Card card : cards) {
@@ -197,13 +189,14 @@ public class Player implements Serializable, IPlayer {
 
 	private void shuffleDeck() {
 
-		Collections.shuffle(discardPile);
-		deck = new ArrayDeque<Card>(discardPile);
-		discardPile = new ArrayList<Card>();
+		assert deck.isEmpty();
+		deck.addAll(discardPile);
+		deck.shuffle();
+		discardPile = new CardList();
 
 	}
 
-	public void discardCardsFromHand(List<Card> cardsToDiscard) {
+	public void discardCardsFromHand(CardList cardsToDiscard) {
 		for (Card card : cardsToDiscard) {
 			assert hand.contains(card);
 			removeCardFromHand(card);
@@ -214,12 +207,12 @@ public class Player implements Serializable, IPlayer {
 
 	public void placeOnDiscardPile(Card card) {
 		discardPile.add(card);
-		// List<Card> discardedCards = new ArrayList<Card>();
+		// CardList discardedCards = new CardList();
 		// discardedCards.add(card);
 		// getEventObserver().discardsCards(this, discardedCards);
 	}
 
-	public void placeOnDiscardPile(List<Card> cards) {
+	public void placeOnDiscardPile(CardList cards) {
 		discardPile.addAll(cards);
 		// getEventObserver().discardsCards(this, cards);
 	}
@@ -228,11 +221,11 @@ public class Player implements Serializable, IPlayer {
 		if (hand.contains(card)) {
 			removeCardFromHand(card);
 		}
-		deck.push(card);
+		deck.putOnTop(card);
 	}
 
 	// TODO: use this in more places
-	private void removeCardsFromOtherPlaces(List<Card> cards) {
+	private void removeCardsFromOtherPlaces(CardList cards) {
 		for (Card card : cards) {
 			if (this.cardsSetAside.contains(card)) {
 				this.cardsSetAside.remove(card);
@@ -244,18 +237,18 @@ public class Player implements Serializable, IPlayer {
 				this.discardPile.remove(card);
 			}
 			if (this.deck.contains(card)) {
-				this.deck.removeFirstOccurrence(card);
+				this.deck.remove(card);
 			}
 		}
 	}
 
 	public void trashCard(Card cardToTrash, Game game) {
-		List<Card> cardList = new ArrayList<Card>();
+		CardList cardList = new CardList();
 		cardList.add(cardToTrash);
 		trashCards(cardList, game);
 	}
 
-	public void trashCards(List<Card> cardsToTrash, Game game) {
+	public void trashCards(CardList cardsToTrash, Game game) {
 		for (Card cardToTrash : cardsToTrash) {
 			cardToTrash.setOwner(null);
 			if (hand.contains(cardToTrash)) {
@@ -305,13 +298,13 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void setCardAside(Card card) {
-		EventManager.getInstance().handleEvent(new CardsSetAside(this, Util.createCardList(card)));
+		EventManager.getInstance().handleEvent(new CardsSetAside(this, new CardList(card)));
 		this.cardsSetAside.add(card);
-		removeCardsFromOtherPlaces(Util.createCardList(card));
+		removeCardsFromOtherPlaces(new CardList(card));
 	}
 
-	private List<Card> getListOfAllCards(Turn currentTurn) {
-		List<Card> list = new ArrayList<Card>();
+	private CardList getListOfAllCards(Turn currentTurn) {
+		CardList list = new CardList();
 		list.addAll(deck);
 		list.addAll(hand.getCardList());
 		list.addAll(discardPile);

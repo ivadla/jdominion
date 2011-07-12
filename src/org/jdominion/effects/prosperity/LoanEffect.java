@@ -1,9 +1,7 @@
 package org.jdominion.effects.prosperity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -19,12 +17,12 @@ public class LoanEffect extends CardEffectTreasure {
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
-		List<Card> allRevealedCards = new ArrayList<Card>();
+		CardList allRevealedCards = new CardList();
 		while ((activePlayer.getDeckSize() + activePlayer.getDiscardPileSize()) > 0) {
 
-			List<Card> revealedCardList = activePlayer.revealCards(1);
+			CardList revealedCardList = activePlayer.revealCards(1);
 			assert revealedCardList.size() == 1;
-			Card revealedCard = revealedCardList.get(0);
+			Card revealedCard = revealedCardList.getFirst();
 
 			if (revealedCard.isOfType(Type.TREASURE)) {
 				TrashRevealedCard decison = new TrashRevealedCard(revealedCard);

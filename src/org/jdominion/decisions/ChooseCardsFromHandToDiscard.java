@@ -1,8 +1,7 @@
 package org.jdominion.decisions;
 
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Hand;
 import org.jdominion.Card.Type;
 import org.jdominion.cards.common.Copper;
@@ -51,7 +50,7 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 
 	// TODO: move to a more general place
 	private boolean hasSuperfluousActions(Hand hand) {
-		List<Card> actionCards = hand.getCardsOfType(Type.ACTION);
+		CardList actionCards = hand.getCardsOfType(Type.ACTION);
 
 		if (actionCards.size() > 1) {
 			if ((countProvidedActions(actionCards) + 1) < actionCards.size()) {
@@ -62,7 +61,7 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 	}
 
 	// TODO: move to a more general place
-	private Card chooseCheapestTerminalAction(List<Card> actionCards) {
+	private Card chooseCheapestTerminalAction(CardList actionCards) {
 		int costOfCheapestActionCard = Integer.MAX_VALUE;
 		Card cheapestActionCard = null;
 		for (Card card : actionCards) {
@@ -75,7 +74,7 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 	}
 
 	// TODO: move to a more general place
-	private int countProvidedActions(List<Card> cards) {
+	private int countProvidedActions(CardList cards) {
 		int actions = 0;
 		for (Card card : cards) {
 			actions += card.getAddedActions();

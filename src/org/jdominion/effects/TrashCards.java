@@ -1,9 +1,7 @@
 package org.jdominion.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Game;
 import org.jdominion.Player;
 import org.jdominion.Supply;
@@ -23,12 +21,12 @@ public class TrashCards extends CardEffectAction {
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
-		List<Card> cardsToTrash = trashCards(activePlayer, currentTurn.getGame(), currentTurn, supply);
+		CardList cardsToTrash = trashCards(activePlayer, currentTurn.getGame(), currentTurn, supply);
 		return cardsToTrash.size() >= minimumNumberOfCardsToTrash;
 	}
 
-	private List<Card> trashCards(Player activePlayer, Game game, Turn currentTurn, Supply supply) {
-		List<Card> trashedCards = new ArrayList<Card>();
+	private CardList trashCards(Player activePlayer, Game game, Turn currentTurn, Supply supply) {
+		CardList trashedCards = new CardList();
 
 		do {
 			if (activePlayer.getHandSize() == 0) {
@@ -39,7 +37,7 @@ public class TrashCards extends CardEffectAction {
 			activePlayer.decide(decision, this);
 
 			if (!decision.isCanceled()) {
-				Card cardToTrash = decision.getAnswer().get(0);
+				Card cardToTrash = decision.getAnswer().getFirst();
 				activePlayer.trashCard(cardToTrash, game);
 				trashedCards.add(cardToTrash);
 			} else if (trashedCards.size() >= minimumNumberOfCardsToTrash) {

@@ -1,12 +1,11 @@
 package org.jdominion.event;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Card.Type;
 import org.jdominion.decisions.ChooseReactionCardToUse;
@@ -19,10 +18,10 @@ public class ReactionEventHandler implements IEventHandler {
 
 	private static ReactionEventHandler instance = null;
 
-	private Map<Player, List<Card>> playerCardMap = null;
+	private Map<Player, CardList> playerCardMap = null;
 
 	private ReactionEventHandler() {
-		playerCardMap = new HashMap<Player, List<Card>>();
+		playerCardMap = new HashMap<Player, CardList>();
 		EventManager.getInstance().addEventHandler(this, CardPlayed.class, Duration.FOREVER);
 	}
 
@@ -37,7 +36,7 @@ public class ReactionEventHandler implements IEventHandler {
 	public void handleEvent(Event event) {
 		if ((event instanceof CardPlayed) && ((CardPlayed) event).getPlayedCard().isOfType(Type.ATTACK)) {
 
-			for (Entry<Player, List<Card>> playerCardMapEntry : playerCardMap.entrySet()) {
+			for (Entry<Player, CardList> playerCardMapEntry : playerCardMap.entrySet()) {
 				// affectedPlayer is the player who plays the attack card
 				if ((playerCardMapEntry.getKey() != event.getAffectedPlayer()) && (playerCardMapEntry.getValue().size() > 0)) {
 					chooseReactionCardAndHandleReaction(playerCardMapEntry.getKey(), event);
@@ -52,7 +51,7 @@ public class ReactionEventHandler implements IEventHandler {
 			decision = new ChooseReactionCardToUse(attackedPlayer.getHand(), event);
 			attackedPlayer.decide(decision, new NullEffect());
 			if (!decision.isCanceled()) {
-				Card reactionCard = decision.getAnswer().get(0);
+				Card reactionCard = decision.getAnswer().getFirst();
 				attackedPlayer.revealCardFromHand(reactionCard);
 				for (CardEffect effect : reactionCard.getEffects()) {
 					if (effect instanceof CardEffectReaction) {
@@ -72,9 +71,9 @@ public class ReactionEventHandler implements IEventHandler {
 		getCardList(cardOwner).remove(reactionCard);
 	}
 
-	private List<Card> getCardList(Player player) {
+	private CardList getCardList(Player player) {
 		if (!playerCardMap.containsKey(player)) {
-			playerCardMap.put(player, new ArrayList<Card>());
+			playerCardMap.put(player, new CardList());
 		}
 		return playerCardMap.get(player);
 	}

@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,6 +17,7 @@ import net.miginfocom.layout.LC;
 import net.miginfocom.swing.MigLayout;
 
 import org.jdominion.Card;
+import org.jdominion.CardList;
 
 public class SelectCardsView extends JDialog implements ItemListener {
 
@@ -25,8 +25,8 @@ public class SelectCardsView extends JDialog implements ItemListener {
 	private Map<Checkbox, Card> checkboxCardMapping;
 	private SelectCardsController controller;
 
-	public SelectCardsView(JFrame parent, SelectCardsController controller, String title, final String messageToUser, final List<Card> cards,
-			final List<Card> selectedCards) {
+	public SelectCardsView(JFrame parent, SelectCardsController controller, String title, final String messageToUser, final CardList cards,
+			final CardList selectedCards) {
 		super(parent, title, false);
 		this.controller = controller;
 		this.addWindowListener(controller);
@@ -38,7 +38,7 @@ public class SelectCardsView extends JDialog implements ItemListener {
 		});
 	}
 
-	private void init(String messageToUser, List<Card> cards, List<Card> selectedCards) {
+	private void init(String messageToUser, CardList cards, CardList selectedCards) {
 
 		this.setLayout(this.getLayoutManager());
 		createMessageLabel(messageToUser);
@@ -58,7 +58,7 @@ public class SelectCardsView extends JDialog implements ItemListener {
 		return newCheckbox;
 	}
 
-	private void createCheckboxes(List<Card> cards, List<Card> selectedCards) {
+	private void createCheckboxes(CardList cards, CardList selectedCards) {
 		checkboxCardMapping = new HashMap<Checkbox, Card>();
 		for (Card card : cards) {
 			checkboxCardMapping.put(createCheckbox(card, selectedCards.contains(card)), card);

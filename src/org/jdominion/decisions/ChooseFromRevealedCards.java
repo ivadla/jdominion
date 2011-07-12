@@ -3,7 +3,7 @@ package org.jdominion.decisions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.decisions.revealedCards.Option;
 import org.jdominion.decisions.revealedCards.RevealedCard;
 
@@ -24,7 +24,7 @@ public abstract class ChooseFromRevealedCards extends Decision<List<RevealedCard
 
 	@Override
 	public boolean isValidAnswer(List<RevealedCard> answer) {
-		List<Card> listOfAnswerCards = getCardListFromRevealedCards(answer);
+		CardList listOfAnswerCards = getCardListFromRevealedCards(answer);
 		for (RevealedCard revealedCard : getRevealedCards()) {
 			if (!listOfAnswerCards.contains(revealedCard.getRevealedCard())) {
 				return false;
@@ -40,8 +40,8 @@ public abstract class ChooseFromRevealedCards extends Decision<List<RevealedCard
 		return true;
 	}
 
-	private List<Card> getCardListFromRevealedCards(List<RevealedCard> revealedCards) {
-		List<Card> cardList = new ArrayList<Card>();
+	private CardList getCardListFromRevealedCards(List<RevealedCard> revealedCards) {
+		CardList cardList = new CardList();
 		for (RevealedCard revealedCard : revealedCards) {
 			cardList.add(revealedCard.getRevealedCard());
 		}

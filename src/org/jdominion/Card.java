@@ -167,7 +167,7 @@ public abstract class Card implements Serializable {
 		return coins;
 	}
 
-	public int getVictoryPoints(Player owner, List<Card> allCardsOfPlayer) {
+	public int getVictoryPoints(Player owner, CardList allCardsOfPlayer) {
 		int points = 0;
 
 		for (CardEffect effect : this.effects) {

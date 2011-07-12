@@ -1,16 +1,14 @@
 package org.jdominion.effects.cornucopia;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.CardPile;
 import org.jdominion.Game;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.Util;
 import org.jdominion.cards.common.Duchy;
 import org.jdominion.cards.common.Province;
 import org.jdominion.cards.cornucopia.BagOfGold;
@@ -73,7 +71,7 @@ public class TournamentEffect extends CardEffectAction {
 		}
 		if (getAvailablePrizes(currentTurn.getGame()).size() > 0) {
 			for (Card prize : getAvailablePrizes(currentTurn.getGame())) {
-				availablePrizesAndDuchy.add(new CardPile(Util.createCardList(prize)));
+				availablePrizesAndDuchy.add(new CardPile(new CardList(prize)));
 			}
 		} else {
 			chancelable = true;
@@ -87,19 +85,19 @@ public class TournamentEffect extends CardEffectAction {
 	}
 
 	private void discardProvince(Player activePlayer) {
-		activePlayer.discardCardsFromHand(Util.createCardList(activePlayer.getHand().getCardByClass(Province.class)));
+		activePlayer.discardCardsFromHand(new CardList(activePlayer.getHand().getCardByClass(Province.class)));
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<Card> getAvailablePrizes(Game game) {
-		return (List<Card>) game.getExtraGameData(Prizes.class).get();
+	private CardList getAvailablePrizes(Game game) {
+		return (CardList) game.getExtraGameData(Prizes.class).get();
 	}
 
 	@Override
 	public void gameStarted(Game game) {
 		Prizes prizes = new Prizes();
 		// TODO: add princess
-		prizes.add(Arrays.asList(new Card[] { new BagOfGold(), new Diadem(), new Followers(), new TrustySteed() }));
+		prizes.add(new CardList(new Card[] { new BagOfGold(), new Diadem(), new Followers(), new TrustySteed() }));
 		game.addExtraGameData(prizes);
 
 	}

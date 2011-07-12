@@ -1,9 +1,7 @@
 package org.jdominion.effects.cornucopia;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Hand;
 import org.jdominion.Player;
 import org.jdominion.Supply;
@@ -24,7 +22,7 @@ public abstract class SearchForCardAndPutItInHand extends CardEffectAction {
 			activePlayer.revealHand();
 		}
 
-		List<Card> setAsideCards = new ArrayList<Card>();
+		CardList setAsideCards = new CardList();
 
 		Card revealedCard = activePlayer.revealCard();
 

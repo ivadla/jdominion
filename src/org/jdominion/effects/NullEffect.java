@@ -1,8 +1,6 @@
 package org.jdominion.effects;
 
-import java.util.List;
-
-import org.jdominion.Card;
+import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -28,7 +26,7 @@ public class NullEffect extends CardEffect {
 	}
 
 	@Override
-	public int getVictoryPoints(Player owner, List<Card> allCardsOfPlayer) {
+	public int getVictoryPoints(Player owner, CardList allCardsOfPlayer) {
 		return 0;
 	}
 }
