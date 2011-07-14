@@ -85,7 +85,7 @@ public class SupplyController implements MouseListener, ActionListener {
 		return !newCardImages.containsAll(currentlyDisplayedCardImages);
 	}
 
-	public synchronized Class<? extends Card> chooseCard(final Supply supply) {
+	public Class<? extends Card> chooseCard(final Supply supply) {
 		try {
 			EventQueue.invokeAndWait(new Runnable() {
 				@Override
@@ -100,6 +100,14 @@ public class SupplyController implements MouseListener, ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		// the call to this.wait has to be in a synchronized method and chooseCard can not be a synchronized method,
+		// because it contains a call to EventQueue.invokeAndWait which could cause deadlocks in case there is another
+		// event waiting in the queue which also wants to call a synchronized method of this class
+		waitTillUserChooseACard();
+		return this.choosenCardType;
+	}
+
+	private synchronized void waitTillUserChooseACard() {
 		this.choosenCardType = null;
 		this.cancelClicked = false;
 		while ((this.choosenCardType == null) && (!cancelClicked)) {
@@ -109,7 +117,6 @@ public class SupplyController implements MouseListener, ActionListener {
 
 			}
 		}
-		return this.choosenCardType;
 	}
 
 	@Override
