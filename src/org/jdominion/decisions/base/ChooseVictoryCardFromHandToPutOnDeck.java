@@ -18,16 +18,16 @@ public class ChooseVictoryCardFromHandToPutOnDeck extends ChooseCardsFromHand {
 
 	@Override
 	protected Card chooseCardForDefaultAnswer(Hand hand) {
-		for (Card card : hand.getCardList()) {
+		for (Card card : hand) {
 			if (card.getTypes().size() == 1 && card.getTypes().get(0) == Type.VICTORY) {
 				return card;
 			}
 		}
-		for (Card card : hand.getCardList()) {
-			if (card.isOfType(Type.VICTORY)) {
-				return card;
-			}
+
+		if (hand.contains(Type.VICTORY)) {
+			return hand.getCardsOfType(Type.VICTORY).getFirst();
 		}
+		assert false : "no victory card in hand";
 		return null;
 	}
 

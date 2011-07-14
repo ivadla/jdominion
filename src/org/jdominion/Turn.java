@@ -140,7 +140,7 @@ public class Turn implements Serializable {
 	}
 
 	private void playBasicTreasureCards(Player activePlayer, Supply supply) {
-		for (Card cardInHand : new CardList(activePlayer.getHand().getCardList())) {
+		for (Card cardInHand : new CardList(activePlayer.getHand())) {
 			if (isBasicTreasureCard(cardInHand)) {
 				this.playedCards.add(cardInHand);
 				activePlayer.playCard(cardInHand, this, supply);
@@ -193,7 +193,7 @@ public class Turn implements Serializable {
 
 	private void cleanUp(Player activePlayer) {
 		activePlayer.placeOnDiscardPile(playedCards);
-		activePlayer.discardCardsFromHand(activePlayer.getHand().getCardList());
+		activePlayer.discardCardsFromHand(activePlayer.getHand());
 		activePlayer.drawNewHand();
 	}
 

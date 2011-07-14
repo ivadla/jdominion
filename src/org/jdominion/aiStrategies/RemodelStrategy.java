@@ -59,7 +59,7 @@ public class RemodelStrategy extends GenericAI {
 
 		setCardFromHandAsAnswer(decision, hand, cardsToTrash, false);
 		if (!decision.isAnswered()) {
-			decision.addAnswer(hand.getCardList().getFirst());
+			decision.addAnswer(hand.getFirst());
 		}
 	}
 

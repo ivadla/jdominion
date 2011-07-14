@@ -23,7 +23,7 @@ public class MenagerieEffect extends CardEffectAction {
 	}
 
 	private boolean containsDuplicateCard(Hand hand) {
-		for (Card card : hand.getCardList()) {
+		for (Card card : hand) {
 			if (hand.countCard(card.getClass()) > 1) {
 				return true;
 			}

@@ -135,7 +135,7 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void revealHand() {
-		EventManager.getInstance().handleEvent(new CardsRevealed(this, hand.getCardList()));
+		EventManager.getInstance().handleEvent(new CardsRevealed(this, hand));
 	}
 
 	public void drawCardsIntoHand(int numberOfCardsToDraw) {
@@ -306,7 +306,7 @@ public class Player implements Serializable, IPlayer {
 	private CardList getListOfAllCards(Turn currentTurn) {
 		CardList list = new CardList();
 		list.addAll(deck);
-		list.addAll(hand.getCardList());
+		list.addAll(hand);
 		list.addAll(discardPile);
 		list.addAll(cardsSetAside);
 		if (currentTurn != null) {

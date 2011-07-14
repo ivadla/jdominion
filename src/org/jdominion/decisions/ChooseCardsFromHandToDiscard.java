@@ -30,7 +30,7 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 
 	@Override
 	protected Card chooseCardForDefaultAnswer(Hand hand) {
-		for (Card card : hand.getCardList()) {
+		for (Card card : hand) {
 			if (card.isOfType(Type.CURSE)) {
 				return card;
 			} else if (card.getTypes().size() == 1 && card.isOfType(Type.VICTORY)) {
@@ -39,7 +39,7 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 		}
 
 		if (hasSuperfluousActions(hand)) {
-			return chooseCheapestTerminalAction(hand.getCardList());
+			return chooseCheapestTerminalAction(hand);
 		}
 
 		if (hand.contains(Copper.class)) {

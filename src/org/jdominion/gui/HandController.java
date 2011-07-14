@@ -13,7 +13,7 @@ public class HandController extends CardListController {
 
 	@Override
 	protected CardList getCardList() {
-		return new CardList(guiInformationSource.getHand().getCardList());
+		return new CardList(guiInformationSource.getHand());
 	}
 
 }

@@ -1,49 +1,63 @@
 package org.jdominion;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 
-public class Hand implements Serializable {
+public class Hand extends CardList implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	public Hand() {
+		super();
+	}
+
+	public Hand(CardList initialContent) {
+		super(initialContent);
+	}
 
 	/**
+	 * Don't call this method directly use player.addCardToHand instead
 	 * 
+	 * @param cards
+	 *            Cards to add to the hand
 	 */
-	private static final long serialVersionUID = 1L;
-	private CardList cardsInHand = new CardList();
+	@Override
+	public void add(Card e) {
+		super.add(e);
+	}
 
 	/**
 	 * Don't call this method directly use player.addCardsToHand instead
 	 * 
-	 * @param Cards
-	 *            to add to the hand
+	 * @param cards
+	 *            Cards to add to the hand
 	 */
+	@Override
 	public void addAll(CardList cards) {
-		cardsInHand.addAll(cards);
-	}
-
-	public CardList getCardList() {
-		// return a new list to hopefully prevent ConcurrentModificationException
-		// additionally it prevents messing with the hand contents
-		return new CardList(cardsInHand);
+		super.addAll(cards);
 	}
 
 	/**
-	 * Use player.drawNewHand() instead
+	 * Don't call this method directly use player.addCardsToHand instead
 	 * 
-	 * @deprecated
-	 * @param newHandCards
+	 * @param cards
+	 *            Cards to add to the hand
 	 */
-	public void set(CardList newHandCards) {
-		assert cardsInHand.isEmpty() : "Hand has to be empty to prevent the loss of cards";
-		cardsInHand = newHandCards;
+	@Override
+	public void addAll(Collection<? extends Card> c) {
+		super.addAll(c);
 	}
 
-	public Card getCardByClass(Class<? extends Card> cardtoGet) {
-		for (Card card : cardsInHand) {
-			if (card.getClass() == cardtoGet) {
-				return card;
-			}
-		}
-		return null;
+	/**
+	 * returns an iterator over an unmodifiable copy of the hand use the add and remove method from the hand class
+	 * instead of modifying the iterator
+	 */
+	@Override
+	public Iterator<Card> iterator() {
+		return Collections.unmodifiableCollection(new ArrayList<Card>(elements)).iterator();
 	}
 
 	/**
@@ -53,73 +67,7 @@ public class Hand implements Serializable {
 	 *            to remove
 	 */
 	public void remove(Card card) {
-		cardsInHand.remove(card);
-	}
-
-	public boolean contains(Card card) {
-		return cardsInHand.contains(card);
-	}
-
-	public boolean contains(Card.Type type) {
-		for (Card card : cardsInHand) {
-			if (card.isOfType(type)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean contains(Class<? extends Card> cardtoLookFor) {
-		for (Card card : cardsInHand) {
-			if (card.getClass() == cardtoLookFor) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public int countCard(Class<? extends Card> cardtoCount) {
-		int counter = 0;
-		for (Card card : cardsInHand) {
-			if (card.getClass() == cardtoCount) {
-				counter++;
-			}
-		}
-		return counter;
-	}
-
-	public int countCoins() {
-		int amountOfCoins = 0;
-		for (Card card : cardsInHand) {
-			amountOfCoins += card.getCoins();
-		}
-		return amountOfCoins;
-	}
-
-	public int size() {
-		return cardsInHand.size();
-	}
-
-	public Card getCheapestCard() {
-		int costOfCheapestCard = Integer.MAX_VALUE;
-		Card cheapestCard = null;
-		for (Card card : getCardList()) {
-			if (card.getCost() < costOfCheapestCard) {
-				costOfCheapestCard = card.getCost();
-				cheapestCard = card;
-			}
-		}
-		return cheapestCard;
-	}
-
-	public CardList getCardsOfType(Card.Type type) {
-		CardList cardsOfType = new CardList();
-		for (Card card : getCardList()) {
-			if (card.isOfType(type)) {
-				cardsOfType.add(card);
-			}
-		}
-		return cardsOfType;
+		elements.remove(card);
 	}
 
 }

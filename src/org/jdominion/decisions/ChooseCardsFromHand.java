@@ -65,12 +65,10 @@ public abstract class ChooseCardsFromHand extends Decision<CardList> {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void chooseDefaultAnswer(Hand hand, Turn currentTurn, Supply supply) {
 		CardList choosenCards = new CardList();
-		Hand copyOfHand = new Hand();
-		copyOfHand.set(new CardList(hand.getCardList()));
+		Hand copyOfHand = new Hand(hand);
 		for (int i = 0; i < getMinimumNumberOfCards(); i++) {
 			Card choosenCard = chooseCardForDefaultAnswer(copyOfHand);
 			choosenCards.add(choosenCard);

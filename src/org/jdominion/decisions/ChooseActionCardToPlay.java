@@ -27,12 +27,12 @@ public class ChooseActionCardToPlay extends ChooseCardsFromHand {
 
 	@Override
 	protected Card chooseCardForDefaultAnswer(Hand hand) {
-		for (Card card : hand.getCardList()) {
+		for (Card card : hand) {
 			if (card.isOfType(Type.ACTION) && !card.isTerminalAction()) {
 				return card;
 			}
 		}
-		for (Card card : hand.getCardList()) {
+		for (Card card : hand) {
 			if (card.isOfType(Type.ACTION)) {
 				return card;
 			}

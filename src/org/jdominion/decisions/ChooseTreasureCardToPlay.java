@@ -23,13 +23,12 @@ public class ChooseTreasureCardToPlay extends ChooseCardsFromHand {
 
 	@Override
 	protected Card chooseCardForDefaultAnswer(Hand hand) {
-		for (Card card : hand.getCardList()) {
-			if (card.isOfType(Type.TREASURE)) {
-				return card;
-			}
+		if (hand.contains(Type.TREASURE)) {
+			return hand.getCardsOfType(Type.TREASURE).getFirst();
+		} else {
+			setCanceled(true);
+			return null;
 		}
-		setCanceled(true);
-		return null;
 	}
 
 }

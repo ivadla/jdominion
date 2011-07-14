@@ -10,9 +10,12 @@ public class Deck extends CardList {
 	/**
 	 * returns the top card and removes it from the deck
 	 * 
-	 * @return
+	 * @return null, if the deck is empty
 	 */
 	public Card getTopCard() {
+		if (isEmpty()) {
+			return null;
+		}
 		return elements.remove(size() - 1);
 	}
 

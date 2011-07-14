@@ -83,9 +83,9 @@ public class CardList implements Iterable<Card> {
 
 	// Methods from List:
 
-	public boolean add(Card e) {
+	public void add(Card e) {
 		assert !elements.contains(e) : "Adding duplicated Card to the list. This is probably a bug";
-		return elements.add(e);
+		elements.add(e);
 	}
 
 	/**
@@ -95,20 +95,18 @@ public class CardList implements Iterable<Card> {
 	 * @return
 	 */
 	@Deprecated
-	public boolean addAll(Collection<? extends Card> c) {
-		return elements.addAll(c);
+	public void addAll(Collection<? extends Card> c) {
+		elements.addAll(c);
 	}
 
-	public boolean addAll(CardList c) {
-		return elements.addAll(c.elements);
+	public void addAll(CardList c) {
+		for (Card cardToAdd : c) {
+			this.add(cardToAdd);
+		}
 	}
 
-	public boolean contains(Object o) {
+	public boolean contains(Card o) {
 		return elements.contains(o);
-	}
-
-	public boolean containsAll(Collection<?> c) {
-		return elements.containsAll(c);
 	}
 
 	public boolean isEmpty() {
@@ -120,15 +118,78 @@ public class CardList implements Iterable<Card> {
 		return elements.iterator();
 	}
 
-	public boolean remove(Object o) {
-		return elements.remove(o);
-	}
-
-	public boolean removeAll(Collection<?> c) {
-		return elements.removeAll(c);
+	public void remove(Card o) {
+		elements.remove(o);
 	}
 
 	public int size() {
 		return elements.size();
+	}
+
+	public Card getCardByClass(Class<? extends Card> cardtoGet) {
+		for (Card card : elements) {
+			if (card.getClass() == cardtoGet) {
+				return card;
+			}
+		}
+		return null;
+	}
+
+	public boolean contains(Card.Type type) {
+		for (Card card : elements) {
+			if (card.isOfType(type)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean contains(Class<? extends Card> cardtoLookFor) {
+		for (Card card : elements) {
+			if (card.getClass() == cardtoLookFor) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public int countCard(Class<? extends Card> cardtoCount) {
+		int counter = 0;
+		for (Card card : elements) {
+			if (card.getClass() == cardtoCount) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+
+	public int countCoins() {
+		int amountOfCoins = 0;
+		for (Card card : elements) {
+			amountOfCoins += card.getCoins();
+		}
+		return amountOfCoins;
+	}
+
+	public Card getCheapestCard() {
+		int costOfCheapestCard = Integer.MAX_VALUE;
+		Card cheapestCard = null;
+		for (Card card : elements) {
+			if (card.getCost() < costOfCheapestCard) {
+				costOfCheapestCard = card.getCost();
+				cheapestCard = card;
+			}
+		}
+		return cheapestCard;
+	}
+
+	public CardList getCardsOfType(Card.Type type) {
+		CardList cardsOfType = new CardList();
+		for (Card card : elements) {
+			if (card.isOfType(type)) {
+				cardsOfType.add(card);
+			}
+		}
+		return cardsOfType;
 	}
 }

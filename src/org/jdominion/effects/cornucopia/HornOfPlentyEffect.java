@@ -48,7 +48,7 @@ public class HornOfPlentyEffect extends CardEffectTreasure {
 	}
 
 	private boolean trashThisCard(Player activePlayer, Turn currentTurn) {
-		if (currentTurn.getGame().getTrash().contains(this)) {
+		if (currentTurn.getGame().getTrash().contains(this.getCard())) {
 			return false;
 		} else {
 			activePlayer.trashCard(getCard(), currentTurn.getGame());

@@ -19,14 +19,13 @@ public class ChooseTreasureCardFromHandToTrash extends ChooseCardsFromHandToTras
 			return hand.getCardByClass(Copper.class);
 		} else if (hand.contains(Silver.class)) {
 			return hand.getCardByClass(Silver.class);
-		}
-		for (Card card : hand.getCardList()) {
-			if (card.isOfType(Type.TREASURE)) {
-				return card;
+		} else {
+			if (hand.contains(Type.TREASURE)) {
+				return hand.getCardsOfType(Type.TREASURE).getFirst();
 			}
 		}
 		assert false : "There are no treasure cards in the hand";
-		return hand.getCardList().getFirst();
+		return null;
 	}
 
 	@Override

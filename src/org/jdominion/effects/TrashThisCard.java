@@ -8,7 +8,7 @@ public class TrashThisCard extends CardEffectAction {
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
-		if (currentTurn.getGame().getTrash().contains(this)) {
+		if (currentTurn.getGame().getTrash().contains(this.getCard())) {
 			return false;
 		} else {
 			activePlayer.trashCard(getCard(), currentTurn.getGame());
