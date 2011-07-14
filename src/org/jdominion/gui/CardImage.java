@@ -21,9 +21,10 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JToolTip;
-import com.mortennobel.imagescaling.ResampleOp;
 
 import org.jdominion.Card;
+
+import com.mortennobel.imagescaling.ResampleOp;
 
 public class CardImage extends JPanel {
 
@@ -31,7 +32,9 @@ public class CardImage extends JPanel {
 	private static final double ERROR_MARGIN = 0.01;
 
 	private static Map<Class<? extends Card>, BufferedImage> cardImages = null;
+	private static Map<Class<? extends Card>, Map<Dimension, BufferedImage>> resizedCardImages = null;
 	private static Map<Class<? extends Card>, BufferedImage> greyCardImages = null;
+	private static Map<Class<? extends Card>, Map<Dimension, BufferedImage>> resizedGreyCardImages = null;
 
 	private BufferedImage image;
 	private Card card;
@@ -121,11 +124,25 @@ public class CardImage extends JPanel {
 		return cardImages;
 	}
 
+	private Map<Class<? extends Card>, Map<Dimension, BufferedImage>> getResizedCardImages() {
+		if (resizedCardImages == null) {
+			resizedCardImages = new HashMap<Class<? extends Card>, Map<Dimension, BufferedImage>>();
+		}
+		return resizedCardImages;
+	}
+
 	private Map<Class<? extends Card>, BufferedImage> getGreyCardImages() {
 		if (greyCardImages == null) {
 			greyCardImages = new HashMap<Class<? extends Card>, BufferedImage>();
 		}
 		return greyCardImages;
+	}
+
+	private Map<Class<? extends Card>, Map<Dimension, BufferedImage>> getResizedGreyCardImages() {
+		if (resizedGreyCardImages == null) {
+			resizedGreyCardImages = new HashMap<Class<? extends Card>, Map<Dimension, BufferedImage>>();
+		}
+		return resizedGreyCardImages;
 	}
 
 	private BufferedImage getImage(Card card) {
@@ -216,18 +233,37 @@ public class CardImage extends JPanel {
 		if (this.getWidth() != oldWidth || this.getHeight() != oldHight || oldImage == null) {
 			BufferedImage imageToDraw = null;
 			if (greyedOut) {
-				imageToDraw = getGreyImage();
+				imageToDraw = getResizedGreyImage();
 			} else {
-				imageToDraw = image;
+				imageToDraw = getResizedImage();
 			}
-			BufferedImage image = resampleImage(imageToDraw);
-			drawNewImage(g, image);
+			drawNewImage(g, imageToDraw);
 			oldWidth = getWidth();
 			oldHight = getHeight();
-			oldImage = image;
+			oldImage = imageToDraw;
 		} else {
 			redrawOldImage(g);
 		}
+	}
+
+	private BufferedImage getResizedImage() {
+		if (!getResizedCardImages().containsKey(card.getClass())) {
+			getResizedCardImages().put(card.getClass(), new HashMap<Dimension, BufferedImage>());
+		}
+		if (!getResizedCardImages().get(card.getClass()).containsKey(this.getSize())) {
+			getResizedCardImages().get(card.getClass()).put(this.getSize(), resampleImage(image));
+		}
+		return getResizedCardImages().get(card.getClass()).get(this.getSize());
+	}
+
+	private BufferedImage getResizedGreyImage() {
+		if (!getResizedGreyCardImages().containsKey(card.getClass())) {
+			getResizedGreyCardImages().put(card.getClass(), new HashMap<Dimension, BufferedImage>());
+		}
+		if (!getResizedGreyCardImages().get(card.getClass()).containsKey(this.getSize())) {
+			getResizedGreyCardImages().get(card.getClass()).put(this.getSize(), resampleImage(getGreyImage()));
+		}
+		return getResizedGreyCardImages().get(card.getClass()).get(this.getSize());
 	}
 
 	private void redrawOldImage(Graphics g) {
