@@ -47,7 +47,6 @@ public class SupplyController implements MouseListener, ActionListener {
 		}
 
 		for (CardPile pile : completeSupply.getCardPiles()) {
-			if (pile.getNumberOfCardsInPile() > 0) {
 				try {
 					CardImage cardImage = new CardImage(pile.getCardClass().newInstance());
 					cardImage.addMouseListener(this);
@@ -63,8 +62,6 @@ public class SupplyController implements MouseListener, ActionListener {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-
 		}
 		if (cardImagesChange(cardImages)) {
 			this.getView().update(cardImages);

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
+import org.jdominion.Card.Type;
 import org.jdominion.CardPile;
 import org.jdominion.Hand;
 import org.jdominion.Supply;
-import org.jdominion.Card.Type;
 import org.jdominion.decisions.ChooseCardsFromHandToTrash;
 import org.jdominion.decisions.base.ChooseTreasureCardFromHandToTrash;
 import org.jdominion.effects.TrashGainEffect;
@@ -31,7 +31,7 @@ public class MineEffect extends TrashGainEffect {
 	protected Supply createSupply(Supply supply, Card cardToTrash) {
 		List<CardPile> newPiles = new ArrayList<CardPile>();
 		for (CardPile pile : supply.getCardPiles()) {
-			if ((pile.getNumberOfCardsInPile() > 0) && (pile.isOfType(Type.TREASURE)) && (pile.getCardCost() <= cardToTrash.getCost() + addedValue)) {
+			if ((!pile.isEmpty()) && (pile.isOfType(Type.TREASURE)) && (pile.getCardCost() <= cardToTrash.getCost() + addedValue)) {
 				newPiles.add(pile);
 			}
 		}

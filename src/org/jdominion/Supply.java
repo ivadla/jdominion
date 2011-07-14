@@ -72,7 +72,7 @@ public class Supply implements Serializable {
 	public Supply createSupplyWithMaximumCost(int maximumCost) {
 		List<CardPile> newPiles = new ArrayList<CardPile>();
 		for (CardPile pile : cardPiles) {
-			if ((pile.getNumberOfCardsInPile() > 0) && (pile.getCardCost() <= maximumCost)) {
+			if ((!pile.isEmpty()) && (pile.getCardCost() <= maximumCost)) {
 				newPiles.add(pile);
 			}
 		}
@@ -82,7 +82,7 @@ public class Supply implements Serializable {
 	public int countEmptyPiles() {
 		int emptyPiles = 0;
 		for (CardPile pile : cardPiles) {
-			if (pile.getNumberOfCardsInPile() == 0) {
+			if (pile.isEmpty()) {
 				emptyPiles++;
 			}
 		}
@@ -93,9 +93,11 @@ public class Supply implements Serializable {
 		int costOfMostExpensiveCard = -1;
 		Class<? extends Card> mostExpensiveCard = null;
 		for (CardPile pile : getCardPiles()) {
-			if (pile.getCardCost() > costOfMostExpensiveCard) {
-				costOfMostExpensiveCard = pile.getCardCost();
-				mostExpensiveCard = pile.getCardClass();
+			if (!pile.isEmpty()) {
+				if (pile.getCardCost() > costOfMostExpensiveCard) {
+					costOfMostExpensiveCard = pile.getCardCost();
+					mostExpensiveCard = pile.getCardClass();
+				}
 			}
 		}
 		return mostExpensiveCard;

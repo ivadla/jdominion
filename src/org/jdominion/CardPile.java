@@ -12,12 +12,16 @@ public class CardPile implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private CardList cards;
+	private Class<? extends Card> classOfCardsInPile;
 
 	public CardPile(CardList cards) {
 		this.cards = cards;
+		classOfCardsInPile = cards.getFirst().getClass();
+		assert cards.countCard(classOfCardsInPile) == cards.size() : "all cards in the pile must have the same class";
 	}
 
 	public CardPile(Class<? extends Card> cardClass, int numberOfCardsInPile) throws InstantiationException, IllegalAccessException {
+		this.classOfCardsInPile = cardClass;
 		cards = new CardList();
 		for (int i = 0; i < numberOfCardsInPile; i++) {
 			cards.add(cardClass.newInstance());
@@ -25,24 +29,18 @@ public class CardPile implements Serializable {
 	}
 
 	public Class<? extends Card> getCardClass() {
-		if (cards.isEmpty()) {
-			return null;
-		}
-		return cards.getFirst().getClass();
+		return classOfCardsInPile;
 	}
 
 	public String getCardName() {
-		if (cards.isEmpty()) {
-			return null;
-		}
-		return cards.getFirst().getName();
+		return CardClassInfo.getInstance().getName(classOfCardsInPile);
 	}
 
 	public int getCardCost() {
-		assert !cards.isEmpty();
-		return cards.getFirst().getCost();
+		return CardClassInfo.getInstance().getCost(classOfCardsInPile);
 	}
 
+	// TODO: maybe use CardClassInfo for this
 	public List<CardEffect> getCardEffects() {
 		if (cards.isEmpty()) {
 			return new ArrayList<CardEffect>();
@@ -54,9 +52,12 @@ public class CardPile implements Serializable {
 		return cards.size();
 	}
 
+	public boolean isEmpty() {
+		return cards.isEmpty();
+	}
+
 	public boolean isOfType(Card.Type type) {
-		assert !cards.isEmpty();
-		return cards.getFirst().isOfType(type);
+		return CardClassInfo.getInstance().isOfType(classOfCardsInPile, type);
 	}
 
 	public Card takeCard() {

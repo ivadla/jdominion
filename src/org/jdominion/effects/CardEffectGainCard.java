@@ -29,7 +29,7 @@ public abstract class CardEffectGainCard extends CardEffectAction {
 	private Supply createSupplyOfPermittedCards(Supply originalSupply) {
 		List<CardPile> newPiles = new ArrayList<CardPile>();
 		for (CardPile pile : originalSupply.getCardPiles()) {
-			if ((pile.getNumberOfCardsInPile() > 0) && (isCardPilePermitted(pile))) {
+			if ((!pile.isEmpty()) && (isCardPilePermitted(pile))) {
 				newPiles.add(pile);
 			}
 		}

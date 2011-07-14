@@ -22,7 +22,7 @@ public class UpgradeEffect extends TrashGainEffect {
 	protected Supply createSupply(Supply supply, Card cardToTrash) {
 		List<CardPile> newPiles = new ArrayList<CardPile>();
 		for (CardPile pile : supply.getCardPiles()) {
-			if ((pile.getNumberOfCardsInPile() > 0) && (pile.getCardCost() == cardToTrash.getCost() + addedValue)) {
+			if ((!pile.isEmpty()) && (pile.getCardCost() == cardToTrash.getCost() + addedValue)) {
 				newPiles.add(pile);
 			}
 		}
