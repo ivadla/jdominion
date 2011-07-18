@@ -17,7 +17,6 @@ import org.jdominion.event.CardsDiscarded;
 import org.jdominion.event.CardsDrawn;
 import org.jdominion.event.CardsRevealed;
 import org.jdominion.event.CardsSetAside;
-import org.jdominion.event.CardsTrashed;
 import org.jdominion.event.EventManager;
 import org.jdominion.event.GameEnded;
 import org.jdominion.location.DiscardPile;
@@ -50,6 +49,9 @@ public class Player implements Serializable, IPlayer {
 	public Player(String name, Deck deck, IStrategy strategy) {
 		this.name = name;
 		this.deck = deck;
+		for (Card cardInDeck : deck) {
+			cardInDeck.setOwner(this);
+		}
 		this.strategy = strategy;
 		this.strategy.setPlayer(this);
 		discardPile = new CardList();
@@ -250,7 +252,6 @@ public class Player implements Serializable, IPlayer {
 
 	public void trashCards(CardList cardsToTrash, Game game) {
 		for (Card cardToTrash : cardsToTrash) {
-			cardToTrash.setOwner(null);
 			if (hand.contains(cardToTrash)) {
 				removeCardFromHand(cardToTrash);
 			}
@@ -259,7 +260,6 @@ public class Player implements Serializable, IPlayer {
 			}
 		}
 		game.addCardsToTrash(cardsToTrash);
-		EventManager.getInstance().handleEvent(new CardsTrashed(this, cardsToTrash));
 	}
 
 	public void playCard(Card card, Turn currentTurn, Supply supply) {
