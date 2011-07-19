@@ -10,6 +10,7 @@ import org.jdominion.Hand;
 import org.jdominion.IPlayer;
 import org.jdominion.Player;
 import org.jdominion.Supply;
+import org.jdominion.Trash;
 import org.jdominion.Turn;
 import org.jdominion.decisions.Decision;
 import org.jdominion.extraGameData.ExtraGameData;
@@ -99,6 +100,12 @@ public class RemoteClient implements IGuiInformationSource {
 		} catch (RemoteException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public Trash getTrash() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

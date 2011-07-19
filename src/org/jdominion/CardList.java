@@ -73,6 +73,17 @@ public class CardList implements Iterable<Card> {
 		}
 	}
 
+	/**
+	 * @return the last element or null if this CardList is empty
+	 */
+	public Card getLast() {
+		if (isEmpty()) {
+			return null;
+		} else {
+			return elements.get(elements.size() - 1);
+		}
+	}
+
 	public boolean disjoint(CardList otherList) {
 		return disjoint(otherList.elements);
 	}

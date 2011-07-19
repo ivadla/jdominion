@@ -8,6 +8,7 @@ import org.jdominion.Game;
 import org.jdominion.Hand;
 import org.jdominion.IPlayer;
 import org.jdominion.Supply;
+import org.jdominion.Trash;
 import org.jdominion.Turn;
 import org.jdominion.extraGameData.ExtraGameData;
 
@@ -43,6 +44,11 @@ public class GuiInformationSource implements IGuiInformationSource {
 	@Override
 	public Supply getSupply() {
 		return supply;
+	}
+
+	@Override
+	public Trash getTrash() {
+		return game.getTrash();
 	}
 
 	@Override

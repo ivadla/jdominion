@@ -1,14 +1,10 @@
 package org.jdominion.gui;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,8 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
+import net.miginfocom.layout.BoundSize;
 import net.miginfocom.layout.CC;
 import net.miginfocom.layout.LC;
+import net.miginfocom.layout.UnitValue;
 import net.miginfocom.swing.MigLayout;
 
 import org.jdominion.Card;
@@ -44,6 +42,7 @@ public class MainWindow extends JFrame {
 	private SupplyController supplyController = null;
 	private TurnController turnController = null;
 	private ExtraGameDataController extraGameDataController = null;
+	private TrashController trashController = null;
 
 	public MainWindow(final IGuiInformationSource guiInformationSource) {
 		try {
@@ -71,6 +70,7 @@ public class MainWindow extends JFrame {
 		this.supplyController = new SupplyController(guiInformationSource);
 		this.turnController = new TurnController(guiInformationSource);
 		this.extraGameDataController = new ExtraGameDataController(guiInformationSource);
+		this.trashController = new TrashController(guiInformationSource);
 		this.setContentPane(getJContentPane());
 		this.setTitle("JDominion");
 	}
@@ -110,13 +110,15 @@ public class MainWindow extends JFrame {
 	private JPanel getLeftPanel() {
 		if (leftPanel == null) {
 			leftPanel = new JPanel();
-			leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-			leftPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-			getplayerTable().setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+			LC layoutConstraints = new LC().wrapAfter(1).insets("0");
+			layoutConstraints.setGridGapY(new BoundSize(new UnitValue(2), ""));
+			MigLayout layout = new MigLayout(layoutConstraints);
+			leftPanel.setLayout(layout);
 			leftPanel.add(getplayerTable());
-			turnController.getView().setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 			leftPanel.add(turnController.getView());
 			leftPanel.add(extraGameDataController.getView());
+			leftPanel.add(new JLabel("Trash:"));
+			leftPanel.add(trashController.getView(), new CC().shrinkPrioY(1000));
 			leftPanel.add(getCancelButton());
 		}
 		return leftPanel;
