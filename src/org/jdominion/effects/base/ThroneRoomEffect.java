@@ -21,9 +21,8 @@ public class ThroneRoomEffect extends CardEffectAction {
 		assert decision.getAnswer().size() == 1;
 		Card choosenCard = decision.getAnswer().getFirst();
 		assert choosenCard.isOfType(Type.ACTION);
-		currentTurn.getPlayedCards().add(choosenCard);
-		activePlayer.playCard(choosenCard, currentTurn, supply);
-		activePlayer.playCard(choosenCard, currentTurn, supply);
+		currentTurn.playCard(activePlayer, supply, choosenCard);
+		currentTurn.playCard(activePlayer, supply, choosenCard);
 
 		return true;
 	}

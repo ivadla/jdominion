@@ -23,6 +23,10 @@ public class Turn implements Serializable {
 	private int availableActions = 1;
 	private int extraMoney = 0;
 	private int availableBuys = 1;
+
+	// this is not the same as the number of action Cards played due to throne room
+	// used for conspirator
+	private int actionsPlayed = 0;
 	private Player activePlayer;
 	private Game game;
 
@@ -57,6 +61,10 @@ public class Turn implements Serializable {
 
 	public int getAvailableBuys() {
 		return availableBuys;
+	}
+
+	public int getActionsPlayed() {
+		return this.actionsPlayed;
 	}
 
 	public void setActivePlayer(Player activePlayer) {
@@ -129,9 +137,19 @@ public class Turn implements Serializable {
 			Card choosenCard = playDecision.getAnswer().getFirst();
 			assert choosenCard.isOfType(Card.Type.ACTION);
 			this.availableActions--;
-			this.playedCards.add(choosenCard);
-			activePlayer.playCard(choosenCard, this, supply);
+			playCard(activePlayer, supply, choosenCard);
 		}
+	}
+
+	public void playCard(Player activePlayer, Supply supply, Card cardToPlay) {
+		// the card could be already in the play Area, because it was played twice by throne room
+		if (!this.playedCards.contains(cardToPlay)) {
+			this.playedCards.add(cardToPlay);
+		}
+		if (cardToPlay.isOfType(Type.ACTION)) {
+			this.actionsPlayed++;
+		}
+		activePlayer.playCard(cardToPlay, this, supply);
 	}
 
 	private void playTreasureCards(Player activePlayer, Supply supply) {
@@ -142,8 +160,7 @@ public class Turn implements Serializable {
 	private void playBasicTreasureCards(Player activePlayer, Supply supply) {
 		for (Card cardInHand : new CardList(activePlayer.getHand())) {
 			if (isBasicTreasureCard(cardInHand)) {
-				this.playedCards.add(cardInHand);
-				activePlayer.playCard(cardInHand, this, supply);
+				playCard(activePlayer, supply, cardInHand);
 			}
 		}
 	}
@@ -161,8 +178,7 @@ public class Turn implements Serializable {
 			}
 			Card choosenCard = playDecision.getAnswer().getFirst();
 			assert choosenCard.isOfType(Card.Type.TREASURE);
-			this.playedCards.add(choosenCard);
-			activePlayer.playCard(choosenCard, this, supply);
+			playCard(activePlayer, supply, choosenCard);
 		}
 	}
 
