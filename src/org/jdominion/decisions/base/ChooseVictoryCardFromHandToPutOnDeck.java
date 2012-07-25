@@ -18,12 +18,14 @@ public class ChooseVictoryCardFromHandToPutOnDeck extends ChooseCardsFromHand {
 
 	@Override
 	protected Card chooseCardForDefaultAnswer(Hand hand) {
+		// the first choice are cards which are only victory cards
 		for (Card card : hand) {
 			if (card.getTypes().size() == 1 && card.getTypes().get(0) == Type.VICTORY) {
 				return card;
 			}
 		}
 
+		// unfortunately we have to put back a action-victory or treasure-victory card
 		if (hand.contains(Type.VICTORY)) {
 			return hand.getCardsOfType(Type.VICTORY).getFirst();
 		}
