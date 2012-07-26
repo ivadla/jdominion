@@ -5,6 +5,7 @@ import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
+import org.jdominion.event.CalculateValue;
 
 public class CardEffectTreasure extends CardEffect {
 
@@ -17,7 +18,7 @@ public class CardEffectTreasure extends CardEffect {
 
 	@Override
 	public int getCoins() {
-		return this.coins;
+		return CalculateValue.calculateValue(getCard(), coins);
 	}
 
 	@Override
