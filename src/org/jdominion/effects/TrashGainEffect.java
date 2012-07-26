@@ -47,7 +47,7 @@ public abstract class TrashGainEffect extends CardEffectAction {
 		assert availableCards.isCardAvailable(choosenCard);
 		assert supply.isCardAvailable(choosenCard);
 
-		activePlayer.gainCard(choosenCard, supply, whereToPutCard());
+		activePlayer.gainCard(choosenCard, supply, whereToPutCard(), currentTurn);
 
 		return true;
 	}

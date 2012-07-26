@@ -9,7 +9,7 @@ public class GiveCurse extends CardEffectSimpleAttack {
 
 	@Override
 	protected void attackPlayer(Player playerToAttack, Turn currentTurn, Supply supply) {
-		playerToAttack.gainCard(Curse.class, supply);
+		playerToAttack.gainCard(Curse.class, supply, currentTurn);
 	}
 
 }

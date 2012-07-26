@@ -47,7 +47,7 @@ public class TournamentEffect extends CardEffectAction {
 				getAvailablePrizes(currentTurn.getGame()).remove(choosenCard);
 			}
 
-			activePlayer.gainCard(choosenCard, new TopOfDeck());
+			activePlayer.gainCard(choosenCard, new TopOfDeck(), currentTurn, supply);
 
 		}
 

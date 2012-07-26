@@ -107,7 +107,7 @@ public abstract class Card implements Serializable {
 	protected void addCardEffect(CardEffect effect) {
 		effects.add(effect);
 		effect.setCard(this);
-		if (!types.contains(effect.getType())) {
+		if (effect.getType() != null && !types.contains(effect.getType())) {
 			types.add(effect.getType());
 			if (effect.getType() == Type.ATTACK && !types.contains(Type.ACTION)) {
 				types.add(Type.ACTION);

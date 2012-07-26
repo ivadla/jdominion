@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
-import org.jdominion.Card.Type;
 import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.Util;
+import org.jdominion.Card.Type;
 import org.jdominion.decisions.base.StealFromRevealedCards;
 import org.jdominion.decisions.revealedCards.Discard;
 import org.jdominion.decisions.revealedCards.Gain;
@@ -59,7 +59,7 @@ public class StealTreasureCards extends CardEffectAttack {
 				revealedCard.getOwner().trashCard(revealedCard.getRevealedCard(), currentTurn.getGame());
 				if (revealedCard.getChoosenOption() == Gain.getInstance()) {
 					currentTurn.getGame().removeCardFromTrash(revealedCard.getRevealedCard());
-					activePlayer.gainCard(revealedCard.getRevealedCard());
+					activePlayer.gainCard(revealedCard.getRevealedCard(), currentTurn, supply);
 				}
 			}
 

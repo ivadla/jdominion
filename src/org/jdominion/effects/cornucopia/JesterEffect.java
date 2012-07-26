@@ -21,14 +21,14 @@ public class JesterEffect extends CardEffectSimpleAttack {
 			return;
 		}
 		if (revealedCard.isOfType(Type.VICTORY)) {
-			playerToAttack.gainCard(Curse.class, supply);
+			playerToAttack.gainCard(Curse.class, supply, currentTurn);
 		} else if (supply.isCardAvailable(revealedCard.getClass())) {
 			List<Player> players = new ArrayList<Player>();
 			players.add(currentTurn.getActivePlayer());
 			players.add(playerToAttack);
 			ChoosePlayerToGetCard decision = new ChoosePlayerToGetCard(players, revealedCard, currentTurn.getActivePlayer());
 			currentTurn.getActivePlayer().decide(decision, this);
-			decision.getAnswer().get(0).getPlayer().gainCard(revealedCard.getClass(), supply);
+			decision.getAnswer().get(0).getPlayer().gainCard(revealedCard.getClass(), supply, currentTurn);
 		}
 
 		playerToAttack.placeOnDiscardPile(revealedCard);

@@ -39,7 +39,7 @@ public class HornOfPlentyEffect extends CardEffectTreasure {
 
 		Card gainedCard = supply.takeCard(choosenCard);
 
-		activePlayer.gainCard(gainedCard);
+		activePlayer.gainCard(gainedCard, currentTurn, supply);
 
 		if (gainedCard.isOfType(Type.VICTORY)) {
 			return trashThisCard(activePlayer, currentTurn);

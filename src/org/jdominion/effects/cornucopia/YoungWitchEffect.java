@@ -41,7 +41,7 @@ public class YoungWitchEffect extends CardEffectSimpleAttack {
 				return;
 			}
 		}
-		playerToAttack.gainCard(Curse.class, supply);
+		playerToAttack.gainCard(Curse.class, supply, currentTurn);
 	}
 
 	@Override

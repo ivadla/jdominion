@@ -35,7 +35,7 @@ public abstract class CardEffectGainCard extends CardEffectAction {
 	 * @param supply
 	 */
 	protected void gainCard(Class<? extends Card> choosenCard, Player activePlayer, Turn currentTurn, Supply supply) {
-		activePlayer.gainCard(choosenCard, supply);
+		activePlayer.gainCard(choosenCard, supply, currentTurn);
 	}
 
 	private Supply createSupplyOfPermittedCards(Supply originalSupply) {

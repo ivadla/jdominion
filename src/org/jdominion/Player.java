@@ -274,27 +274,27 @@ public class Player implements Serializable, IPlayer {
 	public void buyCard(Class<? extends Card> cardToBuy, Turn currentTurn, Supply supply) {
 		Card boughtCard = supply.takeCard(cardToBuy);
 		EventManager.getInstance().handleEvent(new CardBought(this, boughtCard));
-		this.gainCard(boughtCard);
+		this.gainCard(boughtCard, currentTurn, supply);
 	}
 
-	public void gainCard(Class<? extends Card> card, Supply supply) {
-		gainCard(card, supply, new DiscardPile());
+	public void gainCard(Class<? extends Card> card, Supply supply, Turn currentTurn) {
+		gainCard(card, supply, new DiscardPile(), currentTurn);
 	}
 
-	public void gainCard(Class<? extends Card> card, Supply supply, Location whereToPlaceCard) {
+	public void gainCard(Class<? extends Card> card, Supply supply, Location whereToPlaceCard, Turn currentTurn) {
 		if (supply.isCardAvailable(card)) {
-			gainCard(supply.takeCard(card), whereToPlaceCard);
+			gainCard(supply.takeCard(card), whereToPlaceCard, currentTurn, supply);
 		}
 	}
 
-	public void gainCard(Card gainedCard) {
-		this.gainCard(gainedCard, new DiscardPile());
+	public void gainCard(Card gainedCard, Turn currentTurn, Supply supply) {
+		this.gainCard(gainedCard, new DiscardPile(), currentTurn, supply);
 	}
 
-	public void gainCard(Card gainedCard, Location whereToPlaceCard) {
+	public void gainCard(Card gainedCard, Location whereToPlaceCard, Turn currentTurn, Supply supply) {
 		gainedCard.setOwner(this);
 		whereToPlaceCard.putCard(this, gainedCard);
-		EventManager.getInstance().handleEvent(new CardGained(this, gainedCard));
+		EventManager.getInstance().handleEvent(new CardGained(this, gainedCard, currentTurn, supply));
 	}
 
 	public void setCardAside(Card card) {

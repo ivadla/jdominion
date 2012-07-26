@@ -14,7 +14,7 @@ public class TrustySteedGainSilver extends CardEffectAction {
 
 		// gain silver
 		for (int i = 0; i < 4; i++) {
-			activePlayer.gainCard(Silver.class, supply);
+			activePlayer.gainCard(Silver.class, supply, currentTurn);
 		}
 
 		// discard deck

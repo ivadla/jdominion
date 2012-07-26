@@ -24,7 +24,7 @@ public class GainCardX extends CardEffectAction {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		if (supply.isCardAvailable(cardToGain)) {
-			activePlayer.gainCard(cardToGain, supply, whereToPlaceCard);
+			activePlayer.gainCard(cardToGain, supply, whereToPlaceCard, currentTurn);
 			return true;
 		} else {
 			return false;
