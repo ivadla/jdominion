@@ -22,8 +22,20 @@ public abstract class CardEffectGainCard extends CardEffectAction {
 
 		assert permittedCards.isCardAvailable(choosenCard);
 
-		activePlayer.gainCard(choosenCard, supply);
+		gainCard(choosenCard, activePlayer, currentTurn, supply);
+
 		return true;
+	}
+
+	/**
+	 * Subclasses can override this method if they want to do something special with or depending on the card
+	 * 
+	 * @param choosenCard
+	 * @param activePlayer
+	 * @param supply
+	 */
+	protected void gainCard(Class<? extends Card> choosenCard, Player activePlayer, Turn currentTurn, Supply supply) {
+		activePlayer.gainCard(choosenCard, supply);
 	}
 
 	private Supply createSupplyOfPermittedCards(Supply originalSupply) {
