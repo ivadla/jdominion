@@ -3,7 +3,7 @@ package org.jdominion.cards.cornucopia;
 import org.jdominion.Card;
 import org.jdominion.effects.AddBuys;
 import org.jdominion.effects.AddExtraMoney;
-import org.jdominion.effects.cornucopia.DiscardCards;
+import org.jdominion.effects.DiscardCards;
 import org.jdominion.effects.cornucopia.HorseTradersEffect;
 
 public class HorseTraders extends Card {

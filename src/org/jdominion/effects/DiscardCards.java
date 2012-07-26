@@ -1,10 +1,9 @@
-package org.jdominion.effects.cornucopia;
+package org.jdominion.effects;
 
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.decisions.ChooseCardFromHandToDiscard;
-import org.jdominion.effects.CardEffectAction;
 
 public class DiscardCards extends CardEffectAction {
 
