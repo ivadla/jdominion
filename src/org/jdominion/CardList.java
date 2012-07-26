@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import org.jdominion.Card.Type;
+
 public class CardList implements Iterable<Card> {
 
 	protected List<Card> elements;
@@ -168,6 +170,16 @@ public class CardList implements Iterable<Card> {
 		int counter = 0;
 		for (Card card : elements) {
 			if (card.getClass() == cardtoCount) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+
+	public int countCardsOfType(Type cardType) {
+		int counter = 0;
+		for (Card card : elements) {
+			if (card.isOfType(cardType)) {
 				counter++;
 			}
 		}

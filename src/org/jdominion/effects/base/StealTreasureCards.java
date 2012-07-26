@@ -8,7 +8,6 @@ import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.Util;
 import org.jdominion.Card.Type;
 import org.jdominion.decisions.base.StealFromRevealedCards;
 import org.jdominion.decisions.revealedCards.Discard;
@@ -32,7 +31,7 @@ public class StealTreasureCards extends CardEffectAttack {
 					if (revealedCard.isOfType(Type.TREASURE)) {
 						optionList.add(Gain.getInstance());
 						optionList.add(Trash.getInstance());
-						if (Util.countCardsOfType(cardList, Type.TREASURE) > 1) {
+						if (cardList.countCardsOfType(Type.TREASURE) > 1) {
 							optionList.add(Discard.getInstance());
 						}
 					} else {
