@@ -1,6 +1,7 @@
 package org.jdominion.effects.hinterlands;
 
 import org.jdominion.CardList;
+import org.jdominion.Game;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -15,7 +16,7 @@ public abstract class OnGainEffect extends CardEffect implements IEventHandler {
 
 	public OnGainEffect() {
 		super(null);
-		EventManager.getInstance().addEventHandler(this, CardGained.class, Duration.FOREVER);
+
 	}
 
 	@Override
@@ -37,11 +38,22 @@ public abstract class OnGainEffect extends CardEffect implements IEventHandler {
 	public void handleEvent(Event event) {
 		assert event instanceof CardGained;
 		CardGained cardGainedEvent = (CardGained) event;
-		if (cardGainedEvent.getGainedCard().equals(getCard())) {
-			onGain(cardGainedEvent.getAffectedPlayer(), cardGainedEvent.getCurrentTurn(), cardGainedEvent.getSupply());
+		if (cardGainedEvent.getGainedCard().getClass().equals(getCard().getClass())) {
+			for(CardEffect effect: getCard().getEffects())
+			{
+				if (effect.getClass().equals(getClass()))
+				{
+					OnGainEffect onGainEffect = (OnGainEffect) effect;
+					onGainEffect.onGain(cardGainedEvent.getAffectedPlayer(), cardGainedEvent.getCurrentTurn(), cardGainedEvent.getSupply());
+				}
+			}
 		}
 	}
 
 	protected abstract void onGain(Player gainingPlayer, Turn currentTurn, Supply supply);
 
+	@Override
+	public void gameStarted(Game game) {
+		EventManager.getInstance().addEventHandler(this, CardGained.class, Duration.FOREVER);
+	}
 }
