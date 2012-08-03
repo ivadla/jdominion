@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jdominion.Card.Type;
+import org.jdominion.effects.CardEffect;
 
 public class CardList implements Iterable<Card> {
 
@@ -214,5 +215,15 @@ public class CardList implements Iterable<Card> {
 			}
 		}
 		return cardsOfType;
+	}
+
+	public CardList getCardsByEffectClass(Class<? extends CardEffect> effectToGet) {
+		CardList cardsWithEffect = new CardList();
+		for (Card card : elements) {
+			if (card.hasEffect(effectToGet)) {
+				cardsWithEffect.add(card);
+			}
+		}
+		return cardsWithEffect;
 	}
 }
