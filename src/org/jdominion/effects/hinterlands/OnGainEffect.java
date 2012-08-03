@@ -38,15 +38,9 @@ public abstract class OnGainEffect extends CardEffect implements IEventHandler {
 	public void handleEvent(Event event) {
 		assert event instanceof CardGained;
 		CardGained cardGainedEvent = (CardGained) event;
-		if (cardGainedEvent.getGainedCard().getClass().equals(getCard().getClass())) {
-			for(CardEffect effect: getCard().getEffects())
-			{
-				if (effect.getClass().equals(getClass()))
-				{
-					OnGainEffect onGainEffect = (OnGainEffect) effect;
+		if (cardGainedEvent.getGainedCard().hasEffect(getClass())) {
+					OnGainEffect onGainEffect = (OnGainEffect) cardGainedEvent.getGainedCard().getEffect(getClass());
 					onGainEffect.onGain(cardGainedEvent.getAffectedPlayer(), cardGainedEvent.getCurrentTurn(), cardGainedEvent.getSupply());
-				}
-			}
 		}
 	}
 

@@ -115,6 +115,24 @@ public abstract class Card implements Serializable {
 		}
 	}
 
+	public boolean hasEffect(Class<? extends CardEffect> effectToLookFor) {
+		for (CardEffect effect : getEffects()) {
+			if (effect.getClass().equals(effectToLookFor)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public CardEffect getEffect(Class<? extends CardEffect> effectToLookFor) {
+		for (CardEffect effect : getEffects()) {
+			if (effect.getClass().equals(effectToLookFor)) {
+				return effect;
+			}
+		}
+		return null;
+	}
+
 	public boolean isOfType(Type type) {
 		return this.types.contains(type);
 	}
