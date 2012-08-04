@@ -143,7 +143,11 @@ public class Turn implements Serializable {
 	public void playCard(Player activePlayer, Supply supply, Card cardToPlay) {
 		// the card could be already in the play Area, because it was played twice by throne room
 		if (!this.cardsInPlay.contains(cardToPlay)) {
-			this.cardsInPlay.add(cardToPlay);
+			// also check if the card was played before, because maybe it removed itself from the play area
+			// (e.g. a throne roomed feast)
+			if (!this.playedCards.contains(cardToPlay)) {
+				this.cardsInPlay.add(cardToPlay);
+			}
 		}
 
 		this.playedCards.add(cardToPlay);
