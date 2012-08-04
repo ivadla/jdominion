@@ -14,6 +14,7 @@ import org.jdominion.cards.common.Province;
 import org.jdominion.cards.cornucopia.BagOfGold;
 import org.jdominion.cards.cornucopia.Diadem;
 import org.jdominion.cards.cornucopia.Followers;
+import org.jdominion.cards.cornucopia.Princess;
 import org.jdominion.cards.cornucopia.TrustySteed;
 import org.jdominion.decisions.ChooseCardToGain;
 import org.jdominion.decisions.cornucopia.RevealProvince;
@@ -96,8 +97,7 @@ public class TournamentEffect extends CardEffectAction {
 	@Override
 	public void gameStarted(Game game) {
 		Prizes prizes = new Prizes();
-		// TODO: add princess
-		prizes.add(new CardList(new Card[] { new BagOfGold(), new Diadem(), new Followers(), new TrustySteed() }));
+		prizes.add(new CardList(new Card[] { new BagOfGold(), new Diadem(), new Followers(), new Princess(), new TrustySteed() }));
 		game.addExtraGameData(prizes);
 
 	}
