@@ -10,19 +10,33 @@ import org.jdominion.effects.CardEffectAction;
 
 public class ThroneRoomEffect extends CardEffectAction {
 
+	private int numberOfTimesToPlayTheCard;
+	private boolean cancelable;
+
+	public ThroneRoomEffect() {
+		this(2, false);
+	}
+
+	public ThroneRoomEffect(int numberOfTimesToPlayTheCard, boolean cancelable) {
+		super();
+		this.numberOfTimesToPlayTheCard = numberOfTimesToPlayTheCard;
+		this.cancelable = cancelable;
+	}
+
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		if (!activePlayer.hasActionCardInHand()) {
 			return false;
 		}
 
-		ChooseActionCardToPlay decision = new ChooseActionCardToPlay(activePlayer.getHand(), false);
+		ChooseActionCardToPlay decision = new ChooseActionCardToPlay(activePlayer.getHand(), this.cancelable);
 		activePlayer.decide(decision, this);
 		assert decision.getAnswer().size() == 1;
 		Card choosenCard = decision.getAnswer().getFirst();
 		assert choosenCard.isOfType(Type.ACTION);
-		currentTurn.playCard(activePlayer, supply, choosenCard);
-		currentTurn.playCard(activePlayer, supply, choosenCard);
+		for (int i = 0; i < numberOfTimesToPlayTheCard; i++) {
+			currentTurn.playCard(activePlayer, supply, choosenCard);
+		}
 
 		return true;
 	}
