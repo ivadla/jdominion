@@ -15,12 +15,12 @@ public abstract class ChooseBetweenEffects extends CardEffectAction {
 	/**
 	 * @param effects
 	 *            List of effects to choose from
-	 * @param numberIfChoices
+	 * @param numberOfChoices
 	 *            how many effects can be chosen
 	 */
-	public ChooseBetweenEffects(int numberIfChoices, List<CardEffect> effects) {
+	public ChooseBetweenEffects(int numberOfChoices, List<CardEffect> effects) {
 		this.effects = effects;
-		this.numberOfChoices = numberIfChoices;
+		this.numberOfChoices = numberOfChoices;
 	}
 
 	@Override
@@ -38,6 +38,6 @@ public abstract class ChooseBetweenEffects extends CardEffectAction {
 		return true;
 	}
 
-	protected abstract ChooseBetweenEffectsDecision createDecision(int numberIfChoices, List<CardEffect> effects);
+	protected abstract ChooseBetweenEffectsDecision createDecision(int numberOfChoices, List<CardEffect> effects);
 
 }

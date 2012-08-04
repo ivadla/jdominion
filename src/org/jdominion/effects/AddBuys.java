@@ -19,4 +19,8 @@ public class AddBuys extends CardEffectAction {
 		return true;
 	}
 
+	@Override
+	public String getText() {
+		return "+ " + numberOfBuysToAdd + " Buy" + (numberOfBuysToAdd > 1 ? "s" : "");
+	}
 }
