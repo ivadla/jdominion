@@ -97,9 +97,15 @@ public class TournamentEffect extends CardEffectAction {
 	@Override
 	public void gameStarted(Game game) {
 		Prizes prizes = new Prizes();
-		prizes.add(new CardList(new Card[] { new BagOfGold(), new Diadem(), new Followers(), new Princess(), new TrustySteed() }));
+		prizes.add(new CardList(new Card[] { new BagOfGold(), new Diadem(), new Followers(), createPrincessCard(game), new TrustySteed() }));
 		game.addExtraGameData(prizes);
 
+	}
+
+	private Princess createPrincessCard(Game game) {
+		Princess princess = new Princess();
+		princess.getEffect(PrincessEffect.class).gameStarted(game);
+		return princess;
 	}
 
 	private boolean revealsProvince(Player player, Turn currentTurn, Supply supply) {
