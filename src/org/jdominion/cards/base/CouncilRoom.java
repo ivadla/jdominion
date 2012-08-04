@@ -3,7 +3,7 @@ package org.jdominion.cards.base;
 import org.jdominion.Card;
 import org.jdominion.effects.AddBuys;
 import org.jdominion.effects.DrawCards;
-import org.jdominion.effects.base.OtherPlayersDrawCards;
+import org.jdominion.effects.OtherPlayersDrawCards;
 
 public class CouncilRoom extends Card {
 

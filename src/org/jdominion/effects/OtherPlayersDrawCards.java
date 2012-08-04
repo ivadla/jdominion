@@ -1,13 +1,19 @@
-package org.jdominion.effects.base;
+package org.jdominion.effects;
 
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.effects.CardEffectAction;
+import org.jdominion.event.Attack;
 
 public class OtherPlayersDrawCards extends CardEffectAction {
 
 	private int numberOfCardsToDraw;
+	private boolean isPartOfAnAttack = false;
+
+	public OtherPlayersDrawCards(int numberOfCardsToDraw, boolean isPartOfAnAttack) {
+		this(numberOfCardsToDraw);
+		this.isPartOfAnAttack = isPartOfAnAttack;
+	}
 
 	public OtherPlayersDrawCards(int numberOfCardsToDraw) {
 		super();
@@ -17,7 +23,9 @@ public class OtherPlayersDrawCards extends CardEffectAction {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		for (Player player : currentTurn.getOtherPlayers()) {
-			player.drawCardsIntoHand(this.numberOfCardsToDraw);
+			if (!isPartOfAnAttack || !Attack.isBlocked(player, activePlayer, this, currentTurn, supply)) {
+				player.drawCardsIntoHand(this.numberOfCardsToDraw);
+			}
 		}
 		return true;
 	}
