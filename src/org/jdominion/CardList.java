@@ -14,9 +14,15 @@ import org.jdominion.effects.CardEffect;
 public class CardList implements Iterable<Card> {
 
 	protected List<Card> elements;
+	private boolean mayContainDuplicatedElements = false;
 
 	public CardList() {
 		this.elements = new ArrayList<Card>();
+	}
+
+	public CardList(boolean mayContainDuplicatedElements) {
+		this();
+		this.mayContainDuplicatedElements = mayContainDuplicatedElements;
 	}
 
 	public CardList(Card initialContent) {
@@ -98,7 +104,9 @@ public class CardList implements Iterable<Card> {
 	// Methods from List:
 
 	public void add(Card e) {
-		assert !elements.contains(e) : "Adding duplicated Card to the list. This is probably a bug";
+		if (!this.mayContainDuplicatedElements) {
+			assert !elements.contains(e) : "Adding duplicated Card to the list. This is probably a bug";
+		}
 		elements.add(e);
 	}
 

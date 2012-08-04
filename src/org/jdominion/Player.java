@@ -252,11 +252,13 @@ public class Player implements Serializable, IPlayer {
 
 	public void trashCards(CardList cardsToTrash, Game game) {
 		for (Card cardToTrash : cardsToTrash) {
+			// TODO: make this more general to trash a card wherever it might be
+			// Cards should know there location for this
 			if (hand.contains(cardToTrash)) {
 				removeCardFromHand(cardToTrash);
 			}
-			if (game.getCurrentTurn().getPlayedCards().contains(cardToTrash)) {
-				game.getCurrentTurn().getPlayedCards().remove(cardToTrash);
+			if (game.getCurrentTurn().getCardsInPlay().contains(cardToTrash)) {
+				game.getCurrentTurn().getCardsInPlay().remove(cardToTrash);
 			}
 		}
 		game.addCardsToTrash(cardsToTrash);
@@ -310,7 +312,7 @@ public class Player implements Serializable, IPlayer {
 		list.addAll(discardPile);
 		list.addAll(cardsSetAside);
 		if (currentTurn != null) {
-			list.addAll(currentTurn.getPlayedCards());
+			list.addAll(currentTurn.getCardsInPlay());
 		}
 		return list;
 	}

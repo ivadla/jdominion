@@ -53,7 +53,7 @@ public class GuiInformationSource implements IGuiInformationSource {
 
 	@Override
 	public CardList getPlayArea() {
-		return new CardList(getCurrentTurn().getPlayedCards());
+		return new CardList(getCurrentTurn().getCardsInPlay());
 	}
 
 	@Override

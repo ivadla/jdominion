@@ -24,13 +24,11 @@ public class Turn implements Serializable {
 	private int extraMoney = 0;
 	private int availableBuys = 1;
 
-	// this is not the same as the number of action Cards played due to throne room
-	// used for conspirator
-	private int actionsPlayed = 0;
 	private Player activePlayer;
 	private Game game;
 
-	private CardList playedCards = new CardList();
+	private CardList cardsInPlay = new CardList();
+	private CardList playedCards = new CardList(true);
 
 	public int getTurnNumber() {
 		return turnNumber;
@@ -63,10 +61,6 @@ public class Turn implements Serializable {
 		return availableBuys;
 	}
 
-	public int getActionsPlayed() {
-		return this.actionsPlayed;
-	}
-
 	public void setActivePlayer(Player activePlayer) {
 		this.activePlayer = activePlayer;
 	}
@@ -83,13 +77,18 @@ public class Turn implements Serializable {
 		return game;
 	}
 
+	/**
+	 * Returns the list of cards which have been played this turn. This List may contain duplicated elements if a card
+	 * was played more than once (e.g. due to throne room)
+	 * 
+	 * @return CardList
+	 */
 	public CardList getPlayedCards() {
 		return playedCards;
 	}
 
 	public CardList getCardsInPlay() {
-		// TODO: this should be different with duration cards
-		return playedCards;
+		return cardsInPlay;
 	}
 
 	public Turn(Game game, Player activePlayer, int turnNumber) {
@@ -143,12 +142,12 @@ public class Turn implements Serializable {
 
 	public void playCard(Player activePlayer, Supply supply, Card cardToPlay) {
 		// the card could be already in the play Area, because it was played twice by throne room
-		if (!this.playedCards.contains(cardToPlay)) {
-			this.playedCards.add(cardToPlay);
+		if (!this.cardsInPlay.contains(cardToPlay)) {
+			this.cardsInPlay.add(cardToPlay);
 		}
-		if (cardToPlay.isOfType(Type.ACTION)) {
-			this.actionsPlayed++;
-		}
+
+		this.playedCards.add(cardToPlay);
+
 		activePlayer.playCard(cardToPlay, this, supply);
 	}
 
@@ -208,7 +207,7 @@ public class Turn implements Serializable {
 	}
 
 	private void cleanUp(Player activePlayer) {
-		activePlayer.placeOnDiscardPile(playedCards);
+		activePlayer.placeOnDiscardPile(cardsInPlay);
 		activePlayer.discardCardsFromHand(activePlayer.getHand());
 		activePlayer.drawNewHand();
 	}
