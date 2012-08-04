@@ -25,7 +25,7 @@ public class TrashCards extends CardEffectAction {
 		return cardsToTrash.size() >= minimumNumberOfCardsToTrash;
 	}
 
-	private CardList trashCards(Player activePlayer, Game game, Turn currentTurn, Supply supply) {
+	protected CardList trashCards(Player activePlayer, Game game, Turn currentTurn, Supply supply) {
 		CardList trashedCards = new CardList();
 
 		do {
