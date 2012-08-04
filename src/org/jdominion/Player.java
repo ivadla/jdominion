@@ -253,7 +253,7 @@ public class Player implements Serializable, IPlayer {
 	public void trashCards(CardList cardsToTrash, Game game) {
 		for (Card cardToTrash : cardsToTrash) {
 			// TODO: make this more general to trash a card wherever it might be
-			// Cards should know there location for this
+			// Cards should know their location for this
 			if (hand.contains(cardToTrash)) {
 				removeCardFromHand(cardToTrash);
 			}
