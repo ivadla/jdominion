@@ -215,6 +215,18 @@ public class CardList implements Iterable<Card> {
 		return cheapestCard;
 	}
 
+	public Card getMostExpensiveCard() {
+		int costOfMostExpensiveCard = Integer.MIN_VALUE;
+		Card mostExpensiveCard = null;
+		for (Card card : elements) {
+			if (card.getCost() > costOfMostExpensiveCard) {
+				costOfMostExpensiveCard = card.getCost();
+				mostExpensiveCard = card;
+			}
+		}
+		return mostExpensiveCard;
+	}
+
 	public CardList getCardsOfType(Card.Type type) {
 		CardList cardsOfType = new CardList();
 		for (Card card : elements) {

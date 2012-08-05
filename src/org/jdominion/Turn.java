@@ -27,7 +27,6 @@ public class Turn implements Serializable {
 	private Player activePlayer;
 	private Game game;
 
-	private CardList cardsInPlay = new CardList();
 	private CardList playedCards = new CardList(true);
 
 	public int getTurnNumber() {
@@ -87,10 +86,6 @@ public class Turn implements Serializable {
 		return playedCards;
 	}
 
-	public CardList getCardsInPlay() {
-		return cardsInPlay;
-	}
-
 	public Turn(Game game, Player activePlayer, int turnNumber) {
 		this.setGame(game);
 		this.setActivePlayer(activePlayer);
@@ -142,11 +137,11 @@ public class Turn implements Serializable {
 
 	public void playCard(Player activePlayer, Supply supply, Card cardToPlay) {
 		// the card could be already in the play Area, because it was played twice by throne room
-		if (!this.cardsInPlay.contains(cardToPlay)) {
+		if (!activePlayer.getCardsInPlay().contains(cardToPlay)) {
 			// also check if the card was played before, because maybe it removed itself from the play area
 			// (e.g. a throne roomed feast)
 			if (!this.playedCards.contains(cardToPlay)) {
-				this.cardsInPlay.add(cardToPlay);
+				activePlayer.getCardsInPlay().add(cardToPlay);
 			}
 		}
 
@@ -211,7 +206,7 @@ public class Turn implements Serializable {
 	}
 
 	private void cleanUp(Player activePlayer) {
-		activePlayer.placeOnDiscardPile(cardsInPlay);
+		activePlayer.placeOnDiscardPile(activePlayer.getCardsInPlay());
 		activePlayer.discardCardsFromHand(activePlayer.getHand());
 		activePlayer.drawNewHand();
 	}

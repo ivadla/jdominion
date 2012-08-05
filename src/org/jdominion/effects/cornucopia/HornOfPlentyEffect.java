@@ -20,7 +20,7 @@ public class HornOfPlentyEffect extends CardEffectTreasure {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		Set<Class<? extends Card>> differentCardClasses = new HashSet<Class<? extends Card>>();
-		for (Card cardInPlay : currentTurn.getCardsInPlay()) {
+		for (Card cardInPlay : activePlayer.getCardsInPlay()) {
 			differentCardClasses.add(cardInPlay.getClass());
 		}
 

@@ -36,6 +36,7 @@ public class Player implements Serializable, IPlayer {
 	private Deck deck;
 	private CardList discardPile;
 	private CardList cardsSetAside;
+	private CardList cardsInPlay;
 	private int turnCounter = 0;
 
 	private final IStrategy strategy;
@@ -55,6 +56,7 @@ public class Player implements Serializable, IPlayer {
 		this.strategy = strategy;
 		this.strategy.setPlayer(this);
 		discardPile = new CardList();
+		this.cardsInPlay = new CardList();
 		this.hand = new Hand();
 		this.cardsSetAside = new CardList();
 		drawNewHand();
@@ -208,15 +210,16 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void placeOnDiscardPile(Card card) {
+		if (cardsInPlay.contains(card)) {
+			cardsInPlay.remove(card);
+		}
 		discardPile.add(card);
-		// CardList discardedCards = new CardList();
-		// discardedCards.add(card);
-		// getEventObserver().discardsCards(this, discardedCards);
 	}
 
 	public void placeOnDiscardPile(CardList cards) {
-		discardPile.addAll(cards);
-		// getEventObserver().discardsCards(this, cards);
+		for (Card card : new CardList(cards)) {
+			placeOnDiscardPile(card);
+		}
 	}
 
 	public void placeOnDeck(Card card) {
@@ -257,8 +260,8 @@ public class Player implements Serializable, IPlayer {
 			if (hand.contains(cardToTrash)) {
 				removeCardFromHand(cardToTrash);
 			}
-			if (game.getCurrentTurn().getCardsInPlay().contains(cardToTrash)) {
-				game.getCurrentTurn().getCardsInPlay().remove(cardToTrash);
+			if (getCardsInPlay().contains(cardToTrash)) {
+				getCardsInPlay().remove(cardToTrash);
 			}
 		}
 		game.addCardsToTrash(cardsToTrash);
@@ -275,7 +278,7 @@ public class Player implements Serializable, IPlayer {
 
 	public void buyCard(Class<? extends Card> cardToBuy, Turn currentTurn, Supply supply) {
 		Card boughtCard = supply.takeCard(cardToBuy);
-		EventManager.getInstance().handleEvent(new CardBought(this, boughtCard));
+		EventManager.getInstance().handleEvent(new CardBought(this, boughtCard, currentTurn, supply));
 		this.gainCard(boughtCard, currentTurn, supply);
 	}
 
@@ -312,7 +315,7 @@ public class Player implements Serializable, IPlayer {
 		list.addAll(discardPile);
 		list.addAll(cardsSetAside);
 		if (currentTurn != null) {
-			list.addAll(currentTurn.getCardsInPlay());
+			list.addAll(getCardsInPlay());
 		}
 		return list;
 	}
@@ -395,6 +398,10 @@ public class Player implements Serializable, IPlayer {
 
 	private Object writeReplace() throws ObjectStreamException {
 		return new SerializedPlayer(name, getHandSize(), getDeckSize(), getDiscardPileSize());
+	}
+
+	public CardList getCardsInPlay() {
+		return cardsInPlay;
 	}
 
 }

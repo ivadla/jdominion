@@ -110,7 +110,7 @@ public class RemoteClient implements IGuiInformationSource {
 
 	@Override
 	public CardList getPlayArea() {
-		return getCurrentTurn().getCardsInPlay();
+		return getCurrentTurn().getActivePlayer().getCardsInPlay();
 	}
 
 	@Override

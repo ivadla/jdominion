@@ -48,7 +48,7 @@ public abstract class CardEffectInPlay extends CardEffect implements IEventHandl
 		// this point. We ignore the event, because game.getCurrentTurn() would return null
 		// and cause a NullPointerException
 		if (game.gameIsRunning()) {
-			for (Card card : game.getCurrentTurn().getCardsInPlay().getCardsByEffectClass(getClass())) {
+			for (Card card : game.getCurrentTurn().getActivePlayer().getCardsInPlay().getCardsByEffectClass(getClass())) {
 				CardEffectInPlay inPlayEffect = (CardEffectInPlay) card.getEffect(getClass());
 				inPlayEffect.handleEventWhileInPlay(event, game.getCurrentTurn().getActivePlayer(), game.getCurrentTurn(), game.getSupply());
 			}
