@@ -11,7 +11,16 @@ import org.jdominion.decisions.ChooseCardsFromHandToTrash;
 
 public class UpgradeEffect extends TrashGainEffect {
 
-	private int addedValue = 1;
+	private int addedValue;
+
+	public UpgradeEffect() {
+		this(1);
+	}
+
+	public UpgradeEffect(int addedValue) {
+		super();
+		this.addedValue = addedValue;
+	}
 
 	@Override
 	protected ChooseCardsFromHandToTrash createDecision(Hand hand) {
