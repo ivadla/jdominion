@@ -1,5 +1,6 @@
 package org.jdominion.effects.prosperity;
 
+import org.jdominion.Card;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
@@ -21,7 +22,9 @@ public class MintEffect extends CardEffectAction {
 			return false;
 		}
 
-		activePlayer.gainCard(decision.getAnswer().getFirst().getClass(), supply, currentTurn);
+		Card revealedCard = decision.getAnswer().getFirst();
+		activePlayer.revealCardFromHand(revealedCard);
+		activePlayer.gainCard(revealedCard.getClass(), supply, currentTurn);
 
 		return true;
 	}
