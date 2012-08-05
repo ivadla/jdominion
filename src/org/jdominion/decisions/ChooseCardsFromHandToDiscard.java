@@ -49,7 +49,7 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 	}
 
 	// TODO: move to a more general place
-	private boolean hasSuperfluousActions(Hand hand) {
+	protected boolean hasSuperfluousActions(Hand hand) {
 		CardList actionCards = hand.getCardsOfType(Type.ACTION);
 
 		if (actionCards.size() > 1) {
@@ -61,7 +61,7 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 	}
 
 	// TODO: move to a more general place
-	private Card chooseCheapestTerminalAction(CardList actionCards) {
+	protected Card chooseCheapestTerminalAction(CardList actionCards) {
 		int costOfCheapestActionCard = Integer.MAX_VALUE;
 		Card cheapestActionCard = null;
 		for (Card card : actionCards) {
