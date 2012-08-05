@@ -15,14 +15,16 @@ import org.jdominion.event.EventManager;
 import org.jdominion.event.StartOfTurn;
 
 public class Turn implements Serializable {
-	/**
-	 * 
-	 */
+
+	public enum Phase {
+		Action, Buy, Cleanup
+	}
 	private static final long serialVersionUID = 1L;
 	private int turnNumber;
 	private int availableActions = 1;
 	private int extraMoney = 0;
 	private int availableBuys = 1;
+	private Phase currentPhase;
 
 	private Player activePlayer;
 	private Game game;
@@ -60,6 +62,10 @@ public class Turn implements Serializable {
 		return availableBuys;
 	}
 
+	public Phase getCurrentPhase() {
+		return currentPhase;
+	}
+
 	public void setActivePlayer(Player activePlayer) {
 		this.activePlayer = activePlayer;
 	}
@@ -93,10 +99,13 @@ public class Turn implements Serializable {
 	}
 
 	public void doTurn() {
+		this.currentPhase = Phase.Action;
 		EventManager.getInstance().handleEvent(new StartOfTurn(this));
 		playActionCards(activePlayer, game.getSupply());
+		this.currentPhase = Phase.Buy;
 		playTreasureCards(activePlayer, game.getSupply());
 		buyCards(activePlayer, game.getSupply());
+		this.currentPhase = Phase.Cleanup;
 		cleanUp(activePlayer);
 		EventManager.getInstance().handleEvent(new EndOfTurn(this));
 	}
