@@ -44,11 +44,16 @@ public abstract class CardEffectInPlay extends CardEffect implements IEventHandl
 
 	@Override
 	public void handleEvent(Event event) {
-		for (Card card : game.getCurrentTurn().getCardsInPlay().getCardsByEffectClass(getClass())) {
-			CardEffectInPlay inPlayEffect = (CardEffectInPlay) card.getEffect(getClass());
-			inPlayEffect.handleEventWhileInPlay(event, game.getCurrentTurn().getActivePlayer(), game.getCurrentTurn(), game.getSupply());
+		// it's possible that some events happen before the game even started, but the card can't possibly be in play at
+		// this point. We ignore the event, because game.getCurrentTurn() would return null
+		// and cause a NullPointerException
+		if (game.gameIsRunning()) {
+			for (Card card : game.getCurrentTurn().getCardsInPlay().getCardsByEffectClass(getClass())) {
+				CardEffectInPlay inPlayEffect = (CardEffectInPlay) card.getEffect(getClass());
+				inPlayEffect.handleEventWhileInPlay(event, game.getCurrentTurn().getActivePlayer(), game.getCurrentTurn(), game.getSupply());
+			}
 		}
 	}
-	
+
 	protected abstract void handleEventWhileInPlay(Event event, Player activePlayer, Turn currentTurn, Supply supply);
 }

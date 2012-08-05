@@ -29,6 +29,7 @@ public class Game implements Serializable, ICurrentTurn {
 	private Turn currentTurn = null;
 	private Trash trash;
 	private Map<Class<? extends ExtraGameData<?>>, ExtraGameData<?>> extraGameData;
+	private boolean gameStarted = false;
 
 	private void setPlayers(List<Player> players) {
 		this.players = players;
@@ -114,8 +115,8 @@ public class Game implements Serializable, ICurrentTurn {
 		return players;
 	}
 
-	private boolean gameIsRunning() {
-		return getWinners() == null;
+	public boolean gameIsRunning() {
+		return this.gameStarted && (getWinners() == null);
 	}
 
 	public boolean isVictoryConditionReached() {
@@ -146,6 +147,7 @@ public class Game implements Serializable, ICurrentTurn {
 	public void runGame() {
 		informPlayersAboutGameStart();
 		informEffectsAboutGameStart();
+		this.gameStarted = true;
 		while (gameIsRunning()) {
 			setTurnCounter(getTurnCounter() + 1);
 			for (Player activePlayer : getPlayers()) {
