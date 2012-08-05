@@ -1,4 +1,4 @@
-package org.jdominion.cards.intrigue;
+package org.jdominion.effects.intrigue;
 
 import java.util.ArrayList;
 import java.util.List;
