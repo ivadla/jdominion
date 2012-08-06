@@ -40,7 +40,7 @@ public abstract class ChooseFromRevealedCards extends Decision<List<RevealedCard
 		return true;
 	}
 
-	private CardList getCardListFromRevealedCards(List<RevealedCard> revealedCards) {
+	protected CardList getCardListFromRevealedCards(List<RevealedCard> revealedCards) {
 		CardList cardList = new CardList();
 		for (RevealedCard revealedCard : revealedCards) {
 			cardList.add(revealedCard.getRevealedCard());
