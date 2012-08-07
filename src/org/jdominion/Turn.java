@@ -53,6 +53,10 @@ public class Turn implements Serializable {
 		return extraMoney;
 	}
 
+	public void setExtraMoney(int extraMoney) {
+		this.extraMoney = extraMoney;
+	}
+
 	public void addBuys(int value) {
 		assert value > 0;
 		availableBuys += value;
