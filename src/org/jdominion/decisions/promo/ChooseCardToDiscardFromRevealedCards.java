@@ -1,5 +1,6 @@
 package org.jdominion.decisions.promo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdominion.Card;
@@ -49,6 +50,7 @@ public class ChooseCardToDiscardFromRevealedCards extends ChooseFromRevealedCard
 				revealedCard.setChoosenOption(PutInHand.getInstance());
 			}
 		}
+		this.setAnswer(new ArrayList<RevealedCard>(getRevealedCards()));
 	}
 
 	private Card findCardToDiscard(Turn currentTurn, CardList revealedCards) {
