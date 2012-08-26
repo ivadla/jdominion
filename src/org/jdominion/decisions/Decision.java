@@ -17,12 +17,11 @@ public abstract class Decision<E> implements Serializable {
 		return userMessage;
 	}
 
-	public boolean setAnswer(E answer) {
+	public void setAnswer(E answer) {
 		if (isValidAnswer(answer)) {
 			this.answer = answer;
-			return true;
 		} else {
-			return false;
+			throw new UnsupportedOperationException("setting an invalid Answer");
 		}
 	}
 
