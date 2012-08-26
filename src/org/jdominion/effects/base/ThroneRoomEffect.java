@@ -1,10 +1,10 @@
 package org.jdominion.effects.base;
 
 import org.jdominion.Card;
+import org.jdominion.Card.Type;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.Card.Type;
 import org.jdominion.decisions.ChooseActionCardToPlay;
 import org.jdominion.effects.CardEffectAction;
 
@@ -31,6 +31,9 @@ public class ThroneRoomEffect extends CardEffectAction {
 
 		ChooseActionCardToPlay decision = new ChooseActionCardToPlay(activePlayer.getHand(), this.cancelable);
 		activePlayer.decide(decision, this);
+		if (this.cancelable && decision.isCanceled()) {
+			return false;
+		}
 		assert decision.getAnswer().size() == 1;
 		Card choosenCard = decision.getAnswer().getFirst();
 		assert choosenCard.isOfType(Type.ACTION);
