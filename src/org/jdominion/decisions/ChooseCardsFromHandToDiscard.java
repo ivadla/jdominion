@@ -1,9 +1,9 @@
 package org.jdominion.decisions;
 
 import org.jdominion.Card;
+import org.jdominion.Card.Type;
 import org.jdominion.CardList;
 import org.jdominion.Hand;
-import org.jdominion.Card.Type;
 import org.jdominion.cards.common.Copper;
 
 public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
@@ -30,6 +30,9 @@ public class ChooseCardsFromHandToDiscard extends ChooseCardsFromHand {
 
 	@Override
 	protected Card chooseCardForDefaultAnswer(Hand hand) {
+		if (this.isCancelable()) {
+			this.setCanceled(true);
+		}
 		for (Card card : hand) {
 			if (card.isOfType(Type.CURSE)) {
 				return card;
