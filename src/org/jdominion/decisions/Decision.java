@@ -18,6 +18,7 @@ public abstract class Decision<E> implements Serializable {
 	}
 
 	public void setAnswer(E answer) {
+		assert isValidAnswer(answer) : "setting an invalid Answer";
 		if (isValidAnswer(answer)) {
 			this.answer = answer;
 		} else {

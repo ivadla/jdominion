@@ -102,14 +102,15 @@ public class HumanStrategy implements IStrategy {
 
 	public void decide(ChooseCardFromSupply decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
 		Class<? extends Card> choosenCard;
-		while (!decision.isAnswered()) {
+		do {
 			choosenCard = mainWindow.chooseCardFromSupply(decision.getUserMessage(), decision.getAvailableCards(), decision.isCancelable());
-			if (choosenCard == null) {
+			if (choosenCard == null && decision.isCancelable()) {
 				decision.setCanceled(true);
-			} else {
-				decision.setAnswer(choosenCard);
+				return;
 			}
-		}
+		} while (!decision.isValidAnswer(choosenCard));
+
+		decision.setAnswer(choosenCard);
 	}
 
 	public void decide(YesNoDecision decision, CardEffect effect, Hand hand, Turn currentTurn, Supply supply) {
