@@ -10,10 +10,10 @@ import org.jdominion.aiStrategies.IStrategy;
 import org.jdominion.decisions.Decision;
 import org.jdominion.effects.CardEffect;
 import org.jdominion.event.CardBought;
+import org.jdominion.event.CardDiscarded;
 import org.jdominion.event.CardGained;
 import org.jdominion.event.CardPlayFinished;
 import org.jdominion.event.CardPlayed;
-import org.jdominion.event.CardsDiscarded;
 import org.jdominion.event.CardsDrawn;
 import org.jdominion.event.CardsRevealed;
 import org.jdominion.event.CardsSetAside;
@@ -201,12 +201,15 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void discardCardsFromHand(CardList cardsToDiscard) {
+
+	}
+	public void discardCardsFromHand(CardList cardsToDiscard, Turn currentTurn, Supply supply) {
 		for (Card card : cardsToDiscard) {
 			assert hand.contains(card);
 			removeCardFromHand(card);
 			placeOnDiscardPile(card);
+			EventManager.getInstance().handleEvent(new CardDiscarded(this, card, currentTurn, supply));
 		}
-		EventManager.getInstance().handleEvent(new CardsDiscarded(this, cardsToDiscard));
 	}
 
 	public void placeOnDiscardPile(Card card) {
@@ -248,32 +251,30 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void trashCard(Card cardToTrash, Game game) {
-		CardList cardList = new CardList();
-		cardList.add(cardToTrash);
-		trashCards(cardList, game);
+		// TODO: make this more general to trash a card wherever it might be
+		// Cards should know their location for this
+		if (hand.contains(cardToTrash)) {
+			removeCardFromHand(cardToTrash);
+		}
+		if (getCardsInPlay().contains(cardToTrash)) {
+			getCardsInPlay().remove(cardToTrash);
+		}
+		game.getTrash().trashCard(cardToTrash, game.getCurrentTurn(), game.getSupply());
 	}
 
 	public void trashCards(CardList cardsToTrash, Game game) {
 		for (Card cardToTrash : cardsToTrash) {
-			// TODO: make this more general to trash a card wherever it might be
-			// Cards should know their location for this
-			if (hand.contains(cardToTrash)) {
-				removeCardFromHand(cardToTrash);
-			}
-			if (getCardsInPlay().contains(cardToTrash)) {
-				getCardsInPlay().remove(cardToTrash);
-			}
+			this.trashCard(cardToTrash, game);
 		}
-		game.addCardsToTrash(cardsToTrash);
 	}
 
 	public void playCard(Card card, Turn currentTurn, Supply supply) {
 		if (hand.contains(card)) {
 			removeCardFromHand(card);
 		}
-		EventManager.getInstance().handleEvent(new CardPlayed(this, card));
+		EventManager.getInstance().handleEvent(new CardPlayed(this, card, currentTurn, supply));
 		card.play(this, currentTurn, supply);
-		EventManager.getInstance().handleEvent(new CardPlayFinished(this, card));
+		EventManager.getInstance().handleEvent(new CardPlayFinished(this, card, currentTurn, supply));
 	}
 
 	public void buyCard(Class<? extends Card> cardToBuy, Turn currentTurn, Supply supply) {

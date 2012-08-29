@@ -5,7 +5,7 @@ import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
 
-public class CardBought extends CardReceived {
+public class CardBought extends CardEvent {
 
 
 	public CardBought(Player affectedPlayer, Card boughtCard, Turn currentTurn, Supply supply) {
@@ -13,7 +13,7 @@ public class CardBought extends CardReceived {
 	}
 
 	public Card getBoughtCard() {
-		return super.getReceivedCard();
+		return super.getCard();
 	}
 
 

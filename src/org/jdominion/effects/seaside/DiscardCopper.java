@@ -14,7 +14,7 @@ public class DiscardCopper extends CardEffectSimpleAttack {
 		if (playerToAttack.getHand().contains(Copper.class)) {
 			CardList cardsToDiscard = new CardList();
 			cardsToDiscard.add(playerToAttack.getHand().getCardByClass(Copper.class));
-			playerToAttack.discardCardsFromHand(cardsToDiscard);
+			playerToAttack.discardCardsFromHand(cardsToDiscard, currentTurn, supply);
 		}
 	}
 

@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jdominion.Card;
+import org.jdominion.Card.Type;
 import org.jdominion.CardList;
 import org.jdominion.Player;
-import org.jdominion.Card.Type;
 import org.jdominion.decisions.ChooseReactionCardToUse;
 import org.jdominion.effects.CardEffect;
 import org.jdominion.effects.CardEffectReaction;
@@ -34,7 +34,7 @@ public class ReactionEventHandler implements IEventHandler {
 
 	@Override
 	public void handleEvent(Event event) {
-		if ((event instanceof CardPlayed) && ((CardPlayed) event).getPlayedCard().isOfType(Type.ATTACK)) {
+		if ((event instanceof CardPlayed) && ((CardPlayed) event).getCard().isOfType(Type.ATTACK)) {
 
 			for (Entry<Player, CardList> playerCardMapEntry : playerCardMap.entrySet()) {
 				// affectedPlayer is the player who plays the attack card

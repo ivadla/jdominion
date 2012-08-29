@@ -2,6 +2,7 @@ package org.jdominion.event;
 
 import org.jdominion.Player;
 
+//TODO: make this a CardEvent
 public class CardsDrawn extends Event {
 
 	private int numberOfDrawnCards;

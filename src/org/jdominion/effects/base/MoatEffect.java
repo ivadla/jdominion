@@ -1,15 +1,15 @@
 package org.jdominion.effects.base;
 
-import org.jdominion.Player;
 import org.jdominion.Card.Type;
+import org.jdominion.Player;
 import org.jdominion.effects.CardEffectReaction;
 import org.jdominion.event.Attack;
 import org.jdominion.event.CardPlayFinished;
 import org.jdominion.event.CardPlayed;
 import org.jdominion.event.Event;
 import org.jdominion.event.EventManager;
-import org.jdominion.event.IEventHandler;
 import org.jdominion.event.EventManager.Duration;
+import org.jdominion.event.IEventHandler;
 
 public class MoatEffect extends CardEffectReaction implements IEventHandler {
 
@@ -17,7 +17,7 @@ public class MoatEffect extends CardEffectReaction implements IEventHandler {
 	public void handleReaction(Event event, Player reactingPlayer) {
 		if (event instanceof CardPlayed) {
 			CardPlayed cardPlayedEvent = (CardPlayed) event;
-			if (cardPlayedEvent.getPlayedCard().isOfType(Type.ATTACK)) {
+			if (cardPlayedEvent.getCard().isOfType(Type.ATTACK)) {
 				EventManager.getInstance().addEventHandler(this, Attack.class, Duration.END_OF_TURN);
 				EventManager.getInstance().addEventHandler(this, CardPlayFinished.class, Duration.END_OF_TURN);
 			}

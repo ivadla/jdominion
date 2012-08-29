@@ -5,7 +5,7 @@ import org.jdominion.Supply;
 import org.jdominion.Turn;
 import org.jdominion.effects.CardEffect;
 
-public class Attack extends CancelableEvent {
+public class Attack extends Event {
 
 	private Player attackedPlayer;
 	private Player attacker;
@@ -21,14 +21,14 @@ public class Attack extends CancelableEvent {
 	}
 
 	public Attack(Player attackedPlayer, Player attacker, CardEffect effect) {
-		super(attacker.getName() + " attacks " + attackedPlayer.getName() + " with " + effect.getCard().getName(), attackedPlayer);
+		super(attacker.getName() + " attacks " + attackedPlayer.getName() + " with " + effect.getCard().getName(), attackedPlayer, true);
 		this.attackedPlayer = attackedPlayer;
 		this.attacker = attacker;
 		this.effect = effect;
 	}
 
 	public static boolean isBlocked(Player attackedPlayer, Player attacker, CardEffect effect, Turn currentTurn, Supply supply) {
-		CancelableEvent event = new Attack(attackedPlayer, attacker, effect);
+		Attack event = new Attack(attackedPlayer, attacker, effect);
 		EventManager.getInstance().handleEvent(event);
 		return event.isCanceled();
 	}

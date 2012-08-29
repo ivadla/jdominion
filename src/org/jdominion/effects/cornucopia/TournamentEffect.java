@@ -41,7 +41,7 @@ public class TournamentEffect extends CardEffectAction {
 
 		if (activePlayerRevealedProvince && ((getAvailablePrizes(currentTurn.getGame()).size() > 0) || supply.isCardAvailable(Duchy.class))) {
 
-			discardProvince(activePlayer);
+			discardProvince(activePlayer, currentTurn, supply);
 
 			Card choosenCard = choosePrizeOrDuchy(activePlayer, currentTurn, supply);
 			if (!(choosenCard instanceof Duchy)) {
@@ -85,8 +85,8 @@ public class TournamentEffect extends CardEffectAction {
 		return prizesAndDuchySupply.takeCard((Class<? extends Card>) decision.getAnswer());
 	}
 
-	private void discardProvince(Player activePlayer) {
-		activePlayer.discardCardsFromHand(new CardList(activePlayer.getHand().getCardByClass(Province.class)));
+	private void discardProvince(Player activePlayer, Turn currentTurn, Supply supply) {
+		activePlayer.discardCardsFromHand(new CardList(activePlayer.getHand().getCardByClass(Province.class)), currentTurn, supply);
 	}
 
 	@SuppressWarnings("unchecked")

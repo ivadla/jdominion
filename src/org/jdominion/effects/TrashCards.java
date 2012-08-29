@@ -21,31 +21,32 @@ public class TrashCards extends CardEffectAction {
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
-		CardList cardsToTrash = trashCards(activePlayer, currentTurn.getGame(), currentTurn, supply);
+		CardList cardsToTrash = chooseCardsToTrash(activePlayer, currentTurn.getGame(), currentTurn, supply);
+		activePlayer.trashCards(cardsToTrash, currentTurn.getGame());
 		return cardsToTrash.size() >= minimumNumberOfCardsToTrash;
 	}
 
-	protected CardList trashCards(Player activePlayer, Game game, Turn currentTurn, Supply supply) {
-		CardList trashedCards = new CardList();
+	protected CardList chooseCardsToTrash(Player activePlayer, Game game, Turn currentTurn, Supply supply) {
+		CardList cardsTotrash = new CardList();
 
 		do {
 			if (activePlayer.getHandSize() == 0) {
-				return trashedCards;
+				return cardsTotrash;
 			}
-			ChooseCardsFromHandToTrash decision = new ChooseCardsFromHandToTrash(trashedCards.size() >= minimumNumberOfCardsToTrash, 1, 1,
+			ChooseCardsFromHandToTrash decision = new ChooseCardsFromHandToTrash(cardsTotrash.size() >= minimumNumberOfCardsToTrash, 1, 1,
 					activePlayer.getHand());
 			activePlayer.decide(decision, this);
 
 			if (!decision.isCanceled()) {
 				Card cardToTrash = decision.getAnswer().getFirst();
-				activePlayer.trashCard(cardToTrash, game);
-				trashedCards.add(cardToTrash);
-			} else if (trashedCards.size() >= minimumNumberOfCardsToTrash) {
-				return trashedCards;
+				activePlayer.removeCardFromHand(cardToTrash);
+				cardsTotrash.add(cardToTrash);
+			} else if (cardsTotrash.size() >= minimumNumberOfCardsToTrash) {
+				return cardsTotrash;
 			}
-		} while ((trashedCards.size() < maximumNumberOfCardsToTrash));
+		} while ((cardsTotrash.size() < maximumNumberOfCardsToTrash));
 
-		return trashedCards;
+		return cardsTotrash;
 	}
 
 	@Override

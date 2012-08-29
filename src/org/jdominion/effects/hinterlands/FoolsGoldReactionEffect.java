@@ -29,7 +29,7 @@ public class FoolsGoldReactionEffect extends CardEffectReaction implements IEven
 		if (event instanceof CardGained) {
 			CardGained cardGainedEvent = (CardGained) event;
 			Player owner = getCard().getOwner();
-			if (cardGainedEvent.getReceivedCard().getClass().equals(Province.class) && !cardGainedEvent.getAffectedPlayer().equals(owner)) {
+			if (cardGainedEvent.getCard().getClass().equals(Province.class) && !cardGainedEvent.getAffectedPlayer().equals(owner)) {
 				TrashFoolsGoldDecision decision = new TrashFoolsGoldDecision();
 				owner.decide(decision, this);
 				if (decision.getAnswer() == true) {

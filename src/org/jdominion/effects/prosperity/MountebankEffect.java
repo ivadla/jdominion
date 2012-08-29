@@ -17,7 +17,7 @@ public class MountebankEffect extends CardEffectSimpleAttack {
 			DiscardCurse decision = new DiscardCurse();
 			playerToAttack.decide(decision, this);
 			if (decision.getAnswer()) {
-				playerToAttack.discardCardsFromHand(new CardList(playerToAttack.getHand().getCardByClass(Curse.class)));
+				playerToAttack.discardCardsFromHand(new CardList(playerToAttack.getHand().getCardByClass(Curse.class)), currentTurn, supply);
 				return;
 			}
 		}

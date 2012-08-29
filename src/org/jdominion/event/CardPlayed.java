@@ -2,17 +2,12 @@ package org.jdominion.event;
 
 import org.jdominion.Card;
 import org.jdominion.Player;
+import org.jdominion.Supply;
+import org.jdominion.Turn;
 
-public class CardPlayed extends Event {
+public class CardPlayed extends CardEvent {
 
-	private Card playedCard;
-
-	public Card getPlayedCard() {
-		return playedCard;
-	}
-
-	public CardPlayed(Player owner, Card playedCard) {
-		super(owner.getName() + " plays " + playedCard.getName(), owner);
-		this.playedCard = playedCard;
+	public CardPlayed(Player owner, Card playedCard, Turn currentTurn, Supply supply) {
+		super("plays", owner, playedCard, currentTurn, supply);
 	}
 }

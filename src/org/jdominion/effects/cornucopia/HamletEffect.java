@@ -14,14 +14,14 @@ public class HamletEffect extends CardEffectAction {
 		ChooseCardFromHandToDiscardForExtraAction actionDecision = new ChooseCardFromHandToDiscardForExtraAction(activePlayer.getHand());
 		activePlayer.decide(actionDecision, this);
 		if (!actionDecision.isCanceled()) {
-			activePlayer.discardCardsFromHand(actionDecision.getAnswer());
+			activePlayer.discardCardsFromHand(actionDecision.getAnswer(), currentTurn, supply);
 			currentTurn.addActions(1);
 		}
 
 		ChooseCardFromHandToDiscardForExtraBuy buyDecision = new ChooseCardFromHandToDiscardForExtraBuy(activePlayer.getHand());
 		activePlayer.decide(buyDecision, this);
 		if (!buyDecision.isCanceled()) {
-			activePlayer.discardCardsFromHand(buyDecision.getAnswer());
+			activePlayer.discardCardsFromHand(buyDecision.getAnswer(), currentTurn, supply);
 			currentTurn.addBuys(1);
 		}
 

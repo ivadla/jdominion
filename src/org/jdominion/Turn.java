@@ -220,7 +220,7 @@ public class Turn implements Serializable {
 
 	private void cleanUp(Player activePlayer) {
 		activePlayer.placeOnDiscardPile(activePlayer.getCardsInPlay());
-		activePlayer.discardCardsFromHand(activePlayer.getHand());
+		activePlayer.discardCardsFromHand(activePlayer.getHand(), this, getGame().getSupply());
 		activePlayer.drawNewHand();
 	}
 

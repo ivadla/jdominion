@@ -16,7 +16,7 @@ public class CellarEffect extends CardEffectAction {
 			if (decision.isCanceled()) {
 				break;
 			} else {
-				activePlayer.discardCardsFromHand(decision.getAnswer());
+				activePlayer.discardCardsFromHand(decision.getAnswer(), currentTurn, supply);
 				numberOfCardsToDraw++;
 			}
 		}

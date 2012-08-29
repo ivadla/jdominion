@@ -14,7 +14,7 @@ public class BaronEffect extends CardEffectAction {
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 
 		if (activePlayer.getHand().contains(Estate.class) && playerWantsToDiscardEstate(activePlayer)) {
-			activePlayer.discardCardsFromHand(new CardList(activePlayer.getHand().getCardByClass(Estate.class)));
+			activePlayer.discardCardsFromHand(new CardList(activePlayer.getHand().getCardByClass(Estate.class)), currentTurn, supply);
 			currentTurn.addExtraMoney(4);
 		} else {
 			activePlayer.gainCard(Estate.class, supply, currentTurn);

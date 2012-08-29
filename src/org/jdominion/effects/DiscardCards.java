@@ -22,7 +22,7 @@ public class DiscardCards extends CardEffectAction {
 			}
 			ChooseCardFromHandToDiscard decision = new ChooseCardFromHandToDiscard(false, activePlayer.getHand());
 			activePlayer.decide(decision, this);
-			activePlayer.discardCardsFromHand(decision.getAnswer());
+			activePlayer.discardCardsFromHand(decision.getAnswer(), currentTurn, supply);
 		}
 		return true;
 	}

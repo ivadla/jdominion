@@ -7,8 +7,8 @@ import java.util.Set;
 
 import org.jdominion.Card;
 import org.jdominion.Trash;
-import org.jdominion.event.CardsRemovedFromTrash;
-import org.jdominion.event.CardsTrashed;
+import org.jdominion.event.CardGainedFromTrash;
+import org.jdominion.event.CardTrashed;
 import org.jdominion.event.Event;
 import org.jdominion.event.EventManager;
 import org.jdominion.event.EventManager.Duration;
@@ -38,8 +38,8 @@ public class TrashController implements IEventHandler, MouseListener {
 
 	public TrashController(IGuiInformationSource guiInformationSource) {
 		this.guiInformationSource = guiInformationSource;
-		EventManager.getInstance().addEventHandler(this, CardsTrashed.class, Duration.FOREVER);
-		EventManager.getInstance().addEventHandler(this, CardsRemovedFromTrash.class, Duration.FOREVER);
+		EventManager.getInstance().addEventHandler(this, CardTrashed.class, Duration.FOREVER);
+		EventManager.getInstance().addEventHandler(this, CardGainedFromTrash.class, Duration.FOREVER);
 		this.view = new TrashView(this);
 		view.addMouseListener(this);
 		view.setImageForSmallView(new CardImage(new TrashCard()));
