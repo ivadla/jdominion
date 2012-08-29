@@ -16,7 +16,7 @@ public class CalculatingCardCost extends Event {
 	}
 
 	public void decreaseCardCost(int decrement) {
-		assert decrement > 0;
+		assert decrement >= 0;
 		if (decrement > cardCost) {
 			cardCost = 0;
 		} else {

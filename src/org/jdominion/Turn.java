@@ -45,7 +45,7 @@ public class Turn implements Serializable {
 	}
 
 	public void addExtraMoney(int value) {
-		assert value > 0;
+		assert value >= 0;
 		this.extraMoney += value;
 	}
 
