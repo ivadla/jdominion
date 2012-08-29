@@ -6,15 +6,18 @@ import org.jdominion.Turn;
 import org.jdominion.effects.OnXEffect;
 import org.jdominion.event.CardTrashed;
 
-public class CultistOnTrashEffect extends OnXEffect {
+public class OnTrashDrawXCardsEffect extends OnXEffect {
 
-	public CultistOnTrashEffect() {
+	private int numberOfCardsToDraw;
+
+	public OnTrashDrawXCardsEffect(int numberOfCardsToDraw) {
 		super(CardTrashed.class);
+		this.numberOfCardsToDraw = numberOfCardsToDraw;
 	}
 
 	@Override
 	protected void onX(Player gainingPlayer, Turn currentTurn, Supply supply) {
-		gainingPlayer.drawCardsIntoHand(3);
+		gainingPlayer.drawCardsIntoHand(this.numberOfCardsToDraw);
 	}
 
 }

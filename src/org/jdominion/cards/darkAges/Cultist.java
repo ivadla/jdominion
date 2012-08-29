@@ -2,8 +2,8 @@ package org.jdominion.cards.darkAges;
 
 import org.jdominion.Card;
 import org.jdominion.effects.DrawCards;
-import org.jdominion.effects.darkAges.CultistOnTrashEffect;
 import org.jdominion.effects.darkAges.LooterEffect;
+import org.jdominion.effects.darkAges.OnTrashDrawXCardsEffect;
 import org.jdominion.effects.darkAges.OtherPlayersGainRuins;
 import org.jdominion.effects.darkAges.PlayAnotherCultistEffect;
 
@@ -15,6 +15,6 @@ public class Cultist extends Card {
 		addCardEffect(new PlayAnotherCultistEffect());
 		addCardEffect(new LooterEffect());
 		addCardEffect(new OtherPlayersGainRuins());
-		addCardEffect(new CultistOnTrashEffect());
+		addCardEffect(new OnTrashDrawXCardsEffect(3));
 	}
 }

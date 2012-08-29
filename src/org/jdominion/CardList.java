@@ -110,6 +110,13 @@ public class CardList implements Iterable<Card> {
 		elements.add(e);
 	}
 
+	public void addAsFirst(Card e) {
+		if (!this.mayContainDuplicatedElements) {
+			assert !elements.contains(e) : "Adding duplicated Card to the list. This is probably a bug";
+		}
+		elements.add(0, e);
+	}
+
 	/**
 	 * This method is deprecated. Use addAll(CardList c) instead
 	 * 

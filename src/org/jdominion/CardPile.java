@@ -65,4 +65,8 @@ public class CardPile implements Serializable {
 		cards.remove(card);
 		return card;
 	}
+
+	public void putCard(Card card) {
+		cards.addAsFirst(card);
+	}
 }
