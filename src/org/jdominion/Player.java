@@ -200,9 +200,6 @@ public class Player implements Serializable, IPlayer {
 
 	}
 
-	public void discardCardsFromHand(CardList cardsToDiscard) {
-
-	}
 	public void discardCardsFromHand(CardList cardsToDiscard, Turn currentTurn, Supply supply) {
 		for (Card card : cardsToDiscard) {
 			assert hand.contains(card);
