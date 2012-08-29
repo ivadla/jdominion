@@ -4,7 +4,6 @@ import org.jdominion.CardList;
 import org.jdominion.Player;
 import org.jdominion.Supply;
 import org.jdominion.Turn;
-import org.jdominion.decisions.prosperity.DiscardCardForCoinDecision;
 import org.jdominion.decisions.prosperity.DiscardTwoCardsToDrawOne;
 import org.jdominion.effects.CardEffectAction;
 
@@ -12,10 +11,6 @@ public class VaultEffect extends CardEffectAction {
 
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
-		int numberOfDiscardedCards = discardCards(activePlayer, currentTurn, supply);
-
-		currentTurn.addExtraMoney(numberOfDiscardedCards);
-
 		for (Player player : currentTurn.getOtherPlayers()) {
 			discardTwoCardsAndDrawOne(player, currentTurn, supply);
 		}
@@ -35,19 +30,5 @@ public class VaultEffect extends CardEffectAction {
 		}
 	}
 
-	private int discardCards(Player activePlayer, Turn currentTurn, Supply supply) {
-		int numberOfDiscardedCards = 0;
-
-		while (activePlayer.getHandSize() > 0) {
-			DiscardCardForCoinDecision decision = new DiscardCardForCoinDecision(activePlayer.getHand());
-			activePlayer.decide(decision, this);
-			if (decision.isCanceled()) {
-				break;
-			}
-			activePlayer.discardCardsFromHand(decision.getAnswer(), currentTurn, supply);
-			numberOfDiscardedCards++;
-		}
-		return numberOfDiscardedCards;
-	}
 
 }
