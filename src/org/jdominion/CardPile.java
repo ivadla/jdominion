@@ -17,7 +17,6 @@ public class CardPile implements Serializable {
 	public CardPile(CardList cards) {
 		this.cards = cards;
 		classOfCardsInPile = cards.getFirst().getClass();
-		assert cards.countCard(classOfCardsInPile) == cards.size() : "all cards in the pile must have the same class";
 	}
 
 	public CardPile(Class<? extends Card> cardClass, int numberOfCardsInPile) throws InstantiationException, IllegalAccessException {
