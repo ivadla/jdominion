@@ -15,7 +15,7 @@ public abstract class Card implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public enum Type {
-		ACTION, ATTACK, CURSE, DURATION, PRIZE, REACTION, TREASURE, VICTORY
+		ACTION, ATTACK, CURSE, DURATION, KNIGHT, LOOTER, PRIZE, REACTION, RUINS, SHELTER, TREASURE, VICTORY
 	}
 
 	private final int cost;
@@ -112,6 +112,12 @@ public abstract class Card implements Serializable {
 			if (effect.getType() == Type.ATTACK && !types.contains(Type.ACTION)) {
 				types.add(Type.ACTION);
 			}
+		}
+	}
+
+	protected void addType(Card.Type newType) {
+		if (!types.contains(newType)) {
+			types.add(newType);
 		}
 	}
 

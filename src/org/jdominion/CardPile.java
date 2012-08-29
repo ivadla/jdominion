@@ -11,7 +11,7 @@ public class CardPile implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private CardList cards;
+	protected CardList cards;
 	private Class<? extends Card> classOfCardsInPile;
 
 	public CardPile(CardList cards) {
