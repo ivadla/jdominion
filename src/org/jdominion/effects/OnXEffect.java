@@ -48,7 +48,7 @@ public abstract class OnXEffect extends CardEffect implements IEventHandler {
 		}
 	}
 
-	protected abstract void onX(Player gainingPlayer, Turn currentTurn, Supply supply);
+	protected abstract void onX(Player player, Turn currentTurn, Supply supply);
 
 	@Override
 	public void gameStarted(Game game) {
