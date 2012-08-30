@@ -16,7 +16,7 @@ public class RatsTrashEffect extends CardEffectAction {
 	@Override
 	 public void gameStarted(Game game) {
 		for (int i = 0; i < 10; i++) {
-			game.getSupply().getPile(Rats.class).putCard(new Rats());
+			game.getSupply().putCard(new Rats());
 		}
 	 }
 

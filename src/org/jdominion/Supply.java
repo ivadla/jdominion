@@ -69,6 +69,16 @@ public class Supply implements Serializable {
 		return null;
 	}
 
+	public boolean putCard(Card card) {
+		for (CardPile pile : cardPiles) {
+			if (pile.getCardClass().equals(card.getClass())) {
+				pile.putCard(card);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public Supply createSupplyWithMaximumCost(int maximumCost) {
 		List<CardPile> newPiles = new ArrayList<CardPile>();
 		for (CardPile pile : cardPiles) {
