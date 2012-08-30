@@ -68,10 +68,6 @@ public class Game implements Serializable, ICurrentTurn {
 		this.trash.addAll(cardsToTrash);
 	}
 
-	public void removeCardFromTrash(Card cardToRemove) {
-		this.trash.remove(cardToRemove);
-	}
-
 	public Trash getTrash() {
 		return trash;
 	}

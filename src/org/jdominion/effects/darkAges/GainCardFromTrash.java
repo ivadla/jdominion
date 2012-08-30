@@ -29,7 +29,7 @@ public class GainCardFromTrash extends CardEffectAction {
 
 		Card choosenCard = decision.getChoosenCard();
 
-		currentTurn.getGame().getTrash().remove(choosenCard);
+		currentTurn.getGame().getTrash().gainFromTrash(activePlayer, choosenCard, currentTurn, supply);
 
 		activePlayer.gainCard(choosenCard, new TopOfDeck(), currentTurn, supply);
 
