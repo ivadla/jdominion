@@ -6,7 +6,11 @@ import org.jdominion.decisions.ChooseCardsFromHandToTrash;
 public class ChooseActionCardFromHandToTrash extends ChooseCardsFromHandToTrash {
 
 	public ChooseActionCardFromHandToTrash(Hand hand) {
-		super("Choose an action card to trash", false, 1, 1, hand);
+		this(hand, false);
+	}
+
+	public ChooseActionCardFromHandToTrash(Hand hand, boolean cancelable) {
+		super("Choose an action card to trash", cancelable, 1, 1, hand);
 	}
 
 }
