@@ -16,7 +16,7 @@ public class ForgeEffect extends TrashCards {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		CardList cardsToTrash = chooseCardsToTrash(activePlayer, currentTurn.getGame(), currentTurn, supply);
-
+		activePlayer.trashCards(cardsToTrash, currentTurn.getGame());
 		GainCardWhichCostsExactlyX gainEffect = new GainCardWhichCostsExactlyX(calculateTotalCost(cardsToTrash));
 
 		return gainEffect.execute(activePlayer, currentTurn, supply);
