@@ -54,6 +54,11 @@ public class TrashController implements IEventHandler, MouseListener {
 
 		view.resetFullView();
 
+		if (guiInformationSource.getTrash().isEmpty()) {
+			view.setImageForSmallView(new CardImage(new TrashCard()));
+			return;
+		}
+
 		Set<Class<? extends Card>> cardTypesAlreadyProcessed = new HashSet<Class<? extends Card>>();
 		for (Card cardInTrash : guiInformationSource.getTrash()) {
 			if (!cardTypesAlreadyProcessed.contains(cardInTrash.getClass())) {
