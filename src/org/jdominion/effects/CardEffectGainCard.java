@@ -15,6 +15,12 @@ public abstract class CardEffectGainCard extends CardEffectAction {
 	@Override
 	public boolean execute(Player activePlayer, Turn currentTurn, Supply supply) {
 		Supply permittedCards = createSupplyOfPermittedCards(supply);
+
+		// there is no card available to gain
+		if (permittedCards.getCardPiles().size() == 0) {
+			return false;
+		}
+
 		ChooseCardToGain gainDecision = new ChooseCardToGain(permittedCards);
 		activePlayer.decide(gainDecision, this);
 
