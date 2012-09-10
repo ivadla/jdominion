@@ -248,6 +248,11 @@ public class Player implements Serializable, IPlayer {
 	}
 
 	public void trashCard(Card cardToTrash, Game game) {
+		// already trashed
+		if (game.getTrash().contains(cardToTrash)) {
+			return;
+		}
+
 		// TODO: make this more general to trash a card wherever it might be
 		// Cards should know their location for this
 		if (hand.contains(cardToTrash)) {
